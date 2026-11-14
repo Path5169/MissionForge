@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "partId": "OTH-CONTROL",
+  "role": "Command unit",
+  "behaviorType": "vehicle_control",
+  "description": "Supplies vehicle command authority and attitude-control access to the flight systems.",
+  "activation": "Pilot or autopilot input",
+  "effects": "Control authority and crew/probe role",
+  "parameters": {
+    "command": true
+  },
+  "mechanics": [
+    "command"
+  ],
+  "runtimeStatus": "existing-runtime-support",
+  "catalogueStatus": "Uses the existing vehicle or flight support.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

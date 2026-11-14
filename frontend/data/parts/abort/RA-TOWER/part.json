@@ -1,0 +1,88 @@
+{
+  "abort": {
+    "thrust": 220000,
+    "burnTime": 2.5
+  },
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "RA-TOWER",
+  "catalogueId": "RA-TOWER",
+  "name": "LES-1 Launch Escape Tower",
+  "category": "abort",
+  "description": "Launch escape tower: pulls capsule clear in an abort.",
+  "mass": 350,
+  "diameter": 1.2,
+  "height": 3.4,
+  "cd": 0.35,
+  "cost": 180000,
+  "radialHost": true,
+  "shape": "srb",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "engine": {
+    "type": "solid",
+    "thrustVac": 220000,
+    "ispVac": 245,
+    "ispSL": 215,
+    "minThrottle": 1,
+    "restartable": false,
+    "autoJettison": true
+  },
+  "solid": {
+    "propellant": 180
+  },
+  "analogue": "Scaled launch escape system.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: abort/escape",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/abort/RA-TOWER/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 3.4,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 350,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/RA-TOWER.png",
+    "model": null
+  },
+  "behaviorType": "propulsion"
+}

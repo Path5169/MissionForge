@@ -1,0 +1,76 @@
+{
+  "tank": {
+    "propellant": 1420,
+    "costPerKg": 1.5
+  },
+  "topD": 0.8,
+  "bottomD": 0.8,
+  "id": "BAS-TANK-4",
+  "catalogueId": "BAS-TANK-4",
+  "name": "PT-4 Slim Propellant Tank",
+  "category": "tank",
+  "description": "Narrow long tank (upper stage / small rockets).",
+  "mass": 92.0,
+  "diameter": 0.8,
+  "height": 5.13,
+  "cd": 0.35,
+  "cost": 12000,
+  "radialHost": true,
+  "shape": "cylinder",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/tank/BAS-TANK-4/part.json",
+  "dimensions": {
+    "diameterM": 0.8,
+    "heightM": 5.13,
+    "topDiameterM": 0.8,
+    "bottomDiameterM": 0.8
+  },
+  "physicalProperties": {
+    "dryMassKg": 92.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.8,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.8,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.8,
+    "bottomDiameterM": 0.8,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-TANK-4.png",
+    "model": null
+  },
+  "behaviorType": "resource_storage"
+}

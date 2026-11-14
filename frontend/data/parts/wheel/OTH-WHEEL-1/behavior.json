@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "partId": "OTH-WHEEL-1",
+  "role": "Rover wheel",
+  "behaviorType": "rover_mobility",
+  "description": "Provides rolling contact and drive capability for surface vehicles.",
+  "activation": "Drive input and surface contact",
+  "effects": "Drive capability and wheel geometry",
+  "parameters": {
+    "wheel": {
+      "radius": 0.325,
+      "maxSpeed": 12
+    },
+    "radial": {
+      "align": "bottom"
+    }
+  },
+  "mechanics": [
+    "wheel",
+    "radial"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

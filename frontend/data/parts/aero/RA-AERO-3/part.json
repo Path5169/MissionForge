@@ -1,0 +1,59 @@
+{
+  "topD": null,
+  "bottomD": 3.05,
+  "id": "RA-AERO-3",
+  "catalogueId": "RA-AERO-3",
+  "name": "AS-2 Aerodynamic Skirt",
+  "category": "aero",
+  "description": "Aerodynamic skirt.",
+  "mass": 32.0,
+  "diameter": 3.05,
+  "height": 1.1,
+  "cd": 0.18,
+  "cost": 12000,
+  "radialHost": false,
+  "shape": "taper",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "shapeTopD": 2.135,
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/aero/RA-AERO-3/part.json",
+  "dimensions": {
+    "diameterM": 3.05,
+    "heightM": 1.1,
+    "topDiameterM": null,
+    "bottomDiameterM": 3.05
+  },
+  "physicalProperties": {
+    "dryMassKg": 32.0,
+    "dragCoefficient": 0.18
+  },
+  "attachmentPoints": [
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": null,
+    "bottomDiameterM": 3.05,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/RA-AERO-3.png",
+    "model": null
+  },
+  "behaviorType": "aerodynamic_surface"
+}

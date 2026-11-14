@@ -1,0 +1,58 @@
+{
+  "topD": null,
+  "bottomD": 1.2,
+  "id": "FAIR-01",
+  "catalogueId": "FAIR-01",
+  "name": "PF-01 Compact Payload Fairing",
+  "category": "fairing",
+  "description": "Nose fairing, short; shields payload, jettisons after ascent.",
+    "mass": 24.0,
+  "diameter": 1.2,
+    "height": 1.55,
+  "cd": 0.2,
+  "cost": 32000,
+  "radialHost": false,
+  "shape": "ogive",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "Data ready; jettison not built yet",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/fairing/FAIR-01/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+      "heightM": 1.55,
+    "topDiameterM": null,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 24.0,
+    "dragCoefficient": 0.2
+  },
+  "attachmentPoints": [
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": null,
+    "bottomDiameterM": 1.2,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/FAIR-01.png",
+    "model": null
+  },
+  "behaviorType": "payload_fairing"
+}

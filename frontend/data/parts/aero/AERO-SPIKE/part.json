@@ -1,0 +1,58 @@
+{
+  "topD": null,
+  "bottomD": 1.2,
+  "id": "AERO-SPIKE",
+  "catalogueId": "AERO-SPIKE",
+  "name": "NS-1 Needle Nose",
+  "category": "aero",
+  "description": "Needle nose: lowest drag.",
+  "mass": 12.0,
+  "diameter": 1.2,
+  "height": 2.2,
+  "cd": 0.12,
+  "cost": 12000,
+  "radialHost": false,
+  "shape": "ogive",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/aero/AERO-SPIKE/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 2.2,
+    "topDiameterM": null,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 12.0,
+    "dragCoefficient": 0.12
+  },
+  "attachmentPoints": [
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": null,
+    "bottomDiameterM": 1.2,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/AERO-SPIKE.png",
+    "model": null
+  },
+  "behaviorType": "aerodynamic_surface"
+}

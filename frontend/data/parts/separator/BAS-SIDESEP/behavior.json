@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "partId": "BAS-SIDESEP",
+  "role": "Stage separator",
+  "behaviorType": "staging_separation",
+  "description": "Releases the attached stage or payload section when its staging event is triggered.",
+  "activation": "Stage activation",
+  "effects": "Separation direction and attached branch",
+  "parameters": {
+    "separator": true,
+    "radial": {
+      "align": "bottom"
+    },
+    "clamp": true
+  },
+  "mechanics": [
+    "separator",
+    "radial",
+    "clamp"
+  ],
+  "runtimeStatus": "existing-runtime-support",
+  "catalogueStatus": "Uses the existing vehicle or flight support.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

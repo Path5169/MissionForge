@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "partId": "RA-ENG-1",
+  "role": "Rocket engine",
+  "behaviorType": "propulsion",
+  "description": "Generates thrust while consuming configured propellant; vacuum and sea-level performance may differ.",
+  "activation": "Throttle and engine ignition state",
+  "effects": "Thrust, specific impulse, throttle limits and restartability",
+  "parameters": {
+    "engine": {
+      "type": "liquid",
+      "thrustVac": 760000,
+      "ispVac": 300,
+      "ispSL": 265,
+      "minThrottle": 0.2,
+      "restartable": true
+    }
+  },
+  "mechanics": [
+    "engine"
+  ],
+  "runtimeStatus": "existing-runtime-support",
+  "catalogueStatus": "Uses the existing vehicle or flight support.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

@@ -1,0 +1,418 @@
+{
+  "schema": 1,
+  "epoch": "J2000 (t=0)",
+  "bodies": [
+    {
+      "id": "sun",
+      "name": "Sun",
+      "radius": 695700000,
+      "mu": 132712440018000000000,
+      "parent": null,
+      "a": 0,
+      "e": 0,
+      "periapsisLongitude": 0,
+      "meanLongitude": 0,
+      "period": null,
+      "color": [
+        255,
+        178,
+        76
+      ],
+      "soiRadius": null
+    },
+    {
+      "id": "mercury",
+      "name": "Mercury",
+      "radius": 2439700,
+      "mu": 22031780000000,
+      "parent": "sun",
+      "a": 57909226541.52439,
+      "e": 0.20563593,
+      "periapsisLongitude": 1.3518935764250157,
+      "meanLongitude": 4.4025986842958265,
+      "period": null,
+      "color": [
+        128,
+        120,
+        115
+      ],
+      "soiRadius": 112000000
+    },
+    {
+      "id": "venus",
+      "name": "Venus",
+      "radius": 6051800,
+      "mu": 324858592000000,
+      "parent": "sun",
+      "a": 108209474537.37917,
+      "e": 0.00677672,
+      "periapsisLongitude": 2.2968963560387774,
+      "meanLongitude": 3.1761344560893665,
+      "period": null,
+      "color": [
+        204,
+        166,
+        102
+      ],
+      "soiRadius": 1004000000
+    },
+    {
+      "id": "earth",
+      "name": "Earth",
+      "radius": 6371000,
+      "mu": 398600441800000,
+      "parent": "sun",
+      "a": 149598261150.4425,
+      "e": 0.01671123,
+      "periapsisLongitude": 1.7966014740491705,
+      "meanLongitude": 1.753437557072786,
+      "period": null,
+      "color": [
+        51,
+        97,
+        69
+      ],
+      "soiRadius": 924000000
+    },
+    {
+      "id": "moon",
+      "name": "Moon",
+      "radius": 1737400,
+      "mu": 4902800066000,
+      "parent": "earth",
+      "a": 384399000,
+      "e": 0.0549,
+      "periapsisLongitude": 1.448623279155294,
+      "meanLongitude": 3.8100537571036206,
+      "period": 2360591.5,
+      "color": [
+        140,
+        138,
+        128
+      ],
+      "soiRadius": 66100000
+    },
+    {
+      "id": "mars",
+      "name": "Mars",
+      "radius": 3389500,
+      "mu": 42828375000000,
+      "parent": "sun",
+      "a": 227943822427.57303,
+      "e": 0.0933941,
+      "periapsisLongitude": 5.865290135956147,
+      "meanLongitude": 6.203712925641251,
+      "period": null,
+      "color": [
+        158,
+        84,
+        51
+      ],
+      "soiRadius": 577000000
+    },
+    {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "radius": 69911000,
+      "mu": 126686534000000000,
+      "parent": "sun",
+      "a": 778340816692.7108,
+      "e": 0.04838624,
+      "periapsisLongitude": 0.25706046684707484,
+      "meanLongitude": 0.600331137865858,
+      "period": null,
+      "color": [
+        191,
+        153,
+        115
+      ],
+      "soiRadius": 48200000000
+    },
+    {
+      "id": "saturn",
+      "name": "Saturn",
+      "radius": 58232000,
+      "mu": 37931187000000000,
+      "parent": "sun",
+      "a": 1426666414179.921,
+      "e": 0.05386179,
+      "periapsisLongitude": 1.6161553101630624,
+      "meanLongitude": 0.8718660371588793,
+      "period": null,
+      "color": [
+        204,
+        184,
+        128
+      ],
+      "soiRadius": 54800000000
+    },
+    {
+      "id": "uranus",
+      "name": "Uranus",
+      "radius": 25362000,
+      "mu": 5793939000000000,
+      "parent": "sun",
+      "a": 2870658170655.7324,
+      "e": 0.04725744,
+      "periapsisLongitude": 2.9837149917991095,
+      "meanLongitude": 5.4670362664056,
+      "period": null,
+      "color": [
+        140,
+        204,
+        217
+      ],
+      "soiRadius": 51700000000
+    },
+    {
+      "id": "neptune",
+      "name": "Neptune",
+      "radius": 24622000,
+      "mu": 6836529000000000,
+      "parent": "sun",
+      "a": 4498396417009.467,
+      "e": 0.00859048,
+      "periapsisLongitude": 0.7847831489880193,
+      "meanLongitude": 5.321159305292057,
+      "period": null,
+      "color": [
+        76,
+        115,
+        217
+      ],
+      "soiRadius": 86600000000
+    },
+    {
+      "id": "bennu",
+      "name": "Bennu",
+      "radius": 242.22,
+      "mu": 4.8904,
+      "soiRadius": 38879.3,
+      "parent": "sun",
+      "a": 168505699049.45242,
+      "e": 0.2037450762416414,
+      "periapsisLongitude": 1.1917793529790002,
+      "meanLongitude": 1.7054380778212774,
+      "period": 37726450.109,
+      "color": [
+        78,
+        74,
+        67
+      ],
+      "dataQuality": "jpl"
+    },
+    {
+      "id": "didymos",
+      "name": "Didymos",
+      "radius": 390,
+      "mu": 36.2,
+      "soiRadius": 110504,
+      "parent": "sun",
+      "a": 245745859614.47397,
+      "e": 0.3831233242624545,
+      "periapsisLongitude": 0.5683930654644138,
+      "meanLongitude": 1.6307662347034508,
+      "period": 66443632.194,
+      "color": [
+        118,
+        106,
+        92
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "dimorphos",
+      "name": "Dimorphos",
+      "radius": 85,
+      "mu": 0.4,
+      "soiRadius": 182,
+      "parent": "didymos",
+      "a": 1200,
+      "e": 0.02,
+      "periapsisLongitude": 0,
+      "meanLongitude": 0,
+      "period": 43200,
+      "color": [
+        130,
+        120,
+        105
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "dinkinesh",
+      "name": "Dinkinesh",
+      "radius": 359.5,
+      "mu": 33,
+      "soiRadius": 142959.8,
+      "parent": "sun",
+      "a": 327883937886.02405,
+      "e": 0.1126817135846694,
+      "periapsisLongitude": 1.5405860107210003,
+      "meanLongitude": 1.135294135619688,
+      "period": 102401015.795,
+      "color": [
+        136,
+        123,
+        106
+      ],
+      "dataQuality": "jpl"
+    },
+    {
+      "id": "donaldjohanson",
+      "name": "Donaldjohanson",
+      "radius": 1947.5,
+      "mu": 4130.063,
+      "soiRadius": 777755.4,
+      "parent": "sun",
+      "a": 356616764435.3917,
+      "e": 0.1868593763038477,
+      "periapsisLongitude": 2.0186248469994137,
+      "meanLongitude": 3.453892859520515,
+      "period": 116151997.882,
+      "color": [
+        140,
+        110,
+        86
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "eurybates",
+      "name": "Eurybates",
+      "radius": 31942.5,
+      "mu": 13667601.331,
+      "soiRadius": 25366681.4,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "a": 780507684675.1361,
+      "e": 0.09059867172297777,
+      "periapsisLongitude": 1.2611471636970002,
+      "meanLongitude": 2.0849379973901723,
+      "period": 376088303.015,
+      "color": [
+        110,
+        96,
+        84
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "polymele",
+      "name": "Polymele",
+      "radius": 10537.5,
+      "mu": 327119.999,
+      "soiRadius": 7274070.8,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "a": 776639460070.8385,
+      "e": 0.09592245810512318,
+      "periapsisLongitude": 0.9808114311190002,
+      "meanLongitude": 2.0088150144051724,
+      "period": 373295908.921,
+      "color": [
+        115,
+        105,
+        95
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "leucus",
+      "name": "Leucus",
+      "radius": 17077.5,
+      "mu": 2088615.391,
+      "soiRadius": 13808822.2,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "a": 794721160035.9669,
+      "e": 0.06495789797701287,
+      "periapsisLongitude": 0.9334853812284134,
+      "meanLongitude": 2.3637948225775864,
+      "period": 386408095.112,
+      "color": [
+        85,
+        78,
+        68
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "orus",
+      "name": "Orus",
+      "radius": 25405,
+      "mu": 6876115.923,
+      "soiRadius": 19811541.1,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "a": 766445877014.023,
+      "e": 0.03672540559818106,
+      "periapsisLongitude": 1.4196322453684136,
+      "meanLongitude": 1.3550151951955867,
+      "period": 365970677.309,
+      "color": [
+        115,
+        100,
+        82
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "patroclus",
+      "name": "Patroclus",
+      "radius": 70181,
+      "mu": 97000000,
+      "soiRadius": 48641518,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "a": 778802800945.7819,
+      "e": 0.1391467916238868,
+      "periapsisLongitude": 6.164283286930001,
+      "meanLongitude": 5.771646024592172,
+      "period": 374856726.619,
+      "color": [
+        75,
+        70,
+        65
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "menoetius",
+      "name": "Menoetius",
+      "radius": 56000,
+      "mu": 49097390.925,
+      "soiRadius": 347000,
+      "parent": "patroclus",
+      "a": 680000,
+      "e": 0.02,
+      "periapsisLongitude": 0,
+      "meanLongitude": 0,
+      "period": 372000,
+      "color": [
+        70,
+        65,
+        60
+      ],
+      "dataQuality": "estimated-mu"
+    },
+    {
+      "id": "europa",
+      "name": "Europa",
+      "radius": 1560800,
+      "mu": 3202700000000,
+      "soiRadius": 9700000,
+      "parent": "jupiter",
+      "a": 671100000,
+      "e": 0.0094,
+      "periapsisLongitude": 0,
+      "meanLongitude": 0,
+      "period": 306810,
+      "color": [
+        206,
+        196,
+        176
+      ]
+    }
+  ]
+}

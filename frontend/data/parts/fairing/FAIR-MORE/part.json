@@ -1,0 +1,59 @@
+{
+  "topD": null,
+  "bottomD": 2.4,
+  "id": "FAIR-MORE",
+  "catalogueId": "FAIR-MORE",
+  "name": "PF-X Additional Fairing Section Set",
+  "category": "fairing",
+  "description": "Grouped catalogue entry representing the additional larger fairing sections shown in the source screenshots. It is one of the 89 spreadsheet rows, not a confirmed single in-game part.",
+  "mass": 95.0,
+  "diameter": 2.4,
+    "height": 3.8,
+  "cd": 0.2,
+  "cost": 110000,
+  "radialHost": false,
+  "shape": "ogive",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "variantsRepresented": 13,
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "Data ready; jettison not built yet",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/fairing/FAIR-MORE/part.json",
+  "dimensions": {
+    "diameterM": 2.4,
+      "heightM": 3.8,
+    "topDiameterM": null,
+    "bottomDiameterM": 2.4
+  },
+  "physicalProperties": {
+    "dryMassKg": 95.0,
+    "dragCoefficient": 0.2
+  },
+  "attachmentPoints": [
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 2.4,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": null,
+    "bottomDiameterM": 2.4,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/FAIR-MORE.png",
+    "model": null
+  },
+  "behaviorType": "payload_fairing"
+}

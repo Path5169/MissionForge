@@ -1,0 +1,36 @@
+{
+  "id": "PAYLOAD-EOS-SAT",
+  "catalogueId": "PAYLOAD-EOS-SAT",
+  "name": "EOS-1 TerraWatch Earth Observation Satellite",
+  "category": "utility",
+  "description": "High-resolution multispectral Earth observation satellite equipped with optical surface scanners, deployable solar arrays, and S-band communications transceiver. Designed for Low Earth Orbit environmental mapping and weather monitoring.",
+  "mass": 280,
+  "diameter": 1.4,
+  "height": 1.4,
+  "topD": 1.4,
+  "bottomD": 1.4,
+  "cd": 0.22,
+  "cost": 450000,
+  "radialHost": false,
+  "palette": true,
+  "shape": "satellite",
+  "payload": {
+    "deployable": true,
+    "kind": "satellite",
+    "type": "earth_observation"
+  },
+  "dimensions": {
+    "diameterM": 1.4,
+    "heightM": 1.4,
+    "topDiameterM": 1.4,
+    "bottomDiameterM": 1.4
+  },
+  "physicalProperties": {
+    "dryMassKg": 280,
+    "dragCoefficient": 0.22
+  },
+  "science": true,
+  "satellite": true,
+  "radial": false,
+  "command": false
+}

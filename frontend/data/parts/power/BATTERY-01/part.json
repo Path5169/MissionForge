@@ -1,0 +1,70 @@
+{
+  "battery": {
+    "capacityKWh": 4.0,
+    "maxChargeRateKW": 0.5,
+    "maxDischargeRateKW": 2.0
+  },
+  "topD": 0.45,
+  "bottomD": 0.45,
+  "id": "BATTERY-01",
+  "catalogueId": "BATTERY-01",
+  "name": "BAT-1 Battery Pack",
+  "category": "power",
+  "description": "Compact electrical storage unit for future spacecraft power systems.",
+  "mass": 18.0,
+  "diameter": 0.45,
+  "height": 0.56,
+  "cd": 0.35,
+  "cost": 24000,
+  "radialHost": false,
+  "shape": "cylinder",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled spacecraft battery hardware.",
+  "simulationStatus": "Assembly available; electrical storage behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: electrical storage",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/power/BATTERY-01/part.json",
+  "dimensions": {
+    "diameterM": 0.45,
+    "heightM": 0.56,
+    "topDiameterM": 0.45,
+    "bottomDiameterM": 0.45
+  },
+  "physicalProperties": {
+    "dryMassKg": 18.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.45,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.45,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": 0.45,
+    "bottomDiameterM": 0.45,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BATTERY-01.png",
+    "model": null
+  },
+  "behaviorType": "electrical_storage"
+}

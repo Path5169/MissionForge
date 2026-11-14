@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "partId": "FAIR-04",
+  "role": "Payload protection and separation",
+  "behaviorType": "payload_fairing",
+  "description": "Encloses payloads during atmospheric ascent; fairing sections are intended to be jettisoned after the dense atmosphere.",
+  "activation": "Atmospheric pressure and a fairing-jettison command",
+  "effects": "Payload protection and reduced ascent drag",
+  "parameters": {},
+  "mechanics": [],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

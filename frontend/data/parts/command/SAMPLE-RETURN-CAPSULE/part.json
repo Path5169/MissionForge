@@ -1,0 +1,37 @@
+{
+  "id": "SAMPLE-RETURN-CAPSULE",
+  "catalogueId": "SAMPLE-RETURN-CAPSULE",
+  "name": "SRC-1 Sample Return Capsule",
+  "category": "command",
+  "description": "OSIRIS-REx sample return capsule with PICA heat shield, sample canister, and dual-stage parachute.",
+  "mass": 125,
+  "diameter": 1.2,
+  "height": 1.2,
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "cd": 0.5,
+  "cost": 8400000,
+  "radialHost": true,
+  "palette": true,
+  "asset": {
+    "image": "assets/parts/SAMPLE-RETURN-CAPSULE.png",
+    "model": null
+  },
+  "dimensions": {
+    "diameterM": 0.8,
+    "heightM": 1.2,
+    "topDiameterM": 0.8,
+    "bottomDiameterM": 0.8
+  },
+  "physicalProperties": {
+    "dryMassKg": 125,
+    "dragCoefficient": 0.5
+  },
+  "command": false,
+  "heatshield": {
+    "maxTemperature": 3200,
+    "ablativeMass": 8.0
+  },
+  "sampleReturn": true,
+  "radial": false
+}

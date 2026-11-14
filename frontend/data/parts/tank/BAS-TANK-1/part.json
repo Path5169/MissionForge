@@ -1,0 +1,76 @@
+{
+  "tank": {
+    "propellant": 540,
+    "costPerKg": 1.5
+  },
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "BAS-TANK-1",
+  "catalogueId": "BAS-TANK-1",
+  "name": "PT-1 Compact Propellant Tank",
+  "category": "tank",
+  "description": "Smallest propellant tank.",
+  "mass": 35.0,
+  "diameter": 1.2,
+  "height": 0.65,
+  "cd": 0.35,
+  "cost": 11000,
+  "radialHost": true,
+  "shape": "cylinder",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/tank/BAS-TANK-1/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 0.65,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 35.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-TANK-1.png",
+    "model": null
+  },
+  "behaviorType": "resource_storage"
+}

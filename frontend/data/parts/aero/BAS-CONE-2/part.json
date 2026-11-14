@@ -1,0 +1,59 @@
+{
+  "topD": null,
+  "bottomD": 1.2,
+  "id": "BAS-CONE-2",
+  "catalogueId": "BAS-CONE-2",
+  "name": "NC-2 Offset Nose Cone",
+  "category": "aero",
+  "description": "Side-booster nose cone.",
+  "mass": 14.0,
+  "diameter": 1.2,
+  "height": 1.38,
+  "cd": 0.2,
+  "cost": 12000,
+  "radialHost": false,
+  "shape": "taper",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "shapeTopD": 0.66,
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (needs new shape: slant)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/aero/BAS-CONE-2/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 1.38,
+    "topDiameterM": 0.66,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 14.0,
+    "dragCoefficient": 0.2
+  },
+  "attachmentPoints": [
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": null,
+    "bottomDiameterM": 1.2,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-CONE-2.png",
+    "model": null
+  },
+  "behaviorType": "aerodynamic_surface"
+}

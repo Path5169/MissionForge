@@ -1,0 +1,76 @@
+{
+  "docking": {
+    "captureRadius": 0.18,
+    "gender": "androgynous"
+  },
+  "topD": 1.5,
+  "bottomD": 1.5,
+  "id": "OTH-DOCK-3",
+  "catalogueId": "OTH-DOCK-3",
+  "name": "DA-3 Low-Profile Docking Plate",
+  "category": "docking",
+  "description": "Thin docking plate.",
+  "mass": 12.0,
+  "diameter": 1.5,
+  "height": 0.32,
+  "cd": 0.35,
+  "cost": 48000,
+  "radialHost": true,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: docking",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/docking/OTH-DOCK-3/part.json",
+  "dimensions": {
+    "diameterM": 1.5,
+    "heightM": 0.32,
+    "topDiameterM": 1.5,
+    "bottomDiameterM": 1.5
+  },
+  "physicalProperties": {
+    "dryMassKg": 12.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.5,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.5,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.5,
+    "bottomDiameterM": 1.5,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/OTH-DOCK-3.png",
+    "model": null
+  },
+  "behaviorType": "docking_interface"
+}

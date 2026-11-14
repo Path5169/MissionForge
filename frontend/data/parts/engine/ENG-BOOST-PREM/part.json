@@ -1,0 +1,80 @@
+{
+  "engine": {
+    "type": "liquid",
+    "thrustVac": 520000,
+    "ispVac": 310,
+    "ispSL": 282,
+    "minThrottle": 0.35,
+    "restartable": true
+  },
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "ENG-BOOST-PREM",
+  "catalogueId": "ENG-BOOST-PREM",
+  "name": "BE-2 Heavy Booster Engine",
+  "category": "engine",
+  "description": "Premium big booster engine.",
+  "mass": 800,
+  "diameter": 1.2,
+  "height": 2.68,
+  "cd": 0.35,
+  "cost": 420000,
+  "radialHost": true,
+  "shape": "cluster",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled propulsion class for game simulation.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/engine/ENG-BOOST-PREM/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 2.68,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 800,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/ENG-BOOST-PREM.png",
+    "model": null
+  },
+  "behaviorType": "propulsion"
+}

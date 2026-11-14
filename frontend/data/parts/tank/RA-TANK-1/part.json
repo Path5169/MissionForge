@@ -1,0 +1,76 @@
+{
+  "tank": {
+    "propellant": 38980,
+    "costPerKg": 1.5
+  },
+  "topD": 3.05,
+  "bottomD": 3.05,
+  "id": "RA-TANK-1",
+  "catalogueId": "RA-TANK-1",
+  "name": "AT-1 Atlas Propellant Tank",
+  "category": "tank",
+  "description": "Slim propellant tank.",
+  "mass": 2534.0,
+  "diameter": 3.05,
+  "height": 7.2,
+  "cd": 0.35,
+  "cost": 57000,
+  "radialHost": true,
+  "shape": "cylinder",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/tank/RA-TANK-1/part.json",
+  "dimensions": {
+    "diameterM": 3.05,
+    "heightM": 7.2,
+    "topDiameterM": 3.05,
+    "bottomDiameterM": 3.05
+  },
+  "physicalProperties": {
+    "dryMassKg": 2534.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 3.05,
+    "bottomDiameterM": 3.05,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/RA-TANK-1.png",
+    "model": null
+  },
+  "behaviorType": "resource_storage"
+}

@@ -1,0 +1,80 @@
+{
+  "engine": {
+    "type": "liquid",
+    "thrustVac": 760000,
+    "ispVac": 300,
+    "ispSL": 265,
+    "minThrottle": 0.2,
+    "restartable": true
+  },
+  "topD": 3.05,
+  "bottomD": 3.05,
+  "id": "RA-ENG-1",
+  "catalogueId": "RA-ENG-1",
+  "name": "MA-1 Booster Engine",
+  "category": "engine",
+  "description": "Booster engine.",
+  "mass": 1100,
+  "diameter": 3.05,
+  "height": 6.3,
+  "cd": 0.35,
+  "cost": 950000,
+  "radialHost": true,
+  "shape": "nozzle_long",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled propulsion class for game simulation.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/engine/RA-ENG-1/part.json",
+  "dimensions": {
+    "diameterM": 3.05,
+    "heightM": 6.3,
+    "topDiameterM": 3.05,
+    "bottomDiameterM": 3.05
+  },
+  "physicalProperties": {
+    "dryMassKg": 1100,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 3.05,
+    "bottomDiameterM": 3.05,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/RA-ENG-1.png",
+    "model": null
+  },
+  "behaviorType": "propulsion"
+}

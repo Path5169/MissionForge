@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "partId": "BAS-TANK-4",
+  "role": "Propellant tank",
+  "behaviorType": "resource_storage",
+  "description": "Stores a finite propellant mass and feeds compatible connected consumers.",
+  "activation": "Propellant loading and engine resource requests",
+  "effects": "Propellant type, capacity and resource feed",
+  "parameters": {
+    "tank": {
+      "propellant": 1420,
+      "costPerKg": 1.5
+    }
+  },
+  "mechanics": [
+    "tank"
+  ],
+  "runtimeStatus": "existing-runtime-support",
+  "catalogueStatus": "Uses the existing vehicle or flight support.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

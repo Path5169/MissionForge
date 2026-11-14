@@ -1,0 +1,749 @@
+{
+  "schema": 1,
+  "units": {
+    "mass": "kg",
+    "length": "m",
+    "thrust": "N",
+    "specificImpulse": "s",
+    "cost": "credits",
+    "power": "kW",
+    "area": "m2"
+  },
+  "categoryOrder": [
+    "command",
+    "aero",
+    "fairing",
+    "heatshield",
+    "tank",
+    "separator",
+    "engine",
+    "landing",
+    "structure",
+    "utility",
+    "docking",
+    "power",
+    "wheel",
+    "abort"
+  ],
+  "source": "MissionForge_Parts_Catalogue.xlsx",
+  "parts": [
+    {
+      "id": "BAS-PARACHUTE",
+      "category": "landing",
+      "name": "PC-1 Recovery Parachute",
+      "definition": "/data/parts/landing/BAS-PARACHUTE/part.json",
+      "behavior": "/data/parts/landing/BAS-PARACHUTE/behavior.json"
+    },
+    {
+      "id": "BAS-CAPSULE",
+      "category": "command",
+      "name": "CM-1 Crew Capsule",
+      "definition": "/data/parts/command/BAS-CAPSULE/part.json",
+      "behavior": "/data/parts/command/BAS-CAPSULE/behavior.json"
+    },
+    {
+      "id": "BAS-HEATSHIELD",
+      "category": "heatshield",
+      "name": "HS-1 Ablative Heat Shield",
+      "definition": "/data/parts/heatshield/BAS-HEATSHIELD/part.json",
+      "behavior": "/data/parts/heatshield/BAS-HEATSHIELD/behavior.json"
+    },
+    {
+      "id": "BAS-DECOUPLER",
+      "category": "separator",
+      "name": "SD-1 Stack Decoupler",
+      "definition": "/data/parts/separator/BAS-DECOUPLER/part.json",
+      "behavior": "/data/parts/separator/BAS-DECOUPLER/behavior.json"
+    },
+    {
+      "id": "BAS-TANK-1",
+      "category": "tank",
+      "name": "PT-1 Compact Propellant Tank",
+      "definition": "/data/parts/tank/BAS-TANK-1/part.json",
+      "behavior": "/data/parts/tank/BAS-TANK-1/behavior.json"
+    },
+    {
+      "id": "BAS-TANK-2",
+      "category": "tank",
+      "name": "PT-2 Standard Propellant Tank",
+      "definition": "/data/parts/tank/BAS-TANK-2/part.json",
+      "behavior": "/data/parts/tank/BAS-TANK-2/behavior.json"
+    },
+    {
+      "id": "BAS-TANK-3",
+      "category": "tank",
+      "name": "PT-3 Extended Propellant Tank",
+      "definition": "/data/parts/tank/BAS-TANK-3/part.json",
+      "behavior": "/data/parts/tank/BAS-TANK-3/behavior.json"
+    },
+    {
+      "id": "BAS-TANK-4",
+      "category": "tank",
+      "name": "PT-4 Slim Propellant Tank",
+      "definition": "/data/parts/tank/BAS-TANK-4/part.json",
+      "behavior": "/data/parts/tank/BAS-TANK-4/behavior.json"
+    },
+    {
+      "id": "BAS-ENG-1",
+      "category": "engine",
+      "name": "BE-1 Booster Engine",
+      "definition": "/data/parts/engine/BAS-ENG-1/part.json",
+      "behavior": "/data/parts/engine/BAS-ENG-1/behavior.json"
+    },
+    {
+      "id": "BAS-ENG-2",
+      "category": "engine",
+      "name": "SE-2 Sustainer Engine",
+      "definition": "/data/parts/engine/BAS-ENG-2/part.json",
+      "behavior": "/data/parts/engine/BAS-ENG-2/behavior.json"
+    },
+    {
+      "id": "BAS-ENG-3",
+      "category": "engine",
+      "name": "LE-3 Lander Engine",
+      "definition": "/data/parts/engine/BAS-ENG-3/part.json",
+      "behavior": "/data/parts/engine/BAS-ENG-3/behavior.json"
+    },
+    {
+      "id": "BAS-RCS",
+      "category": "utility",
+      "name": "RCS-1 Attitude Thruster",
+      "definition": "/data/parts/utility/BAS-RCS/part.json",
+      "behavior": "/data/parts/utility/BAS-RCS/behavior.json"
+    },
+    {
+      "id": "BAS-SIDESEP",
+      "category": "separator",
+      "name": "SS-1 Radial Booster Clamp",
+      "definition": "/data/parts/separator/BAS-SIDESEP/part.json",
+      "behavior": "/data/parts/separator/BAS-SIDESEP/behavior.json"
+    },
+    {
+      "id": "BAS-CONE-1",
+      "category": "aero",
+      "name": "NC-1 Standard Nose Cone",
+      "definition": "/data/parts/aero/BAS-CONE-1/part.json",
+      "behavior": "/data/parts/aero/BAS-CONE-1/behavior.json"
+    },
+    {
+      "id": "BAS-CONE-2",
+      "category": "aero",
+      "name": "NC-2 Offset Nose Cone",
+      "definition": "/data/parts/aero/BAS-CONE-2/part.json",
+      "behavior": "/data/parts/aero/BAS-CONE-2/behavior.json"
+    },
+    {
+      "id": "BAS-LEG",
+      "category": "landing",
+      "name": "LG-1 Landing Leg",
+      "definition": "/data/parts/landing/BAS-LEG/part.json",
+      "behavior": "/data/parts/landing/BAS-LEG/behavior.json"
+    },
+    {
+      "id": "ENG-BOOST-PREM",
+      "category": "engine",
+      "name": "BE-2 Heavy Booster Engine",
+      "definition": "/data/parts/engine/ENG-BOOST-PREM/part.json",
+      "behavior": "/data/parts/engine/ENG-BOOST-PREM/behavior.json"
+    },
+    {
+      "id": "ENG-MID-PREM",
+      "category": "engine",
+      "name": "SE-3 High-Performance Sustainer",
+      "definition": "/data/parts/engine/ENG-MID-PREM/part.json",
+      "behavior": "/data/parts/engine/ENG-MID-PREM/behavior.json"
+    },
+    {
+      "id": "ENG-ION",
+      "category": "engine",
+      "name": "IE-1 Electric Ion Thruster",
+      "definition": "/data/parts/engine/ENG-ION/part.json",
+      "behavior": "/data/parts/engine/ENG-ION/behavior.json"
+    },
+    {
+      "id": "AERO-PARACHUTE-2",
+      "category": "landing",
+      "name": "PC-2 Streamlined Parachute",
+      "definition": "/data/parts/landing/AERO-PARACHUTE-2/part.json",
+      "behavior": "/data/parts/landing/AERO-PARACHUTE-2/behavior.json"
+    },
+    {
+      "id": "AERO-SPIKE",
+      "category": "aero",
+      "name": "NS-1 Needle Nose",
+      "definition": "/data/parts/aero/AERO-SPIKE/part.json",
+      "behavior": "/data/parts/aero/AERO-SPIKE/behavior.json"
+    },
+    {
+      "id": "AERO-SPIKE-SLIM",
+      "category": "aero",
+      "name": "NS-2 Slim Needle Nose",
+      "definition": "/data/parts/aero/AERO-SPIKE-SLIM/part.json",
+      "behavior": "/data/parts/aero/AERO-SPIKE-SLIM/behavior.json"
+    },
+    {
+      "id": "AERO-CONE-SHORT",
+      "category": "aero",
+      "name": "NC-3 Short Nose Cone",
+      "definition": "/data/parts/aero/AERO-CONE-SHORT/part.json",
+      "behavior": "/data/parts/aero/AERO-CONE-SHORT/behavior.json"
+    },
+    {
+      "id": "AERO-CONE-TIP",
+      "category": "aero",
+      "name": "NC-4 Blunt-Tip Nose Cone",
+      "definition": "/data/parts/aero/AERO-CONE-TIP/part.json",
+      "behavior": "/data/parts/aero/AERO-CONE-TIP/behavior.json"
+    },
+    {
+      "id": "AERO-OGIVE-1",
+      "category": "aero",
+      "name": "OG-1 Ogive Nose",
+      "definition": "/data/parts/aero/AERO-OGIVE-1/part.json",
+      "behavior": "/data/parts/aero/AERO-OGIVE-1/behavior.json"
+    },
+    {
+      "id": "AERO-OGIVE-2",
+      "category": "aero",
+      "name": "OG-2 Long Ogive Nose",
+      "definition": "/data/parts/aero/AERO-OGIVE-2/part.json",
+      "behavior": "/data/parts/aero/AERO-OGIVE-2/behavior.json"
+    },
+    {
+      "id": "WIDE-AERO-1",
+      "category": "aero",
+      "name": "WN-1 Wide Nose Cone",
+      "definition": "/data/parts/aero/WIDE-AERO-1/part.json",
+      "behavior": "/data/parts/aero/WIDE-AERO-1/behavior.json"
+    },
+    {
+      "id": "WIDE-AERO-2",
+      "category": "aero",
+      "name": "WN-2 Offset Wide Nose",
+      "definition": "/data/parts/aero/WIDE-AERO-2/part.json",
+      "behavior": "/data/parts/aero/WIDE-AERO-2/behavior.json"
+    },
+    {
+      "id": "WIDE-AERO-3",
+      "category": "aero",
+      "name": "WN-3 Wide Ogive Nose",
+      "definition": "/data/parts/aero/WIDE-AERO-3/part.json",
+      "behavior": "/data/parts/aero/WIDE-AERO-3/behavior.json"
+    },
+    {
+      "id": "WIDE-TANK-1",
+      "category": "tank",
+      "name": "WT-1 Wide Micro Tank",
+      "definition": "/data/parts/tank/WIDE-TANK-1/part.json",
+      "behavior": "/data/parts/tank/WIDE-TANK-1/behavior.json"
+    },
+    {
+      "id": "WIDE-TANK-2",
+      "category": "tank",
+      "name": "WT-2 Wide Short Tank",
+      "definition": "/data/parts/tank/WIDE-TANK-2/part.json",
+      "behavior": "/data/parts/tank/WIDE-TANK-2/behavior.json"
+    },
+    {
+      "id": "WIDE-TANK-3",
+      "category": "tank",
+      "name": "WT-3 Wide Medium Tank",
+      "definition": "/data/parts/tank/WIDE-TANK-3/part.json",
+      "behavior": "/data/parts/tank/WIDE-TANK-3/behavior.json"
+    },
+    {
+      "id": "WIDE-TANK-4",
+      "category": "tank",
+      "name": "WT-4 Wide Long Tank",
+      "definition": "/data/parts/tank/WIDE-TANK-4/part.json",
+      "behavior": "/data/parts/tank/WIDE-TANK-4/behavior.json"
+    },
+    {
+      "id": "WIDE-TANK-5",
+      "category": "tank",
+      "name": "WT-5 Wide Slim Tank",
+      "definition": "/data/parts/tank/WIDE-TANK-5/part.json",
+      "behavior": "/data/parts/tank/WIDE-TANK-5/behavior.json"
+    },
+    {
+      "id": "WIDE-STAGE",
+      "category": "separator",
+      "name": "WSD-1 Wide Stack Decoupler",
+      "definition": "/data/parts/separator/WIDE-STAGE/part.json",
+      "behavior": "/data/parts/separator/WIDE-STAGE/behavior.json"
+    },
+    {
+      "id": "WIDE-HEAT-1",
+      "category": "heatshield",
+      "name": "WHS-1 Wide Heat Shield",
+      "definition": "/data/parts/heatshield/WIDE-HEAT-1/part.json",
+      "behavior": "/data/parts/heatshield/WIDE-HEAT-1/behavior.json"
+    },
+    {
+      "id": "WIDE-HEAT-2",
+      "category": "heatshield",
+      "name": "WHS-2 Wide Heavy Heat Shield",
+      "definition": "/data/parts/heatshield/WIDE-HEAT-2/part.json",
+      "behavior": "/data/parts/heatshield/WIDE-HEAT-2/behavior.json"
+    },
+    {
+      "id": "WIDE-MOUNT-1",
+      "category": "structure",
+      "name": "EM-1 Engine Mount",
+      "definition": "/data/parts/structure/WIDE-MOUNT-1/part.json",
+      "behavior": "/data/parts/structure/WIDE-MOUNT-1/behavior.json"
+    },
+    {
+      "id": "WIDE-MOUNT-2",
+      "category": "structure",
+      "name": "EM-2 Cluster Engine Mount",
+      "definition": "/data/parts/structure/WIDE-MOUNT-2/part.json",
+      "behavior": "/data/parts/structure/WIDE-MOUNT-2/behavior.json"
+    },
+    {
+      "id": "FAIR-01",
+      "category": "fairing",
+      "name": "PF-01 Compact Payload Fairing",
+      "definition": "/data/parts/fairing/FAIR-01/part.json",
+      "behavior": "/data/parts/fairing/FAIR-01/behavior.json"
+    },
+    {
+      "id": "FAIR-02",
+      "category": "fairing",
+      "name": "PF-02 Reinforced Payload Fairing",
+      "definition": "/data/parts/fairing/FAIR-02/part.json",
+      "behavior": "/data/parts/fairing/FAIR-02/behavior.json"
+    },
+    {
+      "id": "FAIR-03",
+      "category": "fairing",
+      "name": "PF-03 Tall Payload Fairing",
+      "definition": "/data/parts/fairing/FAIR-03/part.json",
+      "behavior": "/data/parts/fairing/FAIR-03/behavior.json"
+    },
+    {
+      "id": "FAIR-04",
+      "category": "fairing",
+      "name": "FB-01 Fairing Base Ring",
+      "definition": "/data/parts/fairing/FAIR-04/part.json",
+      "behavior": "/data/parts/fairing/FAIR-04/behavior.json"
+    },
+    {
+      "id": "FAIR-05",
+      "category": "fairing",
+      "name": "FS-01 Fairing Segment",
+      "definition": "/data/parts/fairing/FAIR-05/part.json",
+      "behavior": "/data/parts/fairing/FAIR-05/behavior.json"
+    },
+    {
+      "id": "FAIR-06",
+      "category": "fairing",
+      "name": "PF-04 Extended Payload Fairing",
+      "definition": "/data/parts/fairing/FAIR-06/part.json",
+      "behavior": "/data/parts/fairing/FAIR-06/behavior.json"
+    },
+    {
+      "id": "FAIR-07",
+      "category": "fairing",
+      "name": "FB-02 Heavy Fairing Base Ring",
+      "definition": "/data/parts/fairing/FAIR-07/part.json",
+      "behavior": "/data/parts/fairing/FAIR-07/behavior.json"
+    },
+    {
+      "id": "FAIR-08",
+      "category": "fairing",
+      "name": "FS-02 Short Fairing Segment",
+      "definition": "/data/parts/fairing/FAIR-08/part.json",
+      "behavior": "/data/parts/fairing/FAIR-08/behavior.json"
+    },
+    {
+      "id": "FAIR-09",
+      "category": "fairing",
+      "name": "FS-03 Reinforced Fairing Segment",
+      "definition": "/data/parts/fairing/FAIR-09/part.json",
+      "behavior": "/data/parts/fairing/FAIR-09/behavior.json"
+    },
+    {
+      "id": "FAIR-10",
+      "category": "fairing",
+      "name": "PF-05 Wide Ogive Fairing",
+      "definition": "/data/parts/fairing/FAIR-10/part.json",
+      "behavior": "/data/parts/fairing/FAIR-10/behavior.json"
+    },
+    {
+      "id": "FAIR-11",
+      "category": "fairing",
+      "name": "FB-03 Wide Fairing Ring",
+      "definition": "/data/parts/fairing/FAIR-11/part.json",
+      "behavior": "/data/parts/fairing/FAIR-11/behavior.json"
+    },
+    {
+      "id": "FAIR-12",
+      "category": "fairing",
+      "name": "FB-04 Extended Fairing Base",
+      "definition": "/data/parts/fairing/FAIR-12/part.json",
+      "behavior": "/data/parts/fairing/FAIR-12/behavior.json"
+    },
+    {
+      "id": "FAIR-MORE",
+      "category": "fairing",
+      "name": "PF-X Additional Fairing Section Set",
+      "definition": "/data/parts/fairing/FAIR-MORE/part.json",
+      "behavior": "/data/parts/fairing/FAIR-MORE/behavior.json"
+    },
+    {
+      "id": "STRUCT-1",
+      "category": "structure",
+      "name": "TR-1 Short Truss",
+      "definition": "/data/parts/structure/STRUCT-1/part.json",
+      "behavior": "/data/parts/structure/STRUCT-1/behavior.json"
+    },
+    {
+      "id": "STRUCT-2",
+      "category": "structure",
+      "name": "TR-2 Compact Truss",
+      "definition": "/data/parts/structure/STRUCT-2/part.json",
+      "behavior": "/data/parts/structure/STRUCT-2/behavior.json"
+    },
+    {
+      "id": "STRUCT-3",
+      "category": "structure",
+      "name": "TR-3 Braced Truss",
+      "definition": "/data/parts/structure/STRUCT-3/part.json",
+      "behavior": "/data/parts/structure/STRUCT-3/behavior.json"
+    },
+    {
+      "id": "STRUCT-4",
+      "category": "structure",
+      "name": "TR-4 Long Truss",
+      "definition": "/data/parts/structure/STRUCT-4/part.json",
+      "behavior": "/data/parts/structure/STRUCT-4/behavior.json"
+    },
+    {
+      "id": "STRUCT-5",
+      "category": "structure",
+      "name": "TR-5 Slim Long Truss",
+      "definition": "/data/parts/structure/STRUCT-5/part.json",
+      "behavior": "/data/parts/structure/STRUCT-5/behavior.json"
+    },
+    {
+      "id": "STRUCT-6",
+      "category": "structure",
+      "name": "TR-6 Heavy Truss Frame",
+      "definition": "/data/parts/structure/STRUCT-6/part.json",
+      "behavior": "/data/parts/structure/STRUCT-6/behavior.json"
+    },
+    {
+      "id": "STRUCT-7",
+      "category": "structure",
+      "name": "TR-7 Braced Frame",
+      "definition": "/data/parts/structure/STRUCT-7/part.json",
+      "behavior": "/data/parts/structure/STRUCT-7/behavior.json"
+    },
+    {
+      "id": "STRUCT-8",
+      "category": "structure",
+      "name": "TR-8 Wide Truss Frame",
+      "definition": "/data/parts/structure/STRUCT-8/part.json",
+      "behavior": "/data/parts/structure/STRUCT-8/behavior.json"
+    },
+    {
+      "id": "STRUCT-9",
+      "category": "structure",
+      "name": "TR-9 Slim Truss Frame",
+      "definition": "/data/parts/structure/STRUCT-9/part.json",
+      "behavior": "/data/parts/structure/STRUCT-9/behavior.json"
+    },
+    {
+      "id": "OTH-DOCK-1",
+      "category": "docking",
+      "name": "DP-1 Docking Port",
+      "definition": "/data/parts/docking/OTH-DOCK-1/part.json",
+      "behavior": "/data/parts/docking/OTH-DOCK-1/behavior.json"
+    },
+    {
+      "id": "OTH-DOCK-2",
+      "category": "docking",
+      "name": "DA-2 Docking Adapter Plate",
+      "definition": "/data/parts/docking/OTH-DOCK-2/part.json",
+      "behavior": "/data/parts/docking/OTH-DOCK-2/behavior.json"
+    },
+    {
+      "id": "OTH-DOCK-3",
+      "category": "docking",
+      "name": "DA-3 Low-Profile Docking Plate",
+      "definition": "/data/parts/docking/OTH-DOCK-3/part.json",
+      "behavior": "/data/parts/docking/OTH-DOCK-3/behavior.json"
+    },
+    {
+      "id": "OTH-LEG-1",
+      "category": "landing",
+      "name": "LG-2 Heavy Landing Leg",
+      "definition": "/data/parts/landing/OTH-LEG-1/part.json",
+      "behavior": "/data/parts/landing/OTH-LEG-1/behavior.json"
+    },
+    {
+      "id": "OTH-LEG-2",
+      "category": "landing",
+      "name": "LG-3 Reinforced Landing Leg",
+      "definition": "/data/parts/landing/OTH-LEG-2/part.json",
+      "behavior": "/data/parts/landing/OTH-LEG-2/behavior.json"
+    },
+    {
+      "id": "OTH-SOLAR-1",
+      "category": "power",
+      "name": "SP-1 Deployable Solar Panel",
+      "definition": "/data/parts/power/OTH-SOLAR-1/part.json",
+      "behavior": "/data/parts/power/OTH-SOLAR-1/behavior.json"
+    },
+    {
+      "id": "OTH-CONTROL",
+      "category": "command",
+      "name": "GC-2 Probe Control Unit",
+      "definition": "/data/parts/command/OTH-CONTROL/part.json",
+      "behavior": "/data/parts/command/OTH-CONTROL/behavior.json"
+    },
+    {
+      "id": "OTH-RCS",
+      "category": "utility",
+      "name": "RCS-2 Translation Thruster",
+      "definition": "/data/parts/utility/OTH-RCS/part.json",
+      "behavior": "/data/parts/utility/OTH-RCS/behavior.json"
+    },
+    {
+      "id": "OTH-WHEEL-1",
+      "category": "wheel",
+      "name": "RW-1 Rover Wheel",
+      "definition": "/data/parts/wheel/OTH-WHEEL-1/part.json",
+      "behavior": "/data/parts/wheel/OTH-WHEEL-1/behavior.json"
+    },
+    {
+      "id": "OTH-SOLAR-2",
+      "category": "power",
+      "name": "SP-2 Side Solar Array",
+      "definition": "/data/parts/power/OTH-SOLAR-2/part.json",
+      "behavior": "/data/parts/power/OTH-SOLAR-2/behavior.json"
+    },
+    {
+      "id": "OTH-SOLAR-3",
+      "category": "power",
+      "name": "SP-3 Wide Solar Array",
+      "definition": "/data/parts/power/OTH-SOLAR-3/part.json",
+      "behavior": "/data/parts/power/OTH-SOLAR-3/behavior.json"
+    },
+    {
+      "id": "OTH-WHEEL-2",
+      "category": "wheel",
+      "name": "RW-2 Heavy Rover Wheel",
+      "definition": "/data/parts/wheel/OTH-WHEEL-2/part.json",
+      "behavior": "/data/parts/wheel/OTH-WHEEL-2/behavior.json"
+    },
+    {
+      "id": "RA-TOWER",
+      "category": "abort",
+      "name": "LES-1 Launch Escape Tower",
+      "definition": "/data/parts/abort/RA-TOWER/part.json",
+      "behavior": "/data/parts/abort/RA-TOWER/behavior.json"
+    },
+    {
+      "id": "RA-CAPSULE",
+      "category": "command",
+      "name": "CM-2 Mercury-Class Capsule",
+      "definition": "/data/parts/command/RA-CAPSULE/part.json",
+      "behavior": "/data/parts/command/RA-CAPSULE/behavior.json"
+    },
+    {
+      "id": "RA-STAGE-1",
+      "category": "separator",
+      "name": "SD-2 Atlas Stage Separator",
+      "definition": "/data/parts/separator/RA-STAGE-1/part.json",
+      "behavior": "/data/parts/separator/RA-STAGE-1/behavior.json"
+    },
+    {
+      "id": "RA-MOUNT-1",
+      "category": "structure",
+      "name": "AS-1 Booster Skirt",
+      "definition": "/data/parts/structure/RA-MOUNT-1/part.json",
+      "behavior": "/data/parts/structure/RA-MOUNT-1/behavior.json"
+    },
+    {
+      "id": "RA-TANK-1",
+      "category": "tank",
+      "name": "AT-1 Atlas Propellant Tank",
+      "definition": "/data/parts/tank/RA-TANK-1/part.json",
+      "behavior": "/data/parts/tank/RA-TANK-1/behavior.json"
+    },
+    {
+      "id": "RA-ENG-1",
+      "category": "engine",
+      "name": "MA-1 Booster Engine",
+      "definition": "/data/parts/engine/RA-ENG-1/part.json",
+      "behavior": "/data/parts/engine/RA-ENG-1/behavior.json"
+    },
+    {
+      "id": "RA-ENG-2",
+      "category": "engine",
+      "name": "VE-1 Vernier Engine Cluster",
+      "definition": "/data/parts/engine/RA-ENG-2/part.json",
+      "behavior": "/data/parts/engine/RA-ENG-2/behavior.json"
+    },
+    {
+      "id": "RA-STAGE-2",
+      "category": "separator",
+      "name": "IS-1 Interstage Adapter",
+      "definition": "/data/parts/separator/RA-STAGE-2/part.json",
+      "behavior": "/data/parts/separator/RA-STAGE-2/behavior.json"
+    },
+    {
+      "id": "RA-TANK-2",
+      "category": "tank",
+      "name": "AT-2 Flared Propellant Tank",
+      "definition": "/data/parts/tank/RA-TANK-2/part.json",
+      "behavior": "/data/parts/tank/RA-TANK-2/behavior.json"
+    },
+    {
+      "id": "RA-TANK-3",
+      "category": "tank",
+      "name": "AT-3 Upper Propellant Tank",
+      "definition": "/data/parts/tank/RA-TANK-3/part.json",
+      "behavior": "/data/parts/tank/RA-TANK-3/behavior.json"
+    },
+    {
+      "id": "RA-MOUNT-2",
+      "category": "structure",
+      "name": "EM-3 Atlas Engine Support",
+      "definition": "/data/parts/structure/RA-MOUNT-2/part.json",
+      "behavior": "/data/parts/structure/RA-MOUNT-2/behavior.json"
+    },
+    {
+      "id": "RA-AERO-1",
+      "category": "aero",
+      "name": "AN-1 Atlas Nose Spike",
+      "definition": "/data/parts/aero/RA-AERO-1/part.json",
+      "behavior": "/data/parts/aero/RA-AERO-1/behavior.json"
+    },
+    {
+      "id": "RA-AERO-2",
+      "category": "aero",
+      "name": "AN-2 Slim Nose Spike",
+      "definition": "/data/parts/aero/RA-AERO-2/part.json",
+      "behavior": "/data/parts/aero/RA-AERO-2/behavior.json"
+    },
+    {
+      "id": "RA-ENG-3",
+      "category": "engine",
+      "name": "MA-2 Sustainer Engine",
+      "definition": "/data/parts/engine/RA-ENG-3/part.json",
+      "behavior": "/data/parts/engine/RA-ENG-3/behavior.json"
+    },
+    {
+      "id": "RA-AERO-3",
+      "category": "aero",
+      "name": "AS-2 Aerodynamic Skirt",
+      "definition": "/data/parts/aero/RA-AERO-3/part.json",
+      "behavior": "/data/parts/aero/RA-AERO-3/behavior.json"
+    },
+    {
+      "id": "RA-ENG-4",
+      "category": "engine",
+      "name": "MA-3 Plumbing-Rich Main Engine",
+      "definition": "/data/parts/engine/RA-ENG-4/part.json",
+      "behavior": "/data/parts/engine/RA-ENG-4/behavior.json"
+    },
+    {
+      "id": "BATTERY-01",
+      "category": "power",
+      "name": "BAT-1 Battery Pack",
+      "definition": "/data/parts/power/BATTERY-01/part.json",
+      "behavior": "/data/parts/power/BATTERY-01/behavior.json"
+    },
+    {
+      "id": "PAYLOAD-ROVER",
+      "category": "utility",
+      "name": "M2020 Planetary Rover Payload",
+      "definition": "/data/parts/utility/PAYLOAD-ROVER/part.json",
+      "behavior": "/data/parts/utility/PAYLOAD-ROVER/behavior.json",
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "diameter": 1.2,
+      "radial": false,
+      "command": false,
+      "radialHost": true
+    },
+    {
+      "id": "PAYLOAD-SEISMIC",
+      "category": "utility",
+      "name": "SEIS & HP3 Geophysical Suite",
+      "definition": "/data/parts/utility/PAYLOAD-SEISMIC/part.json",
+      "behavior": "/data/parts/utility/PAYLOAD-SEISMIC/behavior.json",
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "diameter": 1.2,
+      "radial": false,
+      "command": false,
+      "radialHost": true
+    },
+    {
+      "id": "SAMPLE-RETURN-CAPSULE",
+      "category": "command",
+      "name": "SRC-1 Sample Return Capsule",
+      "definition": "/data/parts/command/SAMPLE-RETURN-CAPSULE/part.json",
+      "behavior": "/data/parts/command/SAMPLE-RETURN-CAPSULE/behavior.json",
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "diameter": 1.2,
+      "radial": false,
+      "command": false,
+      "radialHost": true
+    },
+    {
+      "id": "SCIENCE-SUITE-DEEP",
+      "category": "utility",
+      "name": "SIS-4 Deep Space Science Suite",
+      "definition": "/data/parts/utility/SCIENCE-SUITE-DEEP/part.json",
+      "behavior": "/data/parts/utility/SCIENCE-SUITE-DEEP/behavior.json",
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "diameter": 1.2,
+      "radial": false,
+      "command": false,
+      "radialHost": true
+    },
+    {
+      "id": "POWER-RTG-HEAVY",
+      "category": "power",
+      "name": "GPHS-RTG Radioisotope Generator",
+      "definition": "/data/parts/power/POWER-RTG-HEAVY/part.json",
+      "behavior": "/data/parts/power/POWER-RTG-HEAVY/behavior.json",
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "diameter": 1.2,
+      "radial": true,
+      "command": false
+    },
+    {
+      "id": "POWER-SOLAR-OUTER",
+      "category": "power",
+      "name": "UltraFlex Deep-Space Solar Array",
+      "definition": "/data/parts/power/POWER-SOLAR-OUTER/part.json",
+      "behavior": "/data/parts/power/POWER-SOLAR-OUTER/behavior.json",
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "diameter": 1.2,
+      "radial": true,
+      "command": false
+    },
+    {
+      "id": "PAYLOAD-EOS-SAT",
+      "category": "utility",
+      "name": "EOS-1 TerraWatch Earth Observation Satellite",
+      "definition": "/data/parts/utility/PAYLOAD-EOS-SAT/part.json",
+      "behavior": "/data/parts/utility/PAYLOAD-EOS-SAT/behavior.json",
+      "topD": 1.4,
+      "bottomD": 1.4,
+      "diameter": 1.4,
+      "radial": false,
+      "command": false
+    }
+  ]
+}

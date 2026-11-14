@@ -1,0 +1,79 @@
+{
+  "wheel": {
+    "radius": 0.475,
+    "maxSpeed": 18
+  },
+  "radial": {
+    "align": "bottom"
+  },
+  "topD": 0.95,
+  "bottomD": 0.95,
+  "id": "OTH-WHEEL-2",
+  "catalogueId": "OTH-WHEEL-2",
+  "name": "RW-2 Heavy Rover Wheel",
+  "category": "wheel",
+  "description": "Larger rover wheel.",
+  "mass": 32.0,
+  "diameter": 0.95,
+  "height": 0.95,
+  "cd": 0.35,
+  "cost": 34000,
+  "radialHost": false,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: wheels/rover",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/wheel/OTH-WHEEL-2/part.json",
+  "dimensions": {
+    "diameterM": 0.95,
+    "heightM": 0.95,
+    "topDiameterM": 0.95,
+    "bottomDiameterM": 0.95
+  },
+  "physicalProperties": {
+    "dryMassKg": 32.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.95,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.95,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": false,
+      "alignment": "bottom"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.95,
+    "bottomDiameterM": 0.95,
+    "radialHost": false,
+    "radialOnly": true
+  },
+  "asset": {
+    "image": "assets/parts/OTH-WHEEL-2.png",
+    "model": null
+  },
+  "behaviorType": "rover_mobility"
+}

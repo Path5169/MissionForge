@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "partId": "OTH-SOLAR-1",
+  "role": "Solar power unit",
+  "behaviorType": "electrical_generation",
+  "description": "Generates electrical power from sunlight subject to deployment and illumination.",
+  "activation": "Sunlight and deployment state",
+  "effects": "Power output and deployment configuration",
+  "parameters": {
+    "power": {
+      "outputKW": 0.18,
+      "deployable": true
+    },
+    "radial": {
+      "align": "bottom"
+    }
+  },
+  "mechanics": [
+    "power",
+    "radial"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

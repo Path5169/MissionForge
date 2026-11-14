@@ -1,0 +1,66 @@
+{
+  "separator": true,
+  "topD": 3.05,
+  "bottomD": 3.05,
+  "id": "RA-STAGE-2",
+  "catalogueId": "RA-STAGE-2",
+  "name": "IS-1 Interstage Adapter",
+  "category": "separator",
+  "description": "Interstage separator.",
+  "mass": 85.0,
+  "diameter": 3.05,
+  "height": 1.06,
+  "cd": 0.35,
+  "cost": 68000,
+  "radialHost": false,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/separator/RA-STAGE-2/part.json",
+  "dimensions": {
+    "diameterM": 3.05,
+    "heightM": 1.06,
+    "topDiameterM": 3.05,
+    "bottomDiameterM": 3.05
+  },
+  "physicalProperties": {
+    "dryMassKg": 85.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": 3.05,
+    "bottomDiameterM": 3.05,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/RA-STAGE-2.png",
+    "model": null
+  },
+  "behaviorType": "staging_separation"
+}

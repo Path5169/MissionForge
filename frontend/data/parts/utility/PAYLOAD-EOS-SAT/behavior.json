@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "partId": "PAYLOAD-EOS-SAT",
+  "role": "Earth Observation Satellite Payload",
+  "behaviorType": "utility",
+  "description": "High-resolution multispectral Earth observation satellite bus with deployable solar arrays and communications downlink.",
+  "parameters": {
+    "satellite": true,
+    "command": true,
+    "deployable": true,
+    "powerKW": 0.85
+  },
+  "mechanics": [
+    "satellite",
+    "command",
+    "deployable",
+    "powerKW"
+  ],
+  "runtimeStatus": "active"
+}

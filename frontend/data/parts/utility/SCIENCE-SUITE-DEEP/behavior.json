@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "partId": "SCIENCE-SUITE-DEEP",
+  "role": "SIS-4 Deep Space Science Suite",
+  "behaviorType": "utility",
+  "description": "Multi-instrument deep-space suite: ice-penetrating radar, magnetometer boom, and multispectral imaging cameras.",
+  "parameters": {
+    "science": true,
+    "deepSpace": true,
+    "powerKW": 0.2
+  },
+  "mechanics": [
+    "science",
+    "deepSpace",
+    "powerKW"
+  ],
+  "runtimeStatus": "active"
+}

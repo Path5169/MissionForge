@@ -1,0 +1,33 @@
+{
+  "id": "PAYLOAD-ROVER",
+  "catalogueId": "PAYLOAD-ROVER",
+  "name": "M2020 Planetary Rover Payload",
+  "category": "utility",
+  "description": "Mars 2020 Perseverance rover payload equipped with sampling turret, mast cameras, and surface mobility systems.",
+  "mass": 1025,
+  "diameter": 1.2,
+  "height": 1.2,
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "cd": 0.75,
+  "cost": 18500000,
+  "radialHost": true,
+  "palette": true,
+  "asset": {
+    "image": "assets/parts/PAYLOAD-ROVER.png",
+    "model": null
+  },
+  "dimensions": {
+    "diameterM": 2.2,
+    "heightM": 1.2,
+    "topDiameterM": 2.2,
+    "bottomDiameterM": 2.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 1025,
+    "dragCoefficient": 0.75
+  },
+  "command": false,
+  "rover": true,
+  "radial": false
+}

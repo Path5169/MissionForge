@@ -1,0 +1,59 @@
+{
+  "topD": null,
+  "bottomD": 2.4,
+  "id": "WIDE-AERO-2",
+  "catalogueId": "WIDE-AERO-2",
+  "name": "WN-2 Offset Wide Nose",
+  "category": "aero",
+  "description": "Side-booster nose cone at this width",
+  "mass": 14.0,
+  "diameter": 2.4,
+  "height": 0.8,
+  "cd": 0.2,
+  "cost": 12000,
+  "radialHost": false,
+  "shape": "taper",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "shapeTopD": 1.32,
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (needs new shape: slant)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/aero/WIDE-AERO-2/part.json",
+  "dimensions": {
+    "diameterM": 2.4,
+    "heightM": 0.8,
+    "topDiameterM": null,
+    "bottomDiameterM": 2.4
+  },
+  "physicalProperties": {
+    "dryMassKg": 14.0,
+    "dragCoefficient": 0.2
+  },
+  "attachmentPoints": [
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 2.4,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": null,
+    "bottomDiameterM": 2.4,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/WIDE-AERO-2.png",
+    "model": null
+  },
+  "behaviorType": "aerodynamic_surface"
+}

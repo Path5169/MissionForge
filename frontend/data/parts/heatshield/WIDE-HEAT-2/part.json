@@ -1,0 +1,76 @@
+{
+  "heatshield": {
+    "maxTemperature": 2760,
+    "ablativeMass": 41.25
+  },
+  "topD": 2.4,
+  "bottomD": 2.4,
+  "id": "WIDE-HEAT-2",
+  "catalogueId": "WIDE-HEAT-2",
+  "name": "WHS-2 Wide Heavy Heat Shield",
+  "category": "heatshield",
+  "description": "Larger/second heat shield",
+  "mass": 75.0,
+  "diameter": 2.4,
+  "height": 0.67,
+  "cd": 0.35,
+  "cost": 98000,
+  "radialHost": true,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled thermal-protection hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: re-entry heating",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/heatshield/WIDE-HEAT-2/part.json",
+  "dimensions": {
+    "diameterM": 2.4,
+    "heightM": 0.67,
+    "topDiameterM": 2.4,
+    "bottomDiameterM": 2.4
+  },
+  "physicalProperties": {
+    "dryMassKg": 75.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 2.4,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 2.4,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 2.4,
+    "bottomDiameterM": 2.4,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/WIDE-HEAT-2.png",
+    "model": null
+  },
+  "behaviorType": "thermal_protection"
+}

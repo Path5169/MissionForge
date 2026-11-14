@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "partId": "SAMPLE-RETURN-CAPSULE",
+  "role": "SRC-1 Sample Return Capsule",
+  "behaviorType": "command",
+  "description": "OSIRIS-REx sample return capsule with PICA heat shield, sample canister, and dual-stage parachute.",
+  "parameters": {
+    "command": true,
+    "sampleReturn": true,
+    "heatshield": {
+      "maxTemperature": 3200,
+      "ablativeMass": 8.0
+    }
+  },
+  "mechanics": [
+    "command",
+    "sampleReturn",
+    "heatshield"
+  ],
+  "runtimeStatus": "active"
+}

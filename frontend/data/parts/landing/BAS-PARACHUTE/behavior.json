@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "partId": "BAS-PARACHUTE",
+  "role": "Parachute recovery",
+  "behaviorType": "recovery_landing",
+  "description": "Deploys a canopy when commanded and within its deployment envelope; drag slows atmospheric descent.",
+  "activation": "Deployment command",
+  "effects": "Canopy area, deployment altitude and maximum deployment speed",
+  "parameters": {
+    "parachute": {
+      "canopyArea": 52,
+      "deploymentAltitude": 1500,
+      "maxDeploySpeed": 160
+    }
+  },
+  "mechanics": [
+    "parachute"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

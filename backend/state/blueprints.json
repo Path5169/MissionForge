@@ -1,0 +1,217 @@
+{
+  "twin-side-tank-rocket-2zst": {
+    "id": "twin-side-tank-rocket-2zst",
+    "name": "Twin Side-Tank Rocket",
+    "blueprint": {
+      "id": "twin-side-tank-rocket-2zst",
+      "name": "Twin Side-Tank Rocket",
+      "schema": 2,
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "probe_core",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "tank_m",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "engine_booster",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "side_separator",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "tank_s",
+          "parent": "p7",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "engine_lander",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "fairing_nosecone",
+          "parent": "p4",
+          "mount": "side",
+          "stage": 0,
+          "group": 0
+        }
+      ],
+      "looseParts": []
+    }
+  },
+  "untitled-vehicle-jxej": {
+    "id": "untitled-vehicle-jxej",
+    "name": "Untitled vehicle",
+    "blueprint": {
+      "schema": 2,
+      "name": "Untitled vehicle",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "BAS-TANK-3",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "BAS-TANK-3",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-TANK-3",
+          "parent": "p4",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "BAS-CAPSULE",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "BAS-ENG-1",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "untitled-vehicle-jxej",
+      "payload": {
+        "schema": 2,
+        "name": "Deep-space Probe",
+        "fairing": {
+          "mode": "catalogue",
+          "id": "FAIR-MORE"
+        },
+        "parts": [
+          {
+            "uid": "q1",
+            "c": "ADP-66"
+          },
+          {
+            "uid": "q2",
+            "c": "BUS-L"
+          },
+          {
+            "uid": "q3",
+            "c": "FC-2"
+          },
+          {
+            "uid": "q4",
+            "c": "REC-1"
+          },
+          {
+            "uid": "q5",
+            "c": "TX-X"
+          },
+          {
+            "uid": "q6",
+            "c": "BAT-2"
+          },
+          {
+            "uid": "q7",
+            "c": "BAT-2"
+          },
+          {
+            "uid": "q8",
+            "c": "IMU-1"
+          },
+          {
+            "uid": "q9",
+            "c": "RW-1"
+          },
+          {
+            "uid": "q10",
+            "c": "ANT-4"
+          },
+          {
+            "uid": "q11",
+            "c": "SA-2",
+            "dir": 0
+          },
+          {
+            "uid": "q12",
+            "c": "CAM-2",
+            "dir": 1,
+            "row": 0
+          },
+          {
+            "uid": "q13",
+            "c": "ST-1",
+            "dir": 1,
+            "row": 2
+          },
+          {
+            "uid": "q14",
+            "c": "SPC-1",
+            "dir": -1,
+            "row": 0
+          },
+          {
+            "uid": "q15",
+            "c": "RCS-1",
+            "dir": -1,
+            "row": 2
+          }
+        ],
+        "summary": {
+          "mass": 598.5,
+          "cost": 131950000,
+          "powerGen": 2200,
+          "powerDraw": 216,
+          "batteryWh": 2000,
+          "width": 2.04,
+          "height": 2.7,
+          "adapter": "ADP-66",
+          "adapterDiameter": 1.67,
+          "fairing": "FAIR-MORE",
+          "fitsFairing": true,
+          "fitsRocket": null
+        }
+      }
+    }
+  }
+}

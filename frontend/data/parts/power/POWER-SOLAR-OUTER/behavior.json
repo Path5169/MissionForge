@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "partId": "POWER-SOLAR-OUTER",
+  "role": "UltraFlex Deep-Space Solar Array",
+  "behaviorType": "power",
+  "description": "Massive circular deployable solar wings optimized for weak sunlight at Jupiter and Trojan asteroid distances.",
+  "parameters": {
+    "power": {
+      "outputKW": 3.2,
+      "deployable": true
+    }
+  },
+  "mechanics": [
+    "power"
+  ],
+  "runtimeStatus": "active"
+}

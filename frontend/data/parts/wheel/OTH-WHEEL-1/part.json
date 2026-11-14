@@ -1,0 +1,79 @@
+{
+  "wheel": {
+    "radius": 0.325,
+    "maxSpeed": 12
+  },
+  "radial": {
+    "align": "bottom"
+  },
+  "topD": 0.65,
+  "bottomD": 0.65,
+  "id": "OTH-WHEEL-1",
+  "catalogueId": "OTH-WHEEL-1",
+  "name": "RW-1 Rover Wheel",
+  "category": "wheel",
+  "description": "Rover wheel.",
+  "mass": 18.0,
+  "diameter": 0.65,
+  "height": 0.66,
+  "cd": 0.35,
+  "cost": 22000,
+  "radialHost": false,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: wheels/rover",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/wheel/OTH-WHEEL-1/part.json",
+  "dimensions": {
+    "diameterM": 0.65,
+    "heightM": 0.66,
+    "topDiameterM": 0.65,
+    "bottomDiameterM": 0.65
+  },
+  "physicalProperties": {
+    "dryMassKg": 18.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.65,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.65,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": false,
+      "alignment": "bottom"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.65,
+    "bottomDiameterM": 0.65,
+    "radialHost": false,
+    "radialOnly": true
+  },
+  "asset": {
+    "image": "assets/parts/OTH-WHEEL-1.png",
+    "model": null
+  },
+  "behaviorType": "rover_mobility"
+}

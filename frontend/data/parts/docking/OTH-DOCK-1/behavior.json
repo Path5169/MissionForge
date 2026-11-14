@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "partId": "OTH-DOCK-1",
+  "role": "Docking interface",
+  "behaviorType": "docking_interface",
+  "description": "Defines the mating interface used to connect compatible spacecraft.",
+  "activation": "Relative alignment and docking action",
+  "effects": "Docking type and compatibility",
+  "parameters": {
+    "docking": {
+      "captureRadius": 0.18,
+      "gender": "androgynous"
+    }
+  },
+  "mechanics": [
+    "docking"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

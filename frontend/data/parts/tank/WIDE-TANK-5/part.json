@@ -1,0 +1,76 @@
+{
+  "tank": {
+    "propellant": 11400,
+    "costPerKg": 1.5
+  },
+  "topD": 2.4,
+  "bottomD": 2.4,
+  "id": "WIDE-TANK-5",
+  "catalogueId": "WIDE-TANK-5",
+  "name": "WT-5 Wide Slim Tank",
+  "category": "tank",
+  "description": "Narrow long tank",
+  "mass": 741.0,
+  "diameter": 2.4,
+  "height": 3.4,
+  "cd": 0.35,
+  "cost": 24000,
+  "radialHost": true,
+  "shape": "cylinder",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/tank/WIDE-TANK-5/part.json",
+  "dimensions": {
+    "diameterM": 2.4,
+    "heightM": 3.4,
+    "topDiameterM": 2.4,
+    "bottomDiameterM": 2.4
+  },
+  "physicalProperties": {
+    "dryMassKg": 741.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 2.4,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 2.4,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 2.4,
+    "bottomDiameterM": 2.4,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/WIDE-TANK-5.png",
+    "model": null
+  },
+  "behaviorType": "resource_storage"
+}

@@ -1,0 +1,37 @@
+/* Shared motion. Every keyframe below is referenced by a screen stylesheet, so keep the names. */
+
+/* screen changes: one soft settle, flight just fades */
+.view:not([hidden]) { animation: view-in .5s var(--ease) both; }
+@keyframes view-in { from { opacity: 0; transform: scale(1.012); } }
+#view-flight:not([hidden]) { animation-name: fade-in; }
+@keyframes fade-in { from { opacity: 0; } }
+
+/* toasts + dialogs react to the person's action */
+.toast { animation: toast-pop .42s var(--spring) both; }
+@keyframes toast-pop { from { opacity: 0; transform: translateY(16px) scale(.92); } }
+dialog[open] { animation: dlg-in .32s var(--spring) both; }
+dialog[open]::backdrop { animation: fade-in .3s ease both; backdrop-filter: blur(3px); }
+@keyframes dlg-in { from { opacity: 0; transform: translateY(14px) scale(.95); } }
+/* full-screen dialogs draw their own edges */
+dialog.settings-screen::before, dialog.flight-pause::before { display: none; }
+
+/* main menu */
+@keyframes wm-in { from { opacity: 0; letter-spacing: .08em; filter: blur(14px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes caution-breathe { 50% { border-left-color: rgba(255, 176, 46, .35); } }
+
+/* flight HUD */
+@keyframes slide-l { from { transform: translateX(30px); opacity: 0; } }
+@keyframes slide-d { from { transform: translateY(-100%); } }
+@keyframes slide-r { from { transform: translateX(-120%); opacity: 0; } }
+@keyframes slide-u { from { transform: translate(-50%, 140%); opacity: 0; } }
+@keyframes pop { from { opacity: 0; scale: .92; } }
+@keyframes pill-pulse { 50% { box-shadow: 0 0 0 6px rgba(255, 176, 46, 0), 0 0 22px rgba(255, 176, 46, .3); } }
+@keyframes slide-r2 { from { transform: translateX(-30px); opacity: 0; } }
+@keyframes slide-u2 { from { transform: translate(-50%, 30px); opacity: 0; } }
+@keyframes stage-ready { 50% { background: rgba(255, 176, 46, .14); } }
+#fl-mission .obj { transition: color .4s, transform .4s var(--ease); }
+#fl-mission .obj.met { animation: met .7s var(--spring); }
+@keyframes met { 40% { transform: translateX(6px); text-shadow: 0 0 14px var(--go); } }
+
+@media (prefers-reduced-motion: reduce) { .view:not([hidden]) { animation: none !important; } }

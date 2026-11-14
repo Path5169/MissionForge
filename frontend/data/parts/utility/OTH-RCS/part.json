@@ -1,0 +1,79 @@
+{
+  "rcs": {
+    "thrust": 450,
+    "propellant": 8
+  },
+  "radial": {
+    "align": "bottom"
+  },
+  "topD": 0.28,
+  "bottomD": 0.28,
+  "id": "OTH-RCS",
+  "catalogueId": "OTH-RCS",
+  "name": "RCS-2 Translation Thruster",
+  "category": "utility",
+  "description": "RCS thruster.",
+  "mass": 4.5,
+  "diameter": 0.28,
+  "height": 0.27,
+  "cd": 0.35,
+  "cost": 9000,
+  "radialHost": false,
+  "shape": "nozzle",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: RCS",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/utility/OTH-RCS/part.json",
+  "dimensions": {
+    "diameterM": 0.28,
+    "heightM": 0.27,
+    "topDiameterM": 0.28,
+    "bottomDiameterM": 0.28
+  },
+  "physicalProperties": {
+    "dryMassKg": 4.5,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.28,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.28,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": false,
+      "alignment": "bottom"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.28,
+    "bottomDiameterM": 0.28,
+    "radialHost": false,
+    "radialOnly": true
+  },
+  "asset": {
+    "image": "assets/parts/OTH-RCS.png",
+    "model": null
+  },
+  "behaviorType": "reaction_control"
+}

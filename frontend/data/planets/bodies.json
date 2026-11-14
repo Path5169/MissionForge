@@ -1,0 +1,613 @@
+{
+  "schema": 1,
+  "bodies": {
+    "earth": {
+      "id": "earth",
+      "name": "Earth",
+      "R": 6371000,
+      "mu": 398600441800000,
+      "rho0": 1.225,
+      "scaleHeight": 8500,
+      "atmosphereTop": 100000,
+      "sky": [
+        82,
+        143,
+        235
+      ],
+      "ground": [
+        51,
+        97,
+        69
+      ],
+      "groundDark": [
+        26,
+        52,
+        38
+      ],
+      "style": "earth",
+      "parent": "sun",
+      "soiRadius": 924000000,
+      "surfaceGravity": 9.80665,
+      "atmosphere": {
+        "surfacePressure": 101325,
+        "rho0": 1.225,
+        "scaleHeight": 8500,
+        "top": 100000
+      }
+    },
+    "moon": {
+      "id": "moon",
+      "name": "Moon",
+      "R": 1737400,
+      "mu": 4902800066000,
+      "rho0": 0,
+      "scaleHeight": 1,
+      "atmosphereTop": 0,
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        140,
+        138,
+        128
+      ],
+      "groundDark": [
+        62,
+        60,
+        58
+      ],
+      "style": "moon",
+      "parent": "earth",
+      "soiRadius": 66100000,
+      "surfaceGravity": 1.624,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 1,
+        "top": 0
+      }
+    },
+    "mars": {
+      "id": "mars",
+      "name": "Mars",
+      "R": 3389500,
+      "mu": 42828375000000,
+      "rho0": 0.016,
+      "scaleHeight": 11100,
+      "atmosphereTop": 80000,
+      "sky": [
+        140,
+        97,
+        76
+      ],
+      "ground": [
+        158,
+        84,
+        51
+      ],
+      "groundDark": [
+        96,
+        48,
+        28
+      ],
+      "style": "mars",
+      "parent": "sun",
+      "soiRadius": 577000000,
+      "surfaceGravity": 3.71,
+      "atmosphere": {
+        "surfacePressure": 636,
+        "rho0": 0.016,
+        "scaleHeight": 11100,
+        "top": 80000
+      }
+    },
+    "sun": {
+      "id": "sun",
+      "name": "Sun",
+      "R": 695700000,
+      "mu": 132712440018000000000,
+      "rho0": 0,
+      "scaleHeight": 1,
+      "atmosphereTop": 0,
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        255,
+        178,
+        76
+      ],
+      "groundDark": [
+        255,
+        120,
+        30
+      ],
+      "style": "sun",
+      "landable": false,
+      "parent": null,
+      "soiRadius": null,
+      "surfaceGravity": 274,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      }
+    },
+    "jupiter": {
+      "id": "jupiter",
+      "name": "Jupiter",
+      "R": 69911000,
+      "mu": 126686534000000000,
+      "rho0": 0.16,
+      "scaleHeight": 27000,
+      "atmosphereTop": 300000,
+      "sky": [
+        191,
+        153,
+        115
+      ],
+      "ground": [
+        191,
+        153,
+        115
+      ],
+      "groundDark": [
+        120,
+        90,
+        62
+      ],
+      "style": "jupiter",
+      "landable": false,
+      "parent": "sun",
+      "soiRadius": 48200000000,
+      "surfaceGravity": 24.79,
+      "atmosphere": {
+        "surfacePressure": 100000,
+        "rho0": 0.16,
+        "scaleHeight": 27000,
+        "top": 300000
+      }
+    },
+    "europa": {
+      "id": "europa",
+      "name": "Europa",
+      "R": 1560800,
+      "mu": 3202700000000,
+      "rho0": 0,
+      "scaleHeight": 1,
+      "atmosphereTop": 0,
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        206,
+        196,
+        176
+      ],
+      "groundDark": [
+        92,
+        86,
+        78
+      ],
+      "style": "moon",
+      "parent": "jupiter",
+      "soiRadius": 9700000,
+      "surfaceGravity": 1.315,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      }
+    },
+    "bennu": {
+      "id": "bennu",
+      "name": "Bennu",
+      "R": 242.22,
+      "mu": 4.8904,
+      "soiRadius": 38879.3,
+      "parent": "sun",
+      "surfaceGravity": 0.0000833536,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        78,
+        74,
+        67
+      ],
+      "groundDark": [
+        34,
+        32,
+        30
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "jpl"
+    },
+    "didymos": {
+      "id": "didymos",
+      "name": "Didymos",
+      "R": 390,
+      "mu": 36.2,
+      "soiRadius": 110504,
+      "parent": "sun",
+      "surfaceGravity": 0.000238,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        118,
+        106,
+        92
+      ],
+      "groundDark": [
+        48,
+        42,
+        38
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "dimorphos": {
+      "id": "dimorphos",
+      "name": "Dimorphos",
+      "R": 85,
+      "mu": 0.4,
+      "soiRadius": 182,
+      "parent": "didymos",
+      "surfaceGravity": 0.00005536,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        130,
+        120,
+        105
+      ],
+      "groundDark": [
+        50,
+        46,
+        40
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "dinkinesh": {
+      "id": "dinkinesh",
+      "name": "Dinkinesh",
+      "R": 359.5,
+      "mu": 33,
+      "soiRadius": 142959.8,
+      "parent": "sun",
+      "primaryBody": "sun",
+      "surfaceGravity": 0.0002553384,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        136,
+        123,
+        106
+      ],
+      "groundDark": [
+        54,
+        48,
+        42
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "jpl"
+    },
+    "donaldjohanson": {
+      "id": "donaldjohanson",
+      "name": "Donaldjohanson",
+      "R": 1947.5,
+      "mu": 4130.063,
+      "soiRadius": 777755.4,
+      "parent": "sun",
+      "surfaceGravity": 0.001088934,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        140,
+        110,
+        86
+      ],
+      "groundDark": [
+        56,
+        43,
+        34
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "eurybates": {
+      "id": "eurybates",
+      "name": "Eurybates",
+      "R": 31942.5,
+      "mu": 13667601.331,
+      "soiRadius": 25366681.4,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "surfaceGravity": 0.01339536,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        110,
+        96,
+        84
+      ],
+      "groundDark": [
+        44,
+        38,
+        34
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "polymele": {
+      "id": "polymele",
+      "name": "Polymele",
+      "R": 10537.5,
+      "mu": 327119.999,
+      "soiRadius": 7274070.8,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "surfaceGravity": 0.002945994,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        115,
+        105,
+        95
+      ],
+      "groundDark": [
+        46,
+        42,
+        38
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "leucus": {
+      "id": "leucus",
+      "name": "Leucus",
+      "R": 17077.5,
+      "mu": 2088615.391,
+      "soiRadius": 13808822.2,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "surfaceGravity": 0.007161597,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        85,
+        78,
+        68
+      ],
+      "groundDark": [
+        34,
+        31,
+        28
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "orus": {
+      "id": "orus",
+      "name": "Orus",
+      "R": 25405,
+      "mu": 6876115.923,
+      "soiRadius": 19811541.1,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "surfaceGravity": 0.01065381,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        115,
+        100,
+        82
+      ],
+      "groundDark": [
+        46,
+        40,
+        33
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "patroclus": {
+      "id": "patroclus",
+      "name": "Patroclus",
+      "R": 70181,
+      "mu": 97000000,
+      "soiRadius": 48641518,
+      "parent": "sun",
+      "primaryBody": "jupiter",
+      "surfaceGravity": 0.01969394,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        75,
+        70,
+        65
+      ],
+      "groundDark": [
+        30,
+        28,
+        26
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    },
+    "menoetius": {
+      "id": "menoetius",
+      "name": "Menoetius",
+      "R": 56000,
+      "mu": 49097390.925,
+      "soiRadius": 347000,
+      "parent": "patroclus",
+      "surfaceGravity": 0.015655,
+      "rho0": 0,
+      "scaleHeight": 0,
+      "atmosphereTop": 0,
+      "atmosphere": {
+        "surfacePressure": 0,
+        "rho0": 0,
+        "scaleHeight": 0,
+        "top": 0
+      },
+      "sky": [
+        0,
+        0,
+        0
+      ],
+      "ground": [
+        70,
+        65,
+        60
+      ],
+      "groundDark": [
+        28,
+        26,
+        24
+      ],
+      "style": "asteroid",
+      "landable": true,
+      "dataQuality": "estimated-mu"
+    }
+  }
+}

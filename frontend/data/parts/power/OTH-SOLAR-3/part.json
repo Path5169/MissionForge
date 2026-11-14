@@ -1,0 +1,79 @@
+{
+  "power": {
+    "outputKW": 0.65,
+    "deployable": true
+  },
+  "radial": {
+    "align": "bottom"
+  },
+  "topD": 1.0,
+  "bottomD": 1.0,
+  "id": "OTH-SOLAR-3",
+  "catalogueId": "OTH-SOLAR-3",
+  "name": "SP-3 Wide Solar Array",
+  "category": "power",
+  "description": "Larger solar panel variant. CHECK in game.",
+  "mass": 26.0,
+  "diameter": 1.0,
+  "height": 0.82,
+  "cd": 0.35,
+  "cost": 38000,
+  "radialHost": false,
+  "shape": "satellite",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: power",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/power/OTH-SOLAR-3/part.json",
+  "dimensions": {
+    "diameterM": 1.0,
+    "heightM": 0.82,
+    "topDiameterM": 1.0,
+    "bottomDiameterM": 1.0
+  },
+  "physicalProperties": {
+    "dryMassKg": 26.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.0,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.0,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": false,
+      "alignment": "bottom"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.0,
+    "bottomDiameterM": 1.0,
+    "radialHost": false,
+    "radialOnly": true
+  },
+  "asset": {
+    "image": "assets/parts/OTH-SOLAR-3.png",
+    "model": null
+  },
+  "behaviorType": "electrical_generation"
+}

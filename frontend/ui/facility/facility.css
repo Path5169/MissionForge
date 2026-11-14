@@ -1,0 +1,515 @@
+/* ───────── 3D Facility HUD & Terminal Overlays ───────── */
+
+.fac-hud {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+  font-family: var(--font);
+  user-select: none;
+}
+
+/* Location Badge (Top-Left) */
+.fac-location-badge {
+  position: absolute;
+  top: 18px;
+  left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  pointer-events: auto;
+}
+
+.fac-loc-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--ref);
+  text-transform: uppercase;
+}
+
+.fac-loc-title {
+  font-size: 16px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: var(--frost);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.fac-mission-pill {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dim);
+  background: rgba(15, 21, 30, 0.75);
+  border: 1px solid var(--hair-2);
+  border-radius: var(--radius);
+  backdrop-filter: blur(8px);
+}
+
+/* Quick Nav Buttons (Top-Right) */
+.fac-quick-nav {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+/* Context-Sensitive Prompt Box (Bottom-Center) */
+.fac-prompt-box {
+  position: absolute;
+  bottom: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: rgba(8, 12, 19, 0.88);
+  border: 1px solid var(--ref-line);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 16px rgba(82, 214, 234, 0.25);
+  backdrop-filter: blur(12px);
+  pointer-events: auto;
+  animation: promptPulse 2s infinite ease-in-out;
+}
+
+@keyframes promptPulse {
+  0%, 100% {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.6), 0 0 12px rgba(82, 214, 234, 0.2);
+    border-color: var(--ref-line);
+  }
+  50% {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 22px rgba(82, 214, 234, 0.45);
+    border-color: var(--ref);
+  }
+}
+
+.fac-prompt-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 6px;
+  background: var(--ref);
+  color: var(--vacuum);
+  font-weight: 800;
+  font-size: 13px;
+  border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.fac-prompt-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--frost);
+  letter-spacing: 0.02em;
+}
+
+/* Bottom Controls Hint */
+.fac-controls-hint {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: var(--faint);
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ───────── Modal Overlays ───────── */
+.fac-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 6, 13, 0.78);
+  backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  z-index: 50;
+  animation: modalFadeIn 0.2s var(--ease);
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.fac-modal-content {
+  width: min(92vw, 760px);
+  max-height: 86vh;
+  background: linear-gradient(180deg, rgba(24, 33, 45, 0.95), rgba(15, 21, 30, 0.98)), var(--gantry-2);
+  border: 1px solid var(--hair-2);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--pop);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.fac-modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--hair);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  background: rgba(232, 237, 245, 0.02);
+}
+
+.fac-modal-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 750;
+  color: var(--frost);
+  letter-spacing: 0.02em;
+}
+
+.fac-modal-subtitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: var(--dim);
+}
+
+.fac-modal-close {
+  cursor: pointer;
+}
+
+.fac-modal-body {
+  padding: 22px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.fac-modal-footer {
+  padding: 14px 24px;
+  border-top: 1px solid var(--hair);
+  background: rgba(8, 12, 19, 0.5);
+}
+
+.fac-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Stat Cards Grid */
+.fac-grid-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 10px;
+}
+
+.fac-stat-card {
+  padding: 12px 14px;
+  background: rgba(232, 237, 245, 0.03);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fac-stat-card b {
+  font-size: 15px;
+}
+
+/* Preset Selector */
+.fac-sec-title {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--frost);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fac-preset-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.fac-preset-btn {
+  background: rgba(232, 237, 245, 0.04);
+}
+
+/* Mission Control List */
+.fac-mission-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 48vh;
+  overflow-y: auto;
+}
+
+.fac-mission-item {
+  padding: 14px 16px;
+  background: rgba(232, 237, 245, 0.03);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.fac-mission-item.active {
+  border-color: var(--ref-line);
+  background: rgba(82, 214, 234, 0.06);
+}
+
+.fac-mi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fac-mi-title {
+  font-size: 15px;
+  color: var(--frost);
+}
+
+.fac-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+}
+
+.fac-badge.cyan { background: rgba(82, 214, 234, 0.15); color: var(--ref); }
+.fac-badge.green { background: rgba(95, 219, 143, 0.15); color: var(--go); }
+.fac-badge.faint { background: rgba(232, 237, 245, 0.08); color: var(--dim); }
+
+.fac-mi-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--dim);
+}
+
+/* Launch Checklist */
+.fac-launch-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fac-check-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: rgba(232, 237, 245, 0.03);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+}
+
+.fac-check-status {
+  padding: 2px 8px;
+  font-weight: 800;
+  font-size: 11px;
+  border-radius: 2px;
+}
+
+.fac-check-item.go .fac-check-status {
+  background: var(--go);
+  color: var(--vacuum);
+}
+
+.fac-check-label {
+  font-size: 13px;
+  color: var(--frost);
+}
+
+.fac-launch-summary {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: rgba(8, 12, 19, 0.6);
+  border: 1px solid var(--hair-2);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fac-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.fac-btn-ignite {
+  background: linear-gradient(180deg, #ff6b57, #d8292f) !important;
+  color: #fff !important;
+  border-color: #ff9180 !important;
+  box-shadow: 0 0 20px rgba(216, 41, 47, 0.45) !important;
+}
+
+/* Research Lab Cards */
+.fac-research-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fac-research-card {
+  padding: 12px 14px;
+  background: rgba(232, 237, 245, 0.03);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.fac-rc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Parts Hierarchy Inspection Table */
+.fac-parts-table {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.fac-part-row {
+  display: grid;
+  grid-template-columns: 36px 1fr 100px 90px;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(232, 237, 245, 0.02);
+  border-radius: var(--radius);
+  font-size: 12px;
+}
+
+/* Pause List */
+.fac-pause-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ───────── 3D Rocket Assembly Studio ───────── */
+.fac-name-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--ref-line);
+  color: var(--ref);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  outline: none;
+}
+
+.fac-studio-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fac-studio-cols {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 16px;
+  max-height: 52vh;
+  overflow: hidden;
+}
+
+.fac-col-left, .fac-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.fac-cat-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.fac-catalog-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fac-part-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: rgba(232, 237, 245, 0.03);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  gap: 8px;
+}
+
+.fac-part-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fac-part-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.fac-stack-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fac-stack-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 28vh;
+  overflow-y: auto;
+}
+
+.fac-stack-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(232, 237, 245, 0.02);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius);
+  font-size: 12px;
+}
+
+.fac-stack-item b {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fac-stack-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+

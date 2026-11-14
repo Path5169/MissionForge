@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "partId": "BAS-RCS",
+  "role": "Reaction-control thruster",
+  "behaviorType": "reaction_control",
+  "description": "Applies small forces for attitude adjustment or translation while consuming its configured propellant.",
+  "activation": "RCS input and propellant availability",
+  "effects": "Thrust, propellant and mounting direction",
+  "parameters": {
+    "rcs": {
+      "thrust": 450,
+      "propellant": 8
+    },
+    "radial": {
+      "align": "bottom"
+    }
+  },
+  "mechanics": [
+    "rcs",
+    "radial"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

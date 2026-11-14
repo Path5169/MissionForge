@@ -1,0 +1,73 @@
+{
+  "command": true,
+  "topD": 1.9,
+  "bottomD": 1.9,
+  "id": "RA-CAPSULE",
+  "catalogueId": "RA-CAPSULE",
+  "name": "CM-2 Mercury-Class Capsule",
+  "category": "command",
+  "description": "Crew capsule.",
+  "mass": 1099,
+  "diameter": 1.9,
+  "height": 2.4,
+  "cd": 0.55,
+  "cost": 850000,
+  "radialHost": true,
+  "shape": "core",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled spacecraft command module.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (command: true)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/command/RA-CAPSULE/part.json",
+  "dimensions": {
+    "diameterM": 1.9,
+    "heightM": 2.4,
+    "topDiameterM": 1.9,
+    "bottomDiameterM": 1.9
+  },
+  "physicalProperties": {
+    "dryMassKg": 1099,
+    "dragCoefficient": 0.55
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.9,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.9,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.9,
+    "bottomDiameterM": 1.9,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/RA-CAPSULE.png",
+    "model": null
+  },
+  "behaviorType": "vehicle_control"
+}

@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "partId": "OTH-LEG-1",
+  "role": "Landing support",
+  "behaviorType": "surface_landing",
+  "description": "Provides touchdown support and changes the vehicle landing envelope.",
+  "activation": "Surface contact",
+  "effects": "Maximum touchdown speed and geometry",
+  "parameters": {
+    "landing": {
+      "maxSpeed": 8,
+      "drop": 0.35
+    },
+    "radial": {
+      "align": "bottom"
+    }
+  },
+  "mechanics": [
+    "landing",
+    "radial"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Uses the existing vehicle or flight support.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

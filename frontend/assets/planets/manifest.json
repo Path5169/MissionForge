@@ -1,0 +1,31 @@
+{
+  "description": "Planet GLB Manifest for MissionForge. Drop planetary .glb files into this directory.",
+  "planets": {
+    "earth": {
+      "name": "Earth",
+      "model": "earth.glb",
+      "radius": 1.0,
+      "rotationPeriod": 86400,
+      "axialTilt": 23.44,
+      "atmosphere": true,
+      "atmosphereColor": "#3a88e9"
+    },
+    "moon": {
+      "name": "Moon",
+      "model": "moon.glb",
+      "radius": 0.2727,
+      "rotationPeriod": 2360584,
+      "axialTilt": 1.54,
+      "atmosphere": false
+    },
+    "mars": {
+      "name": "Mars",
+      "model": "mars.glb",
+      "radius": 0.532,
+      "rotationPeriod": 88642,
+      "axialTilt": 25.19,
+      "atmosphere": true,
+      "atmosphereColor": "#c87848"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "POWER-SOLAR-OUTER",
+  "catalogueId": "POWER-SOLAR-OUTER",
+  "name": "UltraFlex Deep-Space Solar Array",
+  "category": "power",
+  "description": "Massive circular deployable solar wings optimized for weak sunlight at Jupiter and Trojan asteroid distances.",
+  "mass": 195,
+  "diameter": 1.2,
+  "height": 1.2,
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "cd": 0.4,
+  "cost": 7200000,
+  "radialHost": true,
+  "palette": true,
+  "asset": {
+    "image": "assets/parts/POWER-SOLAR-OUTER.png",
+    "model": null
+  },
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 1.2,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 195,
+    "dragCoefficient": 0.4
+  },
+  "power": {
+    "outputKW": 3.2,
+    "deployable": true
+  },
+  "radial": true,
+  "command": false
+}

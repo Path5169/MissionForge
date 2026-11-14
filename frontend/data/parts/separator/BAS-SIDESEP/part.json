@@ -1,0 +1,77 @@
+{
+  "radial": {
+    "align": "bottom"
+  },
+  "clamp": true,
+  "separator": true,
+  "topD": 0.3,
+  "bottomD": 0.3,
+  "id": "BAS-SIDESEP",
+  "catalogueId": "BAS-SIDESEP",
+  "name": "SS-1 Radial Booster Clamp",
+  "category": "separator",
+  "description": "Side separator: releases radial boosters.",
+  "mass": 20.0,
+  "diameter": 0.3,
+  "height": 0.8,
+  "cd": 0.35,
+  "cost": 18000,
+  "radialHost": false,
+  "shape": "clamp",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (clamp separator, like SS-1)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/separator/BAS-SIDESEP/part.json",
+  "dimensions": {
+    "diameterM": 0.3,
+    "heightM": 0.8,
+    "topDiameterM": 0.3,
+    "bottomDiameterM": 0.3
+  },
+  "physicalProperties": {
+    "dryMassKg": 20.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.3,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.3,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "bottom"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.3,
+    "bottomDiameterM": 0.3,
+    "radialHost": true,
+    "radialOnly": true
+  },
+  "asset": {
+    "image": "assets/parts/BAS-SIDESEP.png",
+    "model": null
+  },
+  "behaviorType": "staging_separation"
+}

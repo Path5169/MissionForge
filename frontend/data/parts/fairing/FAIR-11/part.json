@@ -1,0 +1,65 @@
+{
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "FAIR-11",
+  "catalogueId": "FAIR-11",
+  "name": "FB-03 Wide Fairing Ring",
+  "category": "fairing",
+  "description": "Fairing base ring; shields payload, jettisons after ascent.",
+  "mass": 16.0,
+  "diameter": 1.2,
+  "height": 0.18,
+  "cd": 0.2,
+  "cost": 32000,
+  "radialHost": false,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "Data ready; jettison not built yet",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/fairing/FAIR-11/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 0.18,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 16.0,
+    "dragCoefficient": 0.2
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/FAIR-11.png",
+    "model": null
+  },
+  "behaviorType": "payload_fairing"
+}

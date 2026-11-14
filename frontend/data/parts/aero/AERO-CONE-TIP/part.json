@@ -1,0 +1,58 @@
+{
+  "topD": null,
+  "bottomD": 1.2,
+  "id": "AERO-CONE-TIP",
+  "catalogueId": "AERO-CONE-TIP",
+  "name": "NC-4 Blunt-Tip Nose Cone",
+  "category": "aero",
+  "description": "Wide cone, blunt tip.",
+  "mass": 14.0,
+  "diameter": 1.2,
+  "height": 0.62,
+  "cd": 0.18,
+  "cost": 12000,
+  "radialHost": false,
+  "shape": "ogive",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/aero/AERO-CONE-TIP/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 0.62,
+    "topDiameterM": null,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 14.0,
+    "dragCoefficient": 0.18
+  },
+  "attachmentPoints": [
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": null,
+    "bottomDiameterM": 1.2,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/AERO-CONE-TIP.png",
+    "model": null
+  },
+  "behaviorType": "aerodynamic_surface"
+}

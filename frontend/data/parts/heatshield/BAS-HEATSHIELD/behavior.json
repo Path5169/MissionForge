@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "partId": "BAS-HEATSHIELD",
+  "role": "Ablative thermal protection",
+  "behaviorType": "thermal_protection",
+  "description": "Absorbs and manages re-entry heat; configured ablative mass represents consumable thermal capacity.",
+  "activation": "Re-entry heating",
+  "effects": "Maximum temperature and ablative mass",
+  "parameters": {
+    "heatshield": {
+      "maxTemperature": 2760,
+      "ablativeMass": 13.2
+    }
+  },
+  "mechanics": [
+    "heatshield"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

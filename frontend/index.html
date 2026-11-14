@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MissionForge</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2304060d'/%3E%3Cpath d='M16 3l5 12v10l-5 4-5-4V15z' fill='%23e8edf5'/%3E%3Cpath d='M3 24c6-14 20-14 26 0' fill='none' stroke='%23e264c8' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/base.css">
+<link rel="stylesheet" href="styles/polish.css">
+<link rel="stylesheet" href="ui/menu/menu.css">
+<link rel="stylesheet" href="ui/missions/missions.css">
+<link rel="stylesheet" href="ui/settings/settings.css">
+<link rel="stylesheet" href="ui/workshop/workshop.css">
+<link rel="stylesheet" href="ui/payload/payload.css">
+<link rel="stylesheet" href="ui/flight/flight.css">
+<link rel="stylesheet" href="ui/solar/solar.css">
+<link rel="stylesheet" href="ui/facility/facility.css">
+<script type="importmap">{"imports":{"three":"/vendor/three.module.min.js","three/addons/":"/vendor/addons/"}}</script>
+</head>
+<body>
+<section id="view-menu" class="view"></section>
+<section id="view-facility" class="view" hidden></section>
+<section id="view-workshop" class="view" hidden></section>
+<section id="view-payloadWorkshop" class="view" hidden></section>
+<section id="view-missions" class="view" hidden></section>
+<section id="view-flight" class="view" hidden></section>
+<section id="view-solar" class="view" hidden></section>
+<div id="toasts" role="status" aria-live="polite"></div>
+<dialog id="dialog"></dialog>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

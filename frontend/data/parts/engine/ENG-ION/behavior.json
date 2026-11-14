@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "partId": "ENG-ION",
+  "role": "Rocket engine",
+  "behaviorType": "propulsion",
+  "description": "Generates thrust while consuming configured propellant; vacuum and sea-level performance may differ.",
+  "activation": "Throttle and engine ignition state",
+  "effects": "Thrust, specific impulse, throttle limits and restartability",
+  "parameters": {
+    "engine": {
+      "type": "electric",
+      "thrustVac": 0.092,
+      "ispVac": 3100,
+      "ispSL": 0,
+      "minThrottle": 1,
+      "restartable": true
+    },
+    "powerDraw": 2.3
+  },
+  "mechanics": [
+    "engine"
+  ],
+  "runtimeStatus": "existing-runtime-support",
+  "catalogueStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

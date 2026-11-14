@@ -1,0 +1,79 @@
+{
+  "power": {
+    "outputKW": 0.18,
+    "deployable": true
+  },
+  "radial": {
+    "align": "bottom"
+  },
+  "topD": 0.45,
+  "bottomD": 0.45,
+  "id": "OTH-SOLAR-1",
+  "catalogueId": "OTH-SOLAR-1",
+  "name": "SP-1 Deployable Solar Panel",
+  "category": "power",
+  "description": "Solar panel: generates electricity.",
+  "mass": 9.0,
+  "diameter": 0.45,
+  "height": 0.87,
+  "cd": 0.35,
+  "cost": 38000,
+  "radialHost": false,
+  "shape": "satellite",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: power",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/power/OTH-SOLAR-1/part.json",
+  "dimensions": {
+    "diameterM": 0.45,
+    "heightM": 0.87,
+    "topDiameterM": 0.45,
+    "bottomDiameterM": 0.45
+  },
+  "physicalProperties": {
+    "dryMassKg": 9.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.45,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.45,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": false,
+      "alignment": "bottom"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.45,
+    "bottomDiameterM": 0.45,
+    "radialHost": false,
+    "radialOnly": true
+  },
+  "asset": {
+    "image": "assets/parts/OTH-SOLAR-1.png",
+    "model": null
+  },
+  "behaviorType": "electrical_generation"
+}

@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "partId": "PAYLOAD-ROVER",
+  "role": "M2020 Planetary Rover Payload",
+  "behaviorType": "utility",
+  "description": "Mars 2020 Perseverance rover payload equipped with sampling turret, mast cameras, and surface mobility systems.",
+  "parameters": {
+    "rover": true,
+    "command": true,
+    "powerKW": 0.3
+  },
+  "mechanics": [
+    "rover",
+    "command",
+    "powerKW"
+  ],
+  "runtimeStatus": "active"
+}

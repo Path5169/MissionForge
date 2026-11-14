@@ -1,0 +1,80 @@
+{
+  "engine": {
+    "type": "liquid",
+    "thrustVac": 240000,
+    "ispVac": 345,
+    "ispSL": 290,
+    "minThrottle": 0.2,
+    "restartable": true
+  },
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "ENG-MID-PREM",
+  "catalogueId": "ENG-MID-PREM",
+  "name": "SE-3 High-Performance Sustainer",
+  "category": "engine",
+  "description": "Premium mid-size engine.",
+  "mass": 350,
+  "diameter": 1.2,
+  "height": 1.98,
+  "cd": 0.35,
+  "cost": 240000,
+  "radialHost": true,
+  "shape": "nozzle_long",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled propulsion class for game simulation.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/engine/ENG-MID-PREM/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 1.98,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 350,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/ENG-MID-PREM.png",
+    "model": null
+  },
+  "behaviorType": "propulsion"
+}

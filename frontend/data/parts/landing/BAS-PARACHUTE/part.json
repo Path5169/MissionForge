@@ -1,0 +1,77 @@
+{
+  "parachute": {
+    "canopyArea": 52,
+    "deploymentAltitude": 1500,
+    "maxDeploySpeed": 160
+  },
+  "topD": 0.55,
+  "bottomD": 0.55,
+  "id": "BAS-PARACHUTE",
+  "catalogueId": "BAS-PARACHUTE",
+  "name": "PC-1 Recovery Parachute",
+  "category": "landing",
+  "description": "Slows descent in atmosphere; deploys on command.",
+  "mass": 18.0,
+  "diameter": 0.55,
+  "height": 0.5,
+  "cd": 0.35,
+  "cost": 24000,
+  "radialHost": true,
+  "shape": "cylinder",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: parachute",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/landing/BAS-PARACHUTE/part.json",
+  "dimensions": {
+    "diameterM": 0.55,
+    "heightM": 0.5,
+    "topDiameterM": 0.55,
+    "bottomDiameterM": 0.55
+  },
+  "physicalProperties": {
+    "dryMassKg": 18.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.55,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.55,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.55,
+    "bottomDiameterM": 0.55,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-PARACHUTE.png",
+    "model": null
+  },
+  "behaviorType": "recovery_landing"
+}

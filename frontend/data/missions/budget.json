@@ -1,0 +1,288 @@
+{
+  "missions": {
+    "earth_observation_1": {
+      "budget": {
+        "currency": "USD",
+        "total": 3500000,
+        "construction": 2500000,
+        "fuel": 150000,
+        "operations": 350000,
+        "contingency": 500000,
+        "basis": "Standard qualification budget for Low Earth Orbit satellite delivery ($2.04M launcher construction, $3.5M mission total)."
+      },
+      "rewards": {
+        "baseReward": 8500000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 1500000
+          },
+          {
+            "id": "circular_orbit",
+            "amount": 1000000
+          }
+        ]
+      }
+    },
+    "apollo_11": {
+      "budget": {
+        "currency": "USD",
+        "total": 7000000,
+        "construction": 5500000,
+        "fuel": 500000,
+        "operations": 500000,
+        "payload": 7000000,
+        "specialEquipment": 12000000,
+        "contingency": 500000,
+        "basis": "Real reference: Saturn V launch \u2248 $185M and Apollo 11 flight \u2248 $355M in 1969 dollars. Vehicle construction: $4.35M. Total mission allocation: $7.0M."
+      },
+      "rewards": {
+        "baseReward": 154300000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 30900000
+          },
+          {
+            "id": "soft_landing",
+            "amount": 15400000
+          },
+          {
+            "id": "fuel_efficiency",
+            "amount": 10300000
+          }
+        ]
+      }
+    },
+    "perseverance": {
+      "budget": {
+        "currency": "USD",
+        "total": 28000000,
+        "construction": 23000000,
+        "fuel": 500000,
+        "operations": 3000000,
+        "payload": 250000000,
+        "specialEquipment": 330000000,
+        "contingency": 1500000,
+        "basis": "Real reference: NASA life-cycle cost \u2248 $2.74B \u2014 spacecraft $2.2B, Atlas V 541 launch $243M, 2-year prime operations \u2248 $300M. Propellant \u2248 490 t at $ 1.5/kg. Instrument and special-equipment splits are game estimates."
+      },
+      "rewards": {
+        "baseReward": 1192600000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 238500000
+          },
+          {
+            "id": "precision_landing",
+            "amount": 119300000
+          },
+          {
+            "id": "rover_deployed",
+            "amount": 76900000
+          },
+          {
+            "id": "science_data",
+            "amount": 57700000
+          }
+        ]
+      }
+    },
+    "osiris_rex": {
+      "budget": {
+        "currency": "USD",
+        "total": 32000000,
+        "construction": 25500000,
+        "fuel": 500000,
+        "operations": 4000000,
+        "payload": 120000000,
+        "specialEquipment": 90000000,
+        "contingency": 2000000,
+        "basis": "Real reference: \u2248 $1.16B total with Atlas V launch \u2248 $183.5M. Propellant \u2248 360 t at $ 1.5/kg. Sample-return hardware (TAGSAM, return capsule) is the special-equipment line. Splits are game estimates."
+      },
+      "rewards": {
+        "baseReward": 504300000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 100900000
+          },
+          {
+            "id": "precision_rendezvous",
+            "amount": 66400000
+          },
+          {
+            "id": "sample_returned",
+            "amount": 106200000
+          }
+        ]
+      }
+    },
+    "dart": {
+      "budget": {
+        "currency": "USD",
+        "total": 20000000,
+        "construction": 16000000,
+        "fuel": 400000,
+        "operations": 2400000,
+        "payload": 45000000,
+        "specialEquipment": 30000000,
+        "contingency": 1200000,
+        "basis": "Real reference: \u2248 $324.5M total including a Falcon 9 launch (\u2248 $69M). Propellant \u2248 510 t at $ 1.5/kg. Special equipment covers the NEXT-C ion engine and roll-out solar arrays. Splits are game estimates."
+      },
+      "rewards": {
+        "baseReward": 141100000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 28200000
+          },
+          {
+            "id": "precise_impact",
+            "amount": 44900000
+          },
+          {
+            "id": "deflection_confirmed",
+            "amount": 25700000
+          }
+        ]
+      }
+    },
+    "europa_clipper": {
+      "budget": {
+        "currency": "USD",
+        "total": 46000000,
+        "construction": 36000000,
+        "fuel": 800000,
+        "operations": 6000000,
+        "payload": 850000000,
+        "specialEquipment": 450000000,
+        "contingency": 3200000,
+        "basis": "Real reference: \u2248 $5.2B total with Falcon Heavy launch \u2248 $178M. Propellant \u2248 1,400 t at $ 1.5/kg. Instruments and the radiation-shielded electronics vault drive the payload and special-equipment lines. Splits are game estimates."
+      },
+      "rewards": {
+        "baseReward": 2260900000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 452200000
+          },
+          {
+            "id": "orbit_achieved",
+            "amount": 238000000
+          },
+          {
+            "id": "flyby_count",
+            "amount": 333200000
+          },
+          {
+            "id": "science_complete",
+            "amount": 238000000
+          }
+        ]
+      }
+    },
+    "lucy": {
+      "budget": {
+        "currency": "USD",
+        "total": 40000000,
+        "construction": 32000000,
+        "fuel": 600000,
+        "operations": 5000000,
+        "payload": 110000000,
+        "specialEquipment": 75000000,
+        "contingency": 2400000,
+        "basis": "Real reference: \u2248 $981M total \u2014 development \u2248 $559.5M, Atlas V 401 launch \u2248 $149.4M, remainder operations and science. Propellant \u2248 335 t at $ 1.5/kg. Large solar arrays are the special-equipment line."
+      },
+      "rewards": {
+        "baseReward": 426500000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 85300000
+          },
+          {
+            "id": "all_targets",
+            "amount": 98400000
+          },
+          {
+            "id": "binary_observed",
+            "amount": 41000000
+          },
+          {
+            "id": "science_complete",
+            "amount": 49200000
+          }
+        ]
+      }
+    },
+    "juno": {
+      "budget": {
+        "currency": "USD",
+        "total": 40000000,
+        "construction": 32000000,
+        "fuel": 600000,
+        "operations": 5000000,
+        "payload": 110000000,
+        "specialEquipment": 90000000,
+        "contingency": 2400000,
+        "basis": "Real reference: \u2248 $1.1B total including an Atlas V 551 launch. Propellant \u2248 535 t at $ 1.5/kg. Splits are game estimates."
+      },
+      "rewards": {
+        "baseReward": 478300000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 95700000
+          },
+          {
+            "id": "orbit_insertion",
+            "amount": 66000000
+          },
+          {
+            "id": "polar_orbit",
+            "amount": 41200000
+          },
+          {
+            "id": "science_passes",
+            "amount": 57700000
+          }
+        ]
+      }
+    },
+    "insight": {
+      "budget": {
+        "currency": "USD",
+        "total": 12500000,
+        "construction": 9500000,
+        "fuel": 300000,
+        "operations": 1700000,
+        "payload": 140000000,
+        "specialEquipment": 60000000,
+        "contingency": 1000000,
+        "basis": "Real reference: NASA cost $813.6M \u2014 development $596.3M, Atlas V 401 launch $163.4M, 2-year operations $53.9M. International instrument contributions (\u2248 $180M) are not in that total. Propellant \u2248 335 t at $ 1.5/kg."
+      },
+      "rewards": {
+        "baseReward": 353700000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 70700000
+          },
+          {
+            "id": "precision_landing",
+            "amount": 50500000
+          },
+          {
+            "id": "instruments_deployed",
+            "amount": 42100000
+          },
+          {
+            "id": "seismic_data",
+            "amount": 33700000
+          }
+        ]
+      }
+    }
+  }
+}

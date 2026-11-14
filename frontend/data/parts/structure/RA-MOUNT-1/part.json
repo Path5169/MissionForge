@@ -1,0 +1,72 @@
+{
+  "topD": 2.196,
+  "bottomD": 3.05,
+  "id": "RA-MOUNT-1",
+  "catalogueId": "RA-MOUNT-1",
+  "name": "AS-1 Booster Skirt",
+  "category": "structure",
+  "description": "Booster shroud / skirt.",
+  "mass": 110.0,
+  "diameter": 3.05,
+  "height": 1.0,
+  "cd": 0.35,
+  "cost": 42000,
+  "radialHost": true,
+  "shape": "taper",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/structure/RA-MOUNT-1/part.json",
+  "dimensions": {
+    "diameterM": 3.05,
+    "heightM": 1.0,
+    "topDiameterM": 2.196,
+    "bottomDiameterM": 3.05
+  },
+  "physicalProperties": {
+    "dryMassKg": 110.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 2.196,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 3.05,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 2.196,
+    "bottomDiameterM": 3.05,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/RA-MOUNT-1.png",
+    "model": null
+  },
+  "behaviorType": "passive_structure"
+}

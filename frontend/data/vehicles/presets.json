@@ -1,0 +1,1747 @@
+{
+  "schema": 2,
+  "presets": [
+    {
+      "schema": 2,
+      "name": "TerraWatch-1 (EOS Light Launcher)",
+      "stagingMode": "manual",
+      "id": "eos_terrawatch_launcher",
+      "parts": [
+        {
+          "uid": "p0",
+          "c": "payload_eos_sat",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p1",
+          "c": "BAS-DECOUPLER",
+          "parent": "p0",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-TANK-2",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "ENG-MID-PREM",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "BAS-DECOUPLER",
+          "parent": "p4",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-TANK-3",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-ENG-1",
+          "parent": "p6",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": []
+    },
+    {
+      "schema": 2,
+      "name": "Capsule Hopper",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "BAS-CAPSULE",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "BAS-TANK-2",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-ENG-1",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "capsule_hopper"
+    },
+    {
+      "schema": 2,
+      "name": "Capsule Orbiter",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "BAS-CAPSULE",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "BAS-HEATSHIELD",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-DECOUPLER",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "BAS-TANK-2",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "ENG-MID-PREM",
+          "parent": "p4",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-DECOUPLER",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-TANK-3",
+          "parent": "p6",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-ENG-1",
+          "parent": "p7",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "capsule_orbiter"
+    },
+    {
+      "schema": 2,
+      "name": "Small Hopper",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "OTH-CONTROL",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "BAS-TANK-2",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-ENG-2",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "hopper"
+    },
+    {
+      "schema": 2,
+      "name": "Lander One",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "OTH-CONTROL",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "BAS-TANK-2",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-ENG-2",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "BAS-LEG",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p5",
+          "c": "BAS-LEG",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        }
+      ],
+      "looseParts": [],
+      "id": "lander_one"
+    },
+    {
+      "schema": 2,
+      "name": "Orbiter One",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-01",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-TANK-2",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "ENG-MID-PREM",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "BAS-DECOUPLER",
+          "parent": "p4",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-TANK-3",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-ENG-1",
+          "parent": "p6",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "orbiter_one"
+    },
+    {
+      "schema": 2,
+      "name": "Orbiter Boosted",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-01",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-TANK-2",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "ENG-MID-PREM",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "BAS-DECOUPLER",
+          "parent": "p4",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-TANK-3",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-ENG-1",
+          "parent": "p6",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-SIDESEP",
+          "parent": "p6",
+          "mount": "side",
+          "stage": 2,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-TANK-2",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-ENG-1",
+          "parent": "p9",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-CONE-2",
+          "parent": "p8",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p12",
+          "c": "BAS-SIDESEP",
+          "parent": "p6",
+          "mount": "side",
+          "stage": 2,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p13",
+          "c": "BAS-TANK-2",
+          "parent": "p15",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p14",
+          "c": "BAS-ENG-1",
+          "parent": "p13",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p15",
+          "c": "BAS-CONE-2",
+          "parent": "p12",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        }
+      ],
+      "looseParts": [],
+      "id": "orbiter_boosted"
+    },
+    {
+      "schema": 2,
+      "name": "Heavy Booster Core",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "AERO-OGIVE-1",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-TANK-3",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "BAS-ENG-2",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "BAS-SIDESEP",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 2,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-TANK-3",
+          "parent": "p8",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-ENG-1",
+          "parent": "p6",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-CONE-2",
+          "parent": "p5",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-SIDESEP",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 2,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-TANK-3",
+          "parent": "p12",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-ENG-1",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "BAS-CONE-2",
+          "parent": "p9",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        }
+      ],
+      "looseParts": [],
+      "id": "side_tanks"
+    },
+    {
+      "schema": 2,
+      "name": "Apollo 11 (Saturn V Stack)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "BAS-CAPSULE",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "BAS-HEATSHIELD",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-DECOUPLER",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 6,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "BAS-TANK-3",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "BAS-ENG-3",
+          "parent": "p4",
+          "mount": "below",
+          "stage": 5,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-RCS",
+          "parent": "p4",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-RCS",
+          "parent": "p4",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-DECOUPLER",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 5,
+          "group": 0
+        },
+        {
+          "uid": "p9",
+          "c": "FAIR-04",
+          "parent": "p8",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-TANK-2",
+          "parent": "p9",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-ENG-2",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 4,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "BAS-LEG",
+          "parent": "p10",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p13",
+          "c": "BAS-LEG",
+          "parent": "p10",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p14",
+          "c": "BAS-DECOUPLER",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 4,
+          "group": 0
+        },
+        {
+          "uid": "p15",
+          "c": "WIDE-TANK-5",
+          "parent": "p14",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p16",
+          "c": "BAS-ENG-2",
+          "parent": "p15",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p17",
+          "c": "BAS-DECOUPLER",
+          "parent": "p16",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p18",
+          "c": "RA-TANK-2",
+          "parent": "p17",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p19",
+          "c": "RA-ENG-1",
+          "parent": "p18",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p20",
+          "c": "BAS-DECOUPLER",
+          "parent": "p19",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p21",
+          "c": "RA-TANK-1",
+          "parent": "p20",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p22",
+          "c": "RA-ENG-1",
+          "parent": "p21",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p23",
+          "c": "BAS-TANK-3",
+          "parent": "p21",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p24",
+          "c": "BAS-ENG-1",
+          "parent": "p23",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p25",
+          "c": "BAS-TANK-3",
+          "parent": "p21",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p26",
+          "c": "BAS-ENG-1",
+          "parent": "p25",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "apollo_11_saturn_v"
+    },
+    {
+      "schema": 2,
+      "name": "Perseverance (Atlas V 541)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-03",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "PAYLOAD-ROVER",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "OTH-WHEEL-1",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p4",
+          "c": "OTH-WHEEL-1",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p5",
+          "c": "OTH-CONTROL",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-HEATSHIELD",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-DECOUPLER",
+          "parent": "p6",
+          "mount": "below",
+          "stage": 4,
+          "group": 0
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-TANK-2",
+          "parent": "p7",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-ENG-2",
+          "parent": "p8",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-DECOUPLER",
+          "parent": "p9",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-TANK-3",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "ENG-MID-PREM",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p13",
+          "c": "BAS-DECOUPLER",
+          "parent": "p12",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p14",
+          "c": "BAS-TANK-3",
+          "parent": "p13",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p15",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p14",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "perseverance_atlas_v"
+    },
+    {
+      "schema": 2,
+      "name": "InSight (Atlas V 401)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-03",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "PAYLOAD-SEISMIC",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "OTH-CONTROL",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "OTH-SOLAR-2",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p5",
+          "c": "OTH-SOLAR-2",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-TANK-2",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-ENG-2",
+          "parent": "p6",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-LEG",
+          "parent": "p6",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-LEG",
+          "parent": "p6",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-HEATSHIELD",
+          "parent": "p7",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-DECOUPLER",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "BAS-TANK-3",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p13",
+          "c": "ENG-MID-PREM",
+          "parent": "p12",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p14",
+          "c": "BAS-DECOUPLER",
+          "parent": "p13",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p15",
+          "c": "BAS-TANK-3",
+          "parent": "p14",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p16",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p15",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "insight_lander_stack"
+    },
+    {
+      "schema": 2,
+      "name": "DART (Falcon 9 Interceptor)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-01",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "SCIENCE-SUITE-DEEP",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "OTH-SOLAR-1",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p5",
+          "c": "OTH-SOLAR-1",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-DECOUPLER",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-TANK-2",
+          "parent": "p8",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-ENG-2",
+          "parent": "p9",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-DECOUPLER",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "BAS-TANK-3",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p13",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p12",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "dart_kinetic_impactor"
+    },
+    {
+      "schema": 2,
+      "name": "OSIRIS-REx (Atlas V 411)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-03",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "SAMPLE-RETURN-CAPSULE",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "BAS-HEATSHIELD",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "OTH-CONTROL",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p5",
+          "c": "SCIENCE-SUITE-DEEP",
+          "parent": "p4",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p6",
+          "c": "OTH-SOLAR-2",
+          "parent": "p5",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p7",
+          "c": "OTH-SOLAR-2",
+          "parent": "p5",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-RCS",
+          "parent": "p4",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-RCS",
+          "parent": "p4",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-DECOUPLER",
+          "parent": "p5",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-TANK-3",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "ENG-MID-PREM",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p13",
+          "c": "BAS-DECOUPLER",
+          "parent": "p12",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p14",
+          "c": "BAS-TANK-3",
+          "parent": "p13",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p15",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p14",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "osiris_rex_explorer"
+    },
+    {
+      "schema": 2,
+      "name": "Lucy (Atlas V 401)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-03",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "SCIENCE-SUITE-DEEP",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "POWER-SOLAR-OUTER",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p5",
+          "c": "POWER-SOLAR-OUTER",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-DECOUPLER",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-TANK-3",
+          "parent": "p8",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p10",
+          "c": "ENG-MID-PREM",
+          "parent": "p9",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-DECOUPLER",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "BAS-TANK-3",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p13",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p12",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "lucy_trojan_probe"
+    },
+    {
+      "schema": 2,
+      "name": "Juno (Atlas V 551)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-03",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "SCIENCE-SUITE-DEEP",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "POWER-SOLAR-OUTER",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p5",
+          "c": "POWER-SOLAR-OUTER",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-TANK-2",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p9",
+          "c": "BAS-ENG-2",
+          "parent": "p8",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-DECOUPLER",
+          "parent": "p9",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-TANK-3",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "ENG-MID-PREM",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p13",
+          "c": "BAS-DECOUPLER",
+          "parent": "p12",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p14",
+          "c": "BAS-TANK-3",
+          "parent": "p13",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p15",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p14",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        }
+      ],
+      "looseParts": [],
+      "id": "juno_jupiter_orbiter"
+    },
+    {
+      "schema": 2,
+      "name": "Europa Clipper (Falcon Heavy)",
+      "stagingMode": "auto",
+      "parts": [
+        {
+          "uid": "p1",
+          "c": "FAIR-03",
+          "parent": null,
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p2",
+          "c": "OTH-CONTROL",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p3",
+          "c": "SCIENCE-SUITE-DEEP",
+          "parent": "p2",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4",
+          "c": "POWER-RTG-HEAVY",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p5",
+          "c": "POWER-SOLAR-OUTER",
+          "parent": "p3",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p6",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p7",
+          "c": "BAS-RCS",
+          "parent": "p2",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p8",
+          "c": "BAS-TANK-3",
+          "parent": "p3",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p9",
+          "c": "ENG-MID-PREM",
+          "parent": "p8",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p10",
+          "c": "BAS-DECOUPLER",
+          "parent": "p9",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p11",
+          "c": "BAS-TANK-3",
+          "parent": "p10",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p12",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p11",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p13",
+          "c": "BAS-SIDESEP",
+          "parent": "p11",
+          "mount": "side",
+          "stage": 2,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p14",
+          "c": "BAS-TANK-3",
+          "parent": "p16",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p15",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p14",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p16",
+          "c": "BAS-CONE-2",
+          "parent": "p13",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": -1
+        },
+        {
+          "uid": "p17",
+          "c": "BAS-SIDESEP",
+          "parent": "p11",
+          "mount": "side",
+          "stage": 2,
+          "group": 0,
+          "dir": 1
+        },
+        {
+          "uid": "p18",
+          "c": "BAS-TANK-3",
+          "parent": "p20",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p19",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p18",
+          "mount": "below",
+          "stage": 1,
+          "group": 0
+        },
+        {
+          "uid": "p20",
+          "c": "BAS-CONE-2",
+          "parent": "p17",
+          "mount": "side",
+          "stage": 0,
+          "group": 0,
+          "dir": 1
+        }
+      ],
+      "looseParts": [],
+      "id": "europa_clipper_heavy"
+    }
+  ]
+}

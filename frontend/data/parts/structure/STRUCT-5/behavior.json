@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "partId": "STRUCT-5",
+  "role": "Structural support",
+  "behaviorType": "passive_structure",
+  "description": "Connects vehicle sections and transfers loads without providing active propulsion or control.",
+  "activation": "Attachment loads and connected part geometry",
+  "effects": "Structural connection and mounting interfaces",
+  "parameters": {},
+  "mechanics": [],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Uses the existing vehicle or flight support.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

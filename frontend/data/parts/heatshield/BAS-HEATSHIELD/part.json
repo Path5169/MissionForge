@@ -1,0 +1,76 @@
+{
+  "heatshield": {
+    "maxTemperature": 2760,
+    "ablativeMass": 13.2
+  },
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "BAS-HEATSHIELD",
+  "catalogueId": "BAS-HEATSHIELD",
+  "name": "HS-1 Ablative Heat Shield",
+  "category": "heatshield",
+  "description": "Protects the capsule bottom during re-entry.",
+  "mass": 24.0,
+  "diameter": 1.2,
+  "height": 0.3,
+  "cd": 0.35,
+  "cost": 42000,
+  "radialHost": true,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled thermal-protection hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: re-entry heating",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/heatshield/BAS-HEATSHIELD/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 0.3,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 24.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-HEATSHIELD.png",
+    "model": null
+  },
+  "behaviorType": "thermal_protection"
+}

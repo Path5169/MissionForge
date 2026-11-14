@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "partId": "BATTERY-01",
+  "role": "Electrical storage unit",
+  "behaviorType": "electrical_storage",
+  "description": "Stores electrical energy for future powered spacecraft systems.",
+  "activation": "Power-system demand and charge state",
+  "effects": "Stored energy, charge rate and discharge rate",
+  "parameters": {
+    "battery": {
+      "capacityKWh": 4.0,
+      "maxChargeRateKW": 0.5,
+      "maxDischargeRateKW": 2.0
+    }
+  },
+  "mechanics": [
+    "battery"
+  ],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Assembly available; electrical storage behaviour is not implemented yet.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

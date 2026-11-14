@@ -1,0 +1,66 @@
+{
+  "separator": true,
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "BAS-DECOUPLER",
+  "catalogueId": "BAS-DECOUPLER",
+  "name": "SD-1 Stack Decoupler",
+  "category": "separator",
+  "description": "Stage separator: drops everything below when staged.",
+  "mass": 24.0,
+  "diameter": 1.2,
+  "height": 0.18,
+  "cd": 0.35,
+  "cost": 26000,
+  "radialHost": false,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (separator)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/separator/BAS-DECOUPLER/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 0.18,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 24.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": false,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-DECOUPLER.png",
+    "model": null
+  },
+  "behaviorType": "staging_separation"
+}

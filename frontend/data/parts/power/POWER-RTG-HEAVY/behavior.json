@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "partId": "POWER-RTG-HEAVY",
+  "role": "GPHS-RTG Radioisotope Generator",
+  "behaviorType": "power",
+  "description": "General-Purpose Heat Source Radioisotope Thermoelectric Generator for outer solar system exploration.",
+  "parameters": {
+    "power": {
+      "outputKW": 4.5,
+      "deployable": false
+    }
+  },
+  "mechanics": [
+    "power"
+  ],
+  "runtimeStatus": "active"
+}

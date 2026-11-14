@@ -1,0 +1,501 @@
+{
+  "schema": 1,
+  "units": {
+    "mass": "kg",
+    "length": "m",
+    "force": "N",
+    "time": "s",
+    "cost": "credits"
+  },
+  "categoryOrder": [
+    "command",
+    "aero",
+    "structure",
+    "tank",
+    "separator",
+    "engine",
+    "landing"
+  ],
+  "components": [
+    {
+      "id": "probe_core",
+      "name": "GC-1 Guidance Core",
+      "category": "command",
+      "description": "Avionics and attitude-control core. Every vehicle needs exactly one; it provides attitude commands.",
+      "mass": 90,
+      "diameter": 1.2,
+      "height": 0.6,
+      "cd": 0.3,
+      "cost": 600000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "core",
+      "command": true
+    },
+    {
+      "id": "fairing_nosecone",
+      "name": "NF-12 Payload Fairing",
+      "category": "aero",
+      "description": "Nose fairing visual shell. Must be the topmost part. It adds drag shape only; jettison is not simulated yet.",
+      "mass": 35,
+      "diameter": 1.2,
+      "height": 1.2,
+      "cd": 0.2,
+      "cost": 18000,
+      "topD": null,
+      "bottomD": 1.2,
+      "radialHost": false,
+      "shape": "ogive"
+    },
+    {
+      "id": "payload_demosat",
+      "name": "DS-1 Demonstration Satellite",
+      "category": "utility",
+      "description": "Small technology-demonstration satellite. Use Deploy payload in flight to release it; it then follows its own trajectory. Catalogue placement is grouped under Utility; payload deployment and mission compatibility are retained.",
+      "mass": 120,
+      "diameter": 1.2,
+      "height": 1,
+      "cd": 0.22,
+      "cost": 1500000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": false,
+      "shape": "satellite",
+      "payload": {
+        "deployable": true,
+        "kind": "satellite"
+      }
+    },
+    {
+      "id": "payload_eos_sat",
+      "name": "EOS-1 TerraWatch Earth Observation Satellite",
+      "category": "utility",
+      "description": "High-resolution multispectral Earth observation satellite equipped with optical surface scanners, deployable solar arrays, and S-band communications transceiver. Designed for Low Earth Orbit environmental mapping and weather monitoring.",
+      "mass": 280,
+      "diameter": 1.4,
+      "height": 1.4,
+      "cd": 0.22,
+      "cost": 450000,
+      "topD": 1.4,
+      "bottomD": 1.4,
+      "radialHost": false,
+      "shape": "satellite",
+      "payload": {
+        "deployable": true,
+        "kind": "satellite",
+        "type": "earth_observation"
+      }
+    },
+    {
+      "id": "adapter_structural",
+      "name": "SA-12 Structural Adapter",
+      "category": "structure",
+      "description": "Tapered structural interstage with a 0.8 m top interface and 1.2 m bottom interface. Stack validation uses these interface diameters.",
+      "mass": 18,
+      "diameter": 1.2,
+      "height": 0.8,
+      "cd": 0.35,
+      "cost": 12000,
+      "topD": 0.8,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "taper"
+    },
+    {
+      "id": "tank_s",
+      "name": "PT-S Propellant Tank, short",
+      "category": "tank",
+      "description": "1.2 m tank holding 1,000 kg of kerosene/oxygen-class propellant.",
+      "mass": 70,
+      "diameter": 1.2,
+      "height": 1.6,
+      "cd": 0.35,
+      "cost": 45000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "cylinder",
+      "tank": {
+        "propellant": 1000,
+        "costPerKg": 1.5
+      }
+    },
+    {
+      "id": "tank_m",
+      "name": "PT-M Propellant Tank, medium",
+      "category": "tank",
+      "description": "1.2 m tank holding 2,500 kg of propellant.",
+      "mass": 150,
+      "diameter": 1.2,
+      "height": 3.2,
+      "cd": 0.35,
+      "cost": 90000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "cylinder",
+      "tank": {
+        "propellant": 2500,
+        "costPerKg": 1.5
+      }
+    },
+    {
+      "id": "tank_l",
+      "name": "PT-L Propellant Tank, long",
+      "category": "tank",
+      "description": "1.2 m tank holding 5,500 kg of propellant.",
+      "mass": 330,
+      "diameter": 1.2,
+      "height": 6.4,
+      "cd": 0.35,
+      "cost": 170000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "cylinder",
+      "tank": {
+        "propellant": 5500,
+        "costPerKg": 1.5
+      }
+    },
+    {
+      "id": "decoupler",
+      "name": "SD-12 Stage Separator",
+      "category": "separator",
+      "description": "Pyrotechnic separation ring. Everything below it, including the ring itself, is jettisoned when staging.",
+      "mass": 25,
+      "diameter": 1.2,
+      "height": 0.2,
+      "cd": 0.4,
+      "cost": 30000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": false,
+      "shape": "ring",
+      "separator": true
+    },
+    {
+      "id": "side_separator",
+      "name": "SS-1 Side Separator (pair)",
+      "category": "separator",
+      "description": "Radial decoupler for side boosters. Clamp it to the side of a part, then attach a tank, engine or nose cone to its outer side. When staged it releases everything attached to it. Mounted as a mirrored pair, or one at a time with symmetry off.",
+      "mass": 20,
+      "diameter": 0.3,
+      "height": 0.8,
+      "cd": 0.3,
+      "cost": 25000,
+      "topD": null,
+      "bottomD": null,
+      "radialHost": false,
+      "shape": "clamp",
+      "origin": "new",
+      "radial": {
+        "align": "bottom"
+      },
+      "separator": true,
+      "clamp": true
+    },
+    {
+      "id": "engine_lander",
+      "name": "LE-3 Lander Engine",
+      "category": "engine",
+      "description": "Deep-throttling lander engine: 12 kN vacuum, Isp 315 s vacuum, stable down to 10 % throttle. Restartable.",
+      "mass": 55,
+      "diameter": 1.2,
+      "height": 0.8,
+      "cd": 0.5,
+      "cost": 260000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "nozzle",
+      "engine": {
+        "type": "liquid",
+        "thrustVac": 12000,
+        "ispVac": 315,
+        "ispSL": 270,
+        "minThrottle": 0.1,
+        "restartable": true
+      }
+    },
+    {
+      "id": "engine_vacuum",
+      "name": "VE-1 Vacuum Engine",
+      "category": "engine",
+      "description": "Single engine with an extended nozzle for upper stages. 25.8 kN in vacuum, Isp 343 s in vacuum but only about 230 s at sea level.",
+      "mass": 35,
+      "diameter": 1.2,
+      "height": 0.7,
+      "cd": 0.5,
+      "cost": 350000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "nozzle_long",
+      "engine": {
+        "type": "liquid",
+        "thrustVac": 25800,
+        "ispVac": 343,
+        "ispSL": 230,
+        "minThrottle": 0.2,
+        "restartable": true
+      }
+    },
+    {
+      "id": "engine_booster",
+      "name": "BE-9 Booster Engine Cluster",
+      "category": "engine",
+      "description": "Nine-engine cluster for a first stage. About 190 kN in vacuum, Isp 311 s at sea level and 343 s in vacuum.",
+      "mass": 330,
+      "diameter": 1.2,
+      "height": 0.9,
+      "cd": 0.5,
+      "cost": 2250000,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "radialHost": true,
+      "shape": "cluster",
+      "engine": {
+        "type": "liquid",
+        "thrustVac": 190000,
+        "ispVac": 343,
+        "ispSL": 311,
+        "minThrottle": 0.4,
+        "restartable": true
+      },
+      "render": {
+        "cluster": 3
+      }
+    },
+    {
+      "id": "solid_booster",
+      "name": "SB-1 Solid Booster (pair)",
+      "category": "engine",
+      "description": "Side-mounted solid rocket booster, mounted as a left/right pair. Fixed thrust, cannot be throttled or shut down. Separates itself when burnt out.",
+      "palette": false,
+      "mass": 250,
+      "diameter": 0.6,
+      "height": 5.5,
+      "cd": 0.3,
+      "cost": 260000,
+      "topD": null,
+      "bottomD": null,
+      "radialHost": false,
+      "shape": "srb",
+      "origin": "new",
+      "radial": {
+        "align": "bottom"
+      },
+      "engine": {
+        "type": "solid",
+        "thrustVac": 95000,
+        "ispVac": 250,
+        "ispSL": 230,
+        "minThrottle": 1,
+        "restartable": false,
+        "autoJettison": true
+      },
+      "solid": {
+        "propellant": 1800
+      }
+    },
+    {
+      "id": "landing_legs",
+      "name": "LG-4 Landing Legs (pair)",
+      "category": "landing",
+      "description": "Side-mounted landing legs, mounted as a pair. Raise the safe touchdown speed from 5 to 8 m/s.",
+      "mass": 40,
+      "diameter": 0.4,
+      "height": 1.2,
+      "cd": 0.3,
+      "cost": 45000,
+      "topD": null,
+      "bottomD": null,
+      "radialHost": false,
+      "shape": "legs",
+      "origin": "new",
+      "radial": {
+        "align": "bottom"
+      },
+      "landing": {
+        "maxSpeed": 8,
+        "drop": 0.35
+      }
+    },
+    {
+      "id": "PAYLOAD-ROVER",
+      "name": "M2020 Planetary Rover Payload",
+      "category": "utility",
+      "mass": 1025,
+      "diameter": 1.2,
+      "height": 1.8,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.75,
+      "cost": 18500000,
+      "palette": true,
+      "command": false,
+      "rover": true,
+      "radial": false,
+      "radialHost": true
+    },
+    {
+      "id": "PAYLOAD-SEISMIC",
+      "name": "SEIS & HP3 Geophysical Suite",
+      "category": "utility",
+      "mass": 180,
+      "diameter": 1.2,
+      "height": 0.9,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.6,
+      "cost": 6200000,
+      "palette": true,
+      "seismic": true,
+      "science": true,
+      "radial": false,
+      "command": false,
+      "radialHost": true
+    },
+    {
+      "id": "SAMPLE-RETURN-CAPSULE",
+      "name": "SRC-1 Sample Return Capsule",
+      "category": "command",
+      "mass": 125,
+      "diameter": 1.2,
+      "height": 0.5,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.5,
+      "cost": 8400000,
+      "palette": true,
+      "command": false,
+      "heatshield": {
+        "maxTemperature": 3200,
+        "ablativeMass": 8.0
+      },
+      "sampleReturn": true,
+      "radial": false,
+      "radialHost": true
+    },
+    {
+      "id": "SCIENCE-SUITE-DEEP",
+      "name": "SIS-4 Deep Space Science Suite",
+      "category": "utility",
+      "mass": 280,
+      "diameter": 1.2,
+      "height": 1.2,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.55,
+      "cost": 12500000,
+      "palette": true,
+      "science": true,
+      "deepSpace": true,
+      "radial": false,
+      "command": false,
+      "radialHost": true
+    },
+    {
+      "id": "POWER-RTG-HEAVY",
+      "name": "GPHS-RTG Radioisotope Generator",
+      "category": "power",
+      "mass": 160,
+      "diameter": 1.2,
+      "height": 1.1,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.45,
+      "cost": 9800000,
+      "palette": true,
+      "power": {
+        "outputKW": 4.5,
+        "deployable": false
+      },
+      "radial": true,
+      "command": false
+    },
+    {
+      "id": "POWER-SOLAR-OUTER",
+      "name": "UltraFlex Deep-Space Solar Array",
+      "category": "power",
+      "mass": 195,
+      "diameter": 1.2,
+      "height": 0.8,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.4,
+      "cost": 7200000,
+      "palette": true,
+      "power": {
+        "outputKW": 3.2,
+        "deployable": true
+      },
+      "radial": true,
+      "command": false
+    },
+    {
+      "id": "APOLLO-LM-DESCENT",
+      "name": "LM-1 Lunar Descent Stage",
+      "category": "landing",
+      "mass": 2150,
+      "diameter": 1.2,
+      "height": 3.2,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.85,
+      "cost": 14200000,
+      "palette": true,
+      "engine": {
+        "thrustVac": 45000,
+        "ispVac": 311,
+        "ispSL": 200,
+        "minThrottle": 0.1
+      },
+      "tank": {
+        "propellant": 8200,
+        "fuelType": "liquid",
+        "costPerKg": 0.8
+      },
+      "landing": {
+        "maxSpeed": 8.0,
+        "drop": 0.8
+      },
+      "separator": {
+        "clamp": false,
+        "impulse": 3000
+      },
+      "lander": true,
+      "radial": false,
+      "command": false,
+      "radialHost": true
+    },
+    {
+      "id": "APOLLO-LM-ASCENT",
+      "name": "LM-1 Lunar Ascent Stage",
+      "category": "command",
+      "mass": 2150,
+      "diameter": 1.2,
+      "height": 2.8,
+      "topD": 1.2,
+      "bottomD": 1.2,
+      "cd": 0.7,
+      "cost": 15800000,
+      "palette": true,
+      "command": false,
+      "engine": {
+        "thrustVac": 16000,
+        "ispVac": 311,
+        "ispSL": 220
+      },
+      "tank": {
+        "propellant": 2350,
+        "fuelType": "liquid",
+        "costPerKg": 0.8
+      },
+      "lander": true,
+      "radial": false
+    }
+  ]
+}

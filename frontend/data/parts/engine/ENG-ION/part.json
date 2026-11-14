@@ -1,0 +1,81 @@
+{
+  "engine": {
+    "type": "electric",
+    "thrustVac": 0.092,
+    "ispVac": 3100,
+    "ispSL": 0,
+    "minThrottle": 1,
+    "restartable": true
+  },
+  "powerDraw": 2.3,
+  "topD": 0.55,
+  "bottomD": 0.55,
+  "id": "ENG-ION",
+  "catalogueId": "ENG-ION",
+  "name": "IE-1 Electric Ion Thruster",
+  "category": "engine",
+  "description": "Ion engine: tiny thrust, very high Isp, needs power.",
+  "mass": 26,
+  "diameter": 0.55,
+  "height": 0.22,
+  "cd": 0.35,
+  "cost": 280000,
+  "radialHost": true,
+  "shape": "ring",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled propulsion class for game simulation.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: electric engine + power",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/engine/ENG-ION/part.json",
+  "dimensions": {
+    "diameterM": 0.55,
+    "heightM": 0.22,
+    "topDiameterM": 0.55,
+    "bottomDiameterM": 0.55
+  },
+  "physicalProperties": {
+    "dryMassKg": 26,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.55,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.55,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.55,
+    "bottomDiameterM": 0.55,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/ENG-ION.png",
+    "model": null
+  },
+  "behaviorType": "propulsion"
+}

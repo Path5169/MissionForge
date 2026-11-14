@@ -1,0 +1,79 @@
+{
+  "landing": {
+    "maxSpeed": 11,
+    "drop": 0.42
+  },
+  "radial": {
+    "align": "bottom"
+  },
+  "topD": 0.42,
+  "bottomD": 0.42,
+  "id": "OTH-LEG-2",
+  "catalogueId": "OTH-LEG-2",
+  "name": "LG-3 Reinforced Landing Leg",
+  "category": "landing",
+  "description": "Second leg variant.",
+  "mass": 48.0,
+  "diameter": 0.42,
+  "height": 1.25,
+  "cd": 0.35,
+  "cost": 36000,
+  "radialHost": false,
+  "shape": "legs",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (landing)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/landing/OTH-LEG-2/part.json",
+  "dimensions": {
+    "diameterM": 0.42,
+    "heightM": 1.25,
+    "topDiameterM": 0.42,
+    "bottomDiameterM": 0.42
+  },
+  "physicalProperties": {
+    "dryMassKg": 48.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.42,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.42,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": false,
+      "alignment": "bottom"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.42,
+    "bottomDiameterM": 0.42,
+    "radialHost": false,
+    "radialOnly": true
+  },
+  "asset": {
+    "image": "assets/parts/OTH-LEG-2.png",
+    "model": null
+  },
+  "behaviorType": "surface_landing"
+}

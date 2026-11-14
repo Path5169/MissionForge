@@ -1,0 +1,50 @@
+#view-menu { overflow: hidden; background: var(--vacuum); }
+#menu-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.menu-ui { position: absolute; inset: 0; pointer-events: none; }
+.menu-list { position: absolute; left: 6vw; top: 13vh; display: flex; flex-direction: column; gap: 6px; pointer-events: auto; }
+.mi { appearance: none; text-align: left; background: none; border: 0; border-left: 3px solid transparent; color: var(--frost); padding: 7px 0 7px 16px; cursor: pointer; transition: transform .16s, border-color .16s; }
+.mi:hover, .mi:focus-visible { transform: translateX(10px); border-left-color: var(--ref); outline: none; }
+.mi .t { display: block; font-size: clamp(22px, 2.5vw, 34px); font-weight: 750; font-stretch: 114%; letter-spacing: -.012em; line-height: 1.1; }
+.mi .d { display: block; color: var(--dim); font-size: 13px; margin-top: 1px; text-shadow: 0 1px 12px #000; }
+.wordmark { position: absolute; left: 5.4vw; bottom: 6.5vh; pointer-events: none; }
+.wordmark h1 { font-size: clamp(48px, 9vw, 160px); font-stretch: 125%; font-weight: 800; letter-spacing: -.045em; line-height: .86; margin: 0; text-shadow: 0 4px 60px rgba(0, 0, 0, .55); }
+.wordmark p { margin: 14px 0 0 .6vw; font-size: clamp(14px, 1.5vw, 22px); font-weight: 500; letter-spacing: .02em; color: var(--frost); text-shadow: 0 1px 18px #000; }
+.wordmark p span { color: var(--dim); }
+.olabel { position: absolute; font-size: 12px; font-weight: 600; color: var(--frost); white-space: nowrap; text-shadow: 0 1px 10px #000; transform: translate(10px, -50%); }
+.olabel::before { content: ''; position: absolute; left: -10px; top: 50%; width: 7px; height: 7px; margin-top: -3.5px; border-radius: 50%; background: var(--plan); }
+.olabel small { display: block; color: var(--dim); font-weight: 500; }
+@media (max-height: 760px) {
+  .menu-list { top: 11vh; gap: 0; }
+  .mi { padding-top: 3px; padding-bottom: 3px; }
+  .mi .t { font-size: clamp(20px, 2.15vw, 30px); }
+  .wordmark { bottom: 3vh; }
+  .wordmark h1 { font-size: clamp(40px, 7vw, 108px); line-height: .95; }
+  .wordmark p { margin-top: 8px; }
+}
+@media (max-width: 640px) {
+  .menu-list { left: 5vw; right: 5vw; }
+  .mi .t { font-size: clamp(20px, 5vw, 30px); }
+  .wordmark { left: 5vw; right: 5vw; }
+  .wordmark h1 { font-size: clamp(36px, 10vw, 68px); font-stretch: 105%; }
+}
+#view-menu::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(32deg, rgba(4,6,13,.82) 0%, rgba(4,6,13,.55) 26%, rgba(4,6,13,0) 52%); }
+.menu-ui { z-index: 2; }
+.wordmark h1 { animation: wm-in 1.5s var(--ease) .15s backwards; }
+.wordmark p { animation: rise .8s var(--ease) 1s backwards; }
+.mi { position: relative; border-left-color: transparent !important; padding-left: 20px; transition: transform .3s var(--ease), opacity .2s; animation: rise .7s var(--ease) backwards; }
+.mi:nth-child(1) { animation-delay: .35s; }
+.mi:nth-child(2) { animation-delay: .45s; }
+.mi:nth-child(3) { animation-delay: .55s; }
+.mi:nth-child(4) { animation-delay: .65s; }
+.mi:nth-child(5) { animation-delay: .75s; }
+.mi::before { content: ''; position: absolute; left: 0; top: 7px; bottom: 7px; width: 3px; background: var(--ref); box-shadow: 0 0 14px var(--ref); transform: scaleY(0); transform-origin: bottom; transition: transform .35s var(--ease); }
+.mi:hover::before, .mi:focus-visible::before { transform: scaleY(1); }
+.mi:active { transform: translateX(6px) scale(.985); transition-duration: .08s; }
+.mi .t { transition: font-stretch .35s var(--ease), letter-spacing .35s var(--ease), color .2s; }
+.mi:hover .t, .mi:focus-visible .t { font-stretch: 124%; letter-spacing: -.02em; color: #fff; }
+.mi .d { transition: color .2s, transform .3s var(--ease); }
+.mi:hover .d { color: var(--frost); transform: translateX(2px); }
+.menu-list:hover .mi:not(:hover) { opacity: .55; }
+.olabel::before { animation: ping 2.6s ease-out infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(226, 100, 200, .6); } 70%, 100% { box-shadow: 0 0 0 9px rgba(226, 100, 200, 0); } }
+@media (prefers-reduced-motion: reduce) { .mi, .wordmark *, .olabel::before { animation: none !important; } }

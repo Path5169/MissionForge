@@ -1,0 +1,13 @@
+Drop one PNG per part into this folder.
+
+Use the catalogue ID as the filename, including the .png extension.
+Example: BAS-CAPSULE.png
+
+The catalogue IDs and each part's independent definition are listed in ../../data/parts/index.json.
+Each part has its own folder containing part.json and behavior.json.
+The filename can also match the part's display name.
+
+PNG artwork replaces the procedural artwork in the Workshop palette and 2D assembly view.
+Refresh MissionForge after adding or renaming an image.
+
+For full 3D models, use the existing GLB asset registry.

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "partId": "BAS-CONE-2",
+  "role": "Aerodynamic shaping",
+  "behaviorType": "aerodynamic_surface",
+  "description": "Shapes airflow around the vehicle to reduce drag and protect upper structures.",
+  "activation": "Atmospheric airflow and vehicle speed",
+  "effects": "Reduced aerodynamic drag",
+  "parameters": {},
+  "mechanics": [],
+  "runtimeStatus": "profile-defined-runtime-pending",
+  "catalogueStatus": "Uses the existing vehicle or flight support.",
+  "notes": "Gameplay behavior profile. Values are estimates and are not engineering or construction specifications."
+}

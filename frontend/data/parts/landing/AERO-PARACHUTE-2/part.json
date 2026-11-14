@@ -1,0 +1,77 @@
+{
+  "parachute": {
+    "canopyArea": 28,
+    "deploymentAltitude": 2200,
+    "maxDeploySpeed": 140
+  },
+  "topD": 0.35,
+  "bottomD": 0.35,
+  "id": "AERO-PARACHUTE-2",
+  "catalogueId": "AERO-PARACHUTE-2",
+  "name": "PC-2 Streamlined Parachute",
+  "category": "landing",
+  "description": "Probably a parachute variant or folded landing item. CHECK in game.",
+  "mass": 14.0,
+  "diameter": 0.35,
+  "height": 0.85,
+  "cd": 0.35,
+  "cost": 24000,
+  "radialHost": true,
+  "shape": "cylinder",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Assembly available; flight behaviour is not implemented yet.",
+  "sourceSupportNote": "New mechanic: parachute",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/landing/AERO-PARACHUTE-2/part.json",
+  "dimensions": {
+    "diameterM": 0.35,
+    "heightM": 0.85,
+    "topDiameterM": 0.35,
+    "bottomDiameterM": 0.35
+  },
+  "physicalProperties": {
+    "dryMassKg": 14.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.35,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.35,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.35,
+    "bottomDiameterM": 0.35,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/AERO-PARACHUTE-2.png",
+    "model": null
+  },
+  "behaviorType": "recovery_landing"
+}

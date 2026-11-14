@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "partId": "PAYLOAD-SEISMIC",
+  "role": "SEIS & HP3 Geophysical Suite",
+  "behaviorType": "utility",
+  "description": "InSight geophysical payload with ultra-broadband seismometer and self-penetrating heat flow probe.",
+  "parameters": {
+    "seismic": true,
+    "science": true,
+    "powerKW": 0.1
+  },
+  "mechanics": [
+    "seismic",
+    "science",
+    "powerKW"
+  ],
+  "runtimeStatus": "active"
+}

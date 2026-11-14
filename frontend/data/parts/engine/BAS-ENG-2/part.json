@@ -1,0 +1,80 @@
+{
+  "engine": {
+    "type": "liquid",
+    "thrustVac": 110000,
+    "ispVac": 450,
+    "ispSL": 430,
+    "minThrottle": 0.2,
+    "restartable": true
+  },
+  "topD": 1.2,
+  "bottomD": 1.2,
+  "id": "BAS-ENG-2",
+  "catalogueId": "BAS-ENG-2",
+  "name": "SE-2 Sustainer Engine",
+  "category": "engine",
+  "description": "Mid-size sustainer / upper-stage engine.",
+  "mass": 231,
+  "diameter": 1.2,
+  "height": 3.45,
+  "cd": 0.35,
+  "cost": 240000,
+  "radialHost": true,
+  "shape": "nozzle_long",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled propulsion class for game simulation.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/engine/BAS-ENG-2/part.json",
+  "dimensions": {
+    "diameterM": 1.2,
+    "heightM": 3.45,
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2
+  },
+  "physicalProperties": {
+    "dryMassKg": 231,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 1.2,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.2,
+    "bottomDiameterM": 1.2,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-ENG-2.png",
+    "model": null
+  },
+  "behaviorType": "propulsion"
+}

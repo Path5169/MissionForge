@@ -1,0 +1,80 @@
+{
+  "engine": {
+    "type": "liquid",
+    "thrustVac": 18000,
+    "ispVac": 320,
+    "ispSL": 270,
+    "minThrottle": 0.1,
+    "restartable": true
+  },
+  "topD": 0.65,
+  "bottomD": 0.65,
+  "id": "BAS-ENG-3",
+  "catalogueId": "BAS-ENG-3",
+  "name": "LE-3 Lander Engine",
+  "category": "engine",
+  "description": "Small lander / probe engine.",
+  "mass": 45,
+  "diameter": 0.65,
+  "height": 1.68,
+  "cd": 0.35,
+  "cost": 55000,
+  "radialHost": true,
+  "shape": "nozzle",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled propulsion class for game simulation.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/engine/BAS-ENG-3/part.json",
+  "dimensions": {
+    "diameterM": 0.65,
+    "heightM": 1.68,
+    "topDiameterM": 0.65,
+    "bottomDiameterM": 0.65
+  },
+  "physicalProperties": {
+    "dryMassKg": 45,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 0.65,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 0.65,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 0.65,
+    "bottomDiameterM": 0.65,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/BAS-ENG-3.png",
+    "model": null
+  },
+  "behaviorType": "propulsion"
+}

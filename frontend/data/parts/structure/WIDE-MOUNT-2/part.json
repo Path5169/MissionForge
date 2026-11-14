@@ -1,0 +1,72 @@
+{
+  "topD": 1.728,
+  "bottomD": 2.4,
+  "id": "WIDE-MOUNT-2",
+  "catalogueId": "WIDE-MOUNT-2",
+  "name": "EM-2 Cluster Engine Mount",
+  "category": "structure",
+  "description": "Engine cluster mount",
+  "mass": 110.0,
+  "diameter": 2.4,
+  "height": 1.0,
+  "cd": 0.35,
+  "cost": 42000,
+  "radialHost": true,
+  "shape": "taper",
+  "palette": true,
+  "catalogueSource": "MissionForge_Parts_Catalogue.xlsx",
+  "estimate": true,
+  "specBasis": "Scaled gameplay estimate based on the part's role and size. Not a construction specification.",
+  "analogue": "Scaled aerospace hardware.",
+  "simulationStatus": "Uses the existing vehicle or flight support.",
+  "sourceSupportNote": "Ready (existing schema)",
+  "definitionVersion": 1,
+  "definitionPath": "data/parts/structure/WIDE-MOUNT-2/part.json",
+  "dimensions": {
+    "diameterM": 2.4,
+    "heightM": 1.0,
+    "topDiameterM": 1.728,
+    "bottomDiameterM": 2.4
+  },
+  "physicalProperties": {
+    "dryMassKg": 110.0,
+    "dragCoefficient": 0.35
+  },
+  "attachmentPoints": [
+    {
+      "id": "top",
+      "type": "stack",
+      "diameterM": 1.728,
+      "axis": "longitudinal",
+      "direction": "up"
+    },
+    {
+      "id": "bottom",
+      "type": "stack",
+      "diameterM": 2.4,
+      "axis": "longitudinal",
+      "direction": "down"
+    },
+    {
+      "id": "radial",
+      "type": "radial",
+      "host": true,
+      "alignment": "center"
+    }
+  ],
+  "compatibility": {
+    "mountTypes": [
+      "stack",
+      "radial"
+    ],
+    "topDiameterM": 1.728,
+    "bottomDiameterM": 2.4,
+    "radialHost": true,
+    "radialOnly": false
+  },
+  "asset": {
+    "image": "assets/parts/WIDE-MOUNT-2.png",
+    "model": null
+  },
+  "behaviorType": "passive_structure"
+}

@@ -1,0 +1,40 @@
+{
+  "description": "Audio Manifest for MissionForge. Drop audio files (.wav, .mp3, .ogg, .webm) into designated folders.",
+  "categories": {
+    "ui": {
+      "folder": "assets/audio/ui",
+      "slots": ["ui_hover", "ui_click", "ui_confirm"]
+    },
+    "music": {
+      "folder": "assets/audio/music",
+      "slots": ["music_menu"]
+    },
+    "ambience": {
+      "folder": "assets/audio/ambience",
+      "slots": ["ambience_launch", "atmospheric_flight", "ambience_planetary"]
+    },
+    "engines": {
+      "folder": "assets/audio/engines",
+      "slots": ["engine_ignition", "engine_loop"]
+    },
+    "events": {
+      "folder": "assets/audio/events",
+      "slots": ["stage_separation", "mission_success", "mission_failure", "rover_movement"]
+    }
+  },
+  "slots": {
+    "ui_hover": { "category": "ui", "file": null },
+    "ui_click": { "category": "ui", "file": null },
+    "ui_confirm": { "category": "ui", "file": null },
+    "music_menu": { "category": "music", "file": null, "loop": true },
+    "ambience_launch": { "category": "ambience", "file": null, "loop": true },
+    "engine_ignition": { "category": "engines", "file": null },
+    "engine_loop": { "category": "engines", "file": null, "loop": true },
+    "stage_separation": { "category": "events", "file": null },
+    "atmospheric_flight": { "category": "ambience", "file": null, "loop": true },
+    "mission_success": { "category": "events", "file": null },
+    "mission_failure": { "category": "events", "file": null },
+    "rover_movement": { "category": "events", "file": null, "loop": true },
+    "ambience_planetary": { "category": "ambience", "file": null, "loop": true }
+  }
+}

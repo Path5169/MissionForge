@@ -1,0 +1,1016 @@
+{
+  "schema": 1,
+  "missions": [
+    {
+      "id": "earth_observation_1",
+      "title": "TerraWatch-1 · Earth Observation Satellite",
+      "nasaRef": "Global Earth Observation & Environmental Monitoring Program",
+      "historicalBackground": "Earth observation satellites revolutionized modern science by providing continuous real-time monitoring of weather patterns, deforestation, ocean currents, and global climate systems. TerraWatch-1 serves as the inaugural flight for the orbital space program, certifying multi-stage ascent, orbital circularization, and precision payload deployment.",
+      "scientificObjective": "Inject the TerraWatch-1 Earth observation satellite into Low Earth Orbit (160–350 km altitude), achieve orbital circularization, and deploy the satellite payload to establish an environmental monitoring constellation.",
+      "destination": "Low Earth Orbit (250 km, Earth)",
+      "missionBriefing": "Launch the TerraWatch-1 rocket from the launch pad, pitch over into an orbital ascent trajectory, separate the first stage booster, ignite the vacuum upper stage, achieve a circular parking orbit above 160 km, and deploy the TerraWatch-1 Earth observation satellite.",
+      "text": "Mission 01 (Compulsory Program Milestone): Launch to Low Earth Orbit, achieve stable circular orbit, and deploy the TerraWatch-1 Earth observation satellite payload.",
+      "difficulty": 1,
+      "compulsory": true,
+      "body": "earth",
+      "start": {
+        "type": "pad"
+      },
+      "missionPhases": [
+        "Phase 1 · Atmospheric Ascent: Lift off from launch pad and clear dense lower atmosphere.",
+        "Phase 2 · Booster Separation & Second Stage: Jettison first stage and ignite vacuum sustainer.",
+        "Phase 3 · Orbital Insertion: Circularize orbit with periapsis above 160 km and apoapsis under 350 km.",
+        "Phase 4 · Satellite Deployment: Separate and deploy the TerraWatch-1 Earth observation payload."
+      ],
+      "requiredCapabilities": [
+        "Multi-stage rocket with staging separation",
+        "Earth orbit with periapsis above 150 km",
+        "Satellite payload deployment"
+      ],
+      "objectives": [
+        {
+          "id": "eos_stage",
+          "type": "stages",
+          "value": 1,
+          "label": "Liftoff & Stage 1 Ignition",
+          "phase": 1
+        },
+        {
+          "id": "eos_staging",
+          "type": "stages",
+          "value": 2,
+          "label": "Booster Separation & Stage 2 Ignition",
+          "phase": 2,
+          "after": "eos_stage"
+        },
+        {
+          "id": "eos_orbit",
+          "type": "orbit",
+          "body": "earth",
+          "minPeriapsis": 160000,
+          "maxApoapsis": 350000,
+          "label": "Low Earth Orbit Insertion (160–350 km)",
+          "phase": 3,
+          "after": "eos_staging"
+        },
+        {
+          "id": "eos_deploy",
+          "type": "event",
+          "event": "deploy_payload",
+          "body": "earth",
+          "label": "Deploy TerraWatch-1 Earth Observation Satellite",
+          "phase": 4,
+          "after": "eos_orbit"
+        }
+      ],
+      "suggestedVehicle": "eos_terrawatch_launcher",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 3500000,
+        "construction": 2500000,
+        "fuel": 150000,
+        "operations": 350000,
+        "contingency": 500000,
+        "basis": "Standard qualification budget for Low Earth Orbit satellite delivery ($2.04M launcher construction, $3.5M mission total)."
+      },
+      "rewards": {
+        "baseReward": 8500000,
+        "bonuses": [
+          {
+            "id": "under_budget",
+            "amount": 1500000,
+            "label": "Under Budget Delivery"
+          },
+          {
+            "id": "circular_orbit",
+            "amount": 1000000,
+            "label": "Circular Orbit Precision"
+          }
+        ],
+        "scientificData": [
+          "High-resolution multispectral land surface mapping",
+          "Atmospheric aerosol and greenhouse gas concentration profiles",
+          "Global cloud cover and weather front tracking data"
+        ]
+      }
+    },
+    {
+      "id": "apollo_11",
+      "title": "Apollo 11 \u00b7 First Lunar Landing",
+      "nasaRef": "NASA Apollo 11, launched 16 July 1969",
+      "historicalBackground": "On 20 July 1969, NASA astronauts Neil Armstrong and Buzz Aldrin became the first humans to walk on the Moon. The mission was the culmination of the Apollo programme, fulfilling President Kennedy's 1961 pledge to land a man on the Moon by the end of the decade. Armstrong's famous words \u2014 'one small step for man, one giant leap for mankind' \u2014 were broadcast to 600 million viewers worldwide.",
+      "scientificObjective": "Demonstrate controlled lunar landing and return to Earth. Collect surface samples from the Sea of Tranquility. Deploy scientific instruments including a seismometer and laser retroreflector. Prove round-trip human spaceflight to the Moon.",
+      "destination": "Sea of Tranquility, Moon",
+      "missionBriefing": "Design and launch a multi-stage vehicle capable of reaching the Moon. Establish a stable Earth parking orbit, then perform a translunar injection burn. Capture into lunar orbit, deploy a lander to the surface, complete surface objectives, and return the command module to Earth orbit before re-entry. The lander must touch down at under 8 m/s to satisfy surface objective conditions.",
+      "text": "The definitive test of multi-stage rocketry and orbital mechanics. Launch from Earth, transfer to the Moon, land on the surface, and return. Requires a heavy-lift first stage, a capable upper stage for the translunar injection, and a dedicated lander with enough propellant to descend from lunar orbit and ascend back to rendezvous.",
+      "difficulty": 5,
+      "body": "earth",
+      "start": {
+        "type": "pad"
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Ascent: Launch to Earth parking orbit (185 km).",
+        "Phase 2 \u00b7 Translunar Injection: Burn from parking orbit toward the Moon.",
+        "Phase 3 \u00b7 Lunar Orbit Insertion: Capture into a 100 km lunar orbit.",
+        "Phase 4 \u00b7 Lunar Descent: Separate lander, powered descent to surface.",
+        "Phase 5 \u00b7 Surface Operations: Touch down and complete surface objectives.",
+        "Phase 6 \u00b7 Lunar Ascent: Lander ascent stage returns to lunar orbit.",
+        "Phase 7 \u00b7 Earth Return: Command module departs lunar orbit for Earth."
+      ],
+      "requiredCapabilities": [
+        "Multi-stage rocket with staging separation",
+        "Earth orbit with periapsis above 150 km",
+        "Translunar injection burn",
+        "Lunar orbit capture",
+        "Dedicated lander with landing legs",
+        "Soft landing at under 8 m/s"
+      ],
+      "objectives": [
+        {
+          "id": "apollo_stage",
+          "type": "stages",
+          "value": 1,
+          "label": "Stage 1 Ignition & Staging",
+          "phase": 1
+        },
+        {
+          "id": "apollo_orbit",
+          "type": "orbit",
+          "body": "earth",
+          "minPeriapsis": 150000,
+          "maxApoapsis": 300000,
+          "label": "Earth Parking Orbit (185 km)",
+          "phase": 2,
+          "after": "apollo_stage"
+        },
+        {
+          "id": "apollo_tli",
+          "type": "reach_body",
+          "body": "moon",
+          "label": "Translunar Transfer to Moon SOI",
+          "phase": 3,
+          "after": "apollo_orbit",
+          "value": "moon",
+          "target": "moon"
+        },
+        {
+          "id": "apollo_lunar_orbit",
+          "type": "orbit",
+          "body": "moon",
+          "minPeriapsis": 60000,
+          "maxApoapsis": 200000,
+          "label": "Lunar Orbit Insertion (~100 km)",
+          "phase": 4,
+          "after": "apollo_tli"
+        },
+        {
+          "id": "apollo_separate_lm",
+          "type": "event",
+          "event": "separate_lander",
+          "body": "moon",
+          "label": "Separate Lunar Module",
+          "phase": 5,
+          "after": "apollo_lunar_orbit"
+        },
+        {
+          "id": "apollo_landing",
+          "type": "land_on",
+          "body": "moon",
+          "maxSpeed": 8.0,
+          "label": "Lunar Landing in Sea of Tranquility (< 8 m/s)",
+          "phase": 6,
+          "after": "apollo_separate_lm",
+          "target": "moon",
+          "value": "moon"
+        },
+        {
+          "id": "apollo_eva",
+          "type": "event",
+          "event": "deploy_payload",
+          "body": "moon",
+          "label": "Deploy Surface Experiments (PSEP & LRRR)",
+          "phase": 7,
+          "after": "apollo_landing"
+        },
+        {
+          "id": "apollo_earth_return",
+          "type": "return_entry",
+          "body": "earth",
+          "maxSpeed": 12.0,
+          "minPriorAltitude": 100000,
+          "label": "Return to Earth & Atmospheric Splashdown",
+          "phase": 8,
+          "after": "apollo_eva",
+          "target": "earth",
+          "value": "earth"
+        }
+      ],
+      "suggestedVehicle": "apollo_11_saturn_v",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 7000000,
+        "construction": 5500000,
+        "fuel": 500000,
+        "operations": 500000,
+        "contingency": 500000,
+        "basis": "Planning allocations based on Apollo 11 Saturn V flight configuration ($4.35M vehicle, $7.0M mission allocation)."
+      },
+      "rewards": {
+        "baseReward": 40000000,
+        "bonuses": [
+          {
+            "id": "tranquility_landing",
+            "label": "Sea of Tranquility Precision Landing",
+            "amount": 10000000
+          },
+          {
+            "id": "lunar_ascent",
+            "label": "Clean Lunar Ascent & CSM Rendezvous",
+            "amount": 5000000
+          }
+        ],
+        "scientificData": [
+          "Tranquility Base Regolith and Breccia Samples (21.5 kg)",
+          "Passive Seismic Experiment Package (PSEP) Lunar Interior Data",
+          "Laser Ranging Retroreflector (LRRR) Earth-Moon Distance Calibration"
+        ]
+      }
+    },
+    {
+      "id": "perseverance",
+      "title": "Mars 2020 \u00b7 Perseverance",
+      "nasaRef": "NASA Mars 2020, launched 30 July 2020",
+      "historicalBackground": "Perseverance landed in Jezero Crater on 18 February 2021, a site chosen because it was once an ancient river delta \u2014 a promising environment for preserved biosignatures. The rover carries the MOXIE instrument, which produced breathable oxygen from the Martian atmosphere, and deployed Ingenuity, the first powered aircraft on another world.",
+      "scientificObjective": "Seek signs of ancient microbial life at Jezero Crater. Collect and cache rock and regolith samples for future return to Earth. Test oxygen production from the Martian atmosphere. Demonstrate helicopter flight on Mars. Characterise Martian weather and surface conditions.",
+      "destination": "Jezero Crater, Mars",
+      "missionBriefing": "Deliver a rover payload to the Martian surface. The mission requires an interplanetary transfer, a precise atmospheric entry, and a controlled landing. The rover must be deployed intact. Surface scientific objectives are conducted after landing. Vehicle design must balance launch mass, interplanetary delta-v requirements, and landing system capability.",
+      "text": "An interplanetary mission to deliver a rover to Jezero Crater, Mars. Requires a high-energy launch from Earth, a Hohmann-like transfer to Mars, atmospheric entry through the thin Martian atmosphere, and a controlled landing. The rover payload must be delivered intact. Mars EDL (entry, descent and landing) is the critical mission phase.",
+      "difficulty": 5,
+      "body": "mars",
+      "start": {
+        "type": "state",
+        "altitude": 25000,
+        "vx": 300,
+        "vy": 0
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Departure: Launch to Earth orbit, then perform a Mars transfer injection.",
+        "Phase 2 \u00b7 Interplanetary Cruise: Seven-month transit to Mars.",
+        "Phase 3 \u00b7 Mars Orbit Insertion: Capture or direct entry approach.",
+        "Phase 4 \u00b7 Atmospheric Entry: High-speed entry through the Martian atmosphere.",
+        "Phase 5 \u00b7 Powered Descent: Throttle engine for a controlled landing.",
+        "Phase 6 \u00b7 Rover Deployment: Release rover payload to surface.",
+        "Phase 7 \u00b7 Surface Science: Conduct geological surveys at designated sites."
+      ],
+      "requiredCapabilities": [
+        "Interplanetary transfer to Mars",
+        "Atmospheric entry at Mars (heat shield or parachute)",
+        "Powered descent at Mars",
+        "Rover payload deployment",
+        "Surface science instrument package"
+      ],
+      "objectives": [
+        {
+          "id": "persev_entry",
+          "type": "altitude",
+          "body": "mars",
+          "value": 12000,
+          "label": "Atmospheric Entry Descent to 12 km",
+          "phase": 1
+        },
+        {
+          "id": "persev_chute",
+          "type": "event",
+          "event": "deploy_parachute",
+          "body": "mars",
+          "label": "Deploy Supersonic Parachute",
+          "phase": 2,
+          "after": "persev_entry"
+        },
+        {
+          "id": "persev_heatshield",
+          "type": "event",
+          "event": "jettison_heat_shield",
+          "body": "mars",
+          "label": "Jettison Heat Shield",
+          "phase": 3,
+          "after": "persev_chute"
+        },
+        {
+          "id": "persev_landing",
+          "type": "land_on",
+          "body": "mars",
+          "maxSpeed": 6.0,
+          "label": "Powered Touchdown in Jezero Crater (< 6 m/s)",
+          "phase": 4,
+          "after": "persev_heatshield",
+          "target": "mars",
+          "value": "mars"
+        },
+        {
+          "id": "persev_rover",
+          "type": "event",
+          "event": "deploy_payload",
+          "body": "mars",
+          "label": "Deploy Perseverance Rover Payload",
+          "phase": 5,
+          "after": "persev_landing"
+        },
+        {
+          "id": "persev_sample",
+          "type": "event",
+          "event": "collect_sample",
+          "body": "mars",
+          "label": "Collect Jezero Delta Core Sample",
+          "phase": 6,
+          "after": "persev_rover"
+        }
+      ],
+      "suggestedVehicle": "perseverance_atlas_v",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 28000000,
+        "construction": 23000000,
+        "fuel": 500000,
+        "operations": 3000000,
+        "contingency": 1500000,
+        "basis": "Planning allocations based on Mars 2020 Atlas V EDL stack."
+      },
+      "rewards": {
+        "baseReward": 35000000,
+        "bonuses": [
+          {
+            "id": "jezero_precision",
+            "label": "Jezero Crater Delta Terrain Match",
+            "amount": 8000000
+          },
+          {
+            "id": "first_core",
+            "label": "First Hermetically Sealed Rock Core",
+            "amount": 7000000
+          }
+        ],
+        "scientificData": [
+          "Atmospheric Entry Hypersonic Deceleration Telemetry",
+          "Mastcam-Z High-Resolution Ancient Lakebed Panoramas",
+          "MOXIE In-Situ Atmospheric Oxygen Generation Telemetry",
+          "Sealed Jezero Crater Astrobiological Core Samples"
+        ]
+      }
+    },
+    {
+      "id": "osiris_rex",
+      "title": "OSIRIS-REx \u00b7 Asteroid Sample Return",
+      "nasaRef": "NASA OSIRIS-REx, launched 8 September 2016",
+      "historicalBackground": "OSIRIS-REx (Origins, Spectral Interpretation, Resource Identification, Security, Regolith Explorer) arrived at asteroid Bennu in December 2018. On 20 October 2020 it performed a touch-and-go sample collection manoeuvre, briefly contacting the surface and collecting at least 60 grams of material. The sample capsule returned to Earth on 24 September 2023, delivering the largest asteroid sample ever collected by a NASA mission.",
+      "scientificObjective": "Return a pristine sample of carbonaceous asteroid material from Bennu. Map the asteroid's surface composition and structure. Measure the Yarkovsky effect (thermal radiation pressure on the asteroid's orbit). Assess the potential impact hazard Bennu poses to Earth in the late 22nd century.",
+      "destination": "101955 Bennu, near-Earth asteroid",
+      "missionBriefing": "Launch an interceptor spacecraft toward asteroid Bennu. Conduct proximity operations in Bennu's extremely weak gravity field (surface gravity approximately 6 micro-g). Survey candidate sampling sites. Execute a touch-and-go sample acquisition manoeuvre. Store the sample and return the capsule to Earth for atmospheric re-entry and recovery.",
+      "text": "A precision asteroid rendezvous and sample-return mission. Navigating near a small body in micro-gravity requires careful trajectory management \u2014 standard impulsive manoeuvres are too coarse. The touch-and-go collection requires extremely precise relative velocity control. The return journey must target a precise Earth atmospheric entry corridor.",
+      "difficulty": 4,
+      "body": "earth",
+      "start": {
+        "type": "orbit",
+        "altitude": 200000
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Departure: Depart Earth orbit on an asteroid intercept trajectory.",
+        "Phase 2 \u00b7 Interplanetary Transfer: Heliocentric cruise to Bennu.",
+        "Phase 3 \u00b7 Rendezvous: Decelerate into Bennu proximity orbit.",
+        "Phase 4 \u00b7 Survey Operations: Characterise surface from low Bennu orbit.",
+        "Phase 5 \u00b7 Sample Collection: TAG (Touch-And-Go) manoeuvre at selected site.",
+        "Phase 6 \u00b7 Earth Return: Depart Bennu and target Earth atmospheric entry."
+      ],
+      "requiredCapabilities": [
+        "Interplanetary transfer",
+        "Low-gravity proximity operations",
+        "Precision relative velocity control",
+        "Sample collection mechanism",
+        "Earth atmospheric entry capsule"
+      ],
+      "objectives": [
+        {
+          "id": "osiris_escape",
+          "type": "reach_body",
+          "body": "sun",
+          "label": "Earth Departure to Heliocentric Cruise",
+          "phase": 1,
+          "value": "sun",
+          "target": "sun"
+        },
+        {
+          "id": "osiris_rendezvous",
+          "type": "rendezvous",
+          "body": "bennu",
+          "maxDistance": 50000.0,
+          "maxRelativeSpeed": 50.0,
+          "label": "Rendezvous with Asteroid Bennu",
+          "phase": 2,
+          "after": "osiris_escape",
+          "target": "bennu",
+          "value": "bennu"
+        },
+        {
+          "id": "osiris_sample",
+          "type": "event",
+          "event": "collect_sample",
+          "body": "bennu",
+          "label": "TAGSAM Sample Collection at Nightingale",
+          "phase": 3,
+          "after": "osiris_rendezvous"
+        },
+        {
+          "id": "osiris_return",
+          "type": "return_entry",
+          "body": "earth",
+          "maxSpeed": 12.0,
+          "minPriorAltitude": 200000,
+          "label": "Sample Capsule Atmospheric Entry & Touchdown",
+          "phase": 4,
+          "after": "osiris_sample",
+          "target": "earth",
+          "value": "earth"
+        }
+      ],
+      "suggestedVehicle": "osiris_rex_explorer",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 32000000,
+        "construction": 25500000,
+        "fuel": 500000,
+        "operations": 4000000,
+        "contingency": 2000000,
+        "basis": "Planning allocations based on OSIRIS-REx New Frontiers mission."
+      },
+      "rewards": {
+        "baseReward": 30000000,
+        "bonuses": [
+          {
+            "id": "nightingale_precision",
+            "label": "Nightingale Crater Touch-and-Go Precision",
+            "amount": 8000000
+          },
+          {
+            "id": "capsule_recovery",
+            "label": "Sealed Sample Return Capsule Earth Recovery",
+            "amount": 6000000
+          }
+        ],
+        "scientificData": [
+          "Global 3D Radar Polyhedron Shape & Mass Density Map",
+          "OTES Carbonaceous Chondrite Mineralogy & Hydrated Minerals",
+          "Pristine Bennu Asteroid Surface Samples (121.6 g)"
+        ]
+      }
+    },
+    {
+      "id": "dart",
+      "title": "DART \u00b7 Planetary Defense",
+      "nasaRef": "NASA DART (Double Asteroid Redirection Test), launched 24 November 2021",
+      "historicalBackground": "DART impacted the moonlet Dimorphos of the Didymos binary asteroid system on 26 September 2022, travelling at 6.1 km/s. It was the world's first full-scale planetary defense test. The impact successfully shortened Dimorphos's orbital period around Didymos by 33 minutes \u2014 far exceeding the minimum threshold of 73 seconds needed to validate the kinetic impactor concept.",
+      "scientificObjective": "Validate the kinetic impactor technique as a viable method of altering an asteroid's trajectory. Measure the momentum transfer efficiency from a spacecraft impact. Characterise the ejecta plume and crater formed by the impact. Demonstrate that planetary defense missions can be planned and executed on compressed timelines.",
+      "destination": "Dimorphos, moonlet of 65803 Didymos",
+      "missionBriefing": "Launch an interceptor spacecraft and plot a direct intercept trajectory toward Dimorphos. No orbit insertion \u2014 the spacecraft is expended in the impact. Precision terminal navigation is required to hit a target approximately 160 m in diameter. The impact velocity and vector must be within acceptable margins to produce a measurable orbital change. Post-impact, ground-based observatories evaluate the deflection.",
+      "text": "A one-way kinetic impactor mission requiring extremely precise terminal navigation. Unlike orbital missions there is no second chance: the spacecraft must hit a 160-metre moonlet at the end of a 10-month cruise. Trajectory planning and correction burns during cruise are critical. Terminal navigation uses optical imagery to home on the target.",
+      "difficulty": 3,
+      "body": "earth",
+      "start": {
+        "type": "orbit",
+        "altitude": 200000
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Departure: Depart Earth orbit on direct intercept trajectory.",
+        "Phase 2 \u00b7 Cruise: 10-month transit with trajectory correction manoeuvres.",
+        "Phase 3 \u00b7 Terminal Navigation: Autonomous optical navigation toward Dimorphos.",
+        "Phase 4 \u00b7 Impact: High-velocity kinetic impact on Dimorphos.",
+        "Phase 5 \u00b7 Assessment: Ground observatories confirm orbital period change."
+      ],
+      "requiredCapabilities": [
+        "Interplanetary transfer",
+        "Target intercept navigation",
+        "Trajectory correction manoeuvres",
+        "Terminal navigation accuracy"
+      ],
+      "objectives": [
+        {
+          "id": "dart_escape",
+          "type": "reach_body",
+          "body": "sun",
+          "label": "Earth Departure Burn to Heliocentric Orbit",
+          "phase": 1,
+          "value": "sun",
+          "target": "sun"
+        },
+        {
+          "id": "dart_intercept",
+          "type": "reach_body",
+          "body": "dimorphos",
+          "label": "Intercept Dimorphos Asteroid System",
+          "phase": 2,
+          "after": "dart_escape",
+          "value": "dimorphos",
+          "target": "dimorphos"
+        },
+        {
+          "id": "dart_impact",
+          "type": "impact",
+          "body": "dimorphos",
+          "minSpeed": 1000.0,
+          "label": "Kinetic Impact on Dimorphos (> 1000 m/s)",
+          "phase": 3,
+          "after": "dart_intercept",
+          "target": "dimorphos",
+          "value": "dimorphos"
+        }
+      ],
+      "suggestedVehicle": "dart_kinetic_impactor",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 20000000,
+        "construction": 16000000,
+        "fuel": 400000,
+        "operations": 2400000,
+        "contingency": 1200000,
+        "basis": "Planning allocations based on DART Planetary Defense demonstration."
+      },
+      "rewards": {
+        "baseReward": 20000000,
+        "bonuses": [
+          {
+            "id": "hypervelocity_strike",
+            "label": "Hypervelocity Kinetic Impact (> 6 km/s)",
+            "amount": 5000000
+          }
+        ],
+        "scientificData": [
+          "DRACO High-Resolution Dimorphos Terminal Impact Images",
+          "Didymos-Dimorphos Binary Asteroid Surface Geomorphology",
+          "Kinetic Impactor Momentum Transfer (Beta) Determination"
+        ]
+      }
+    },
+    {
+      "id": "europa_clipper",
+      "title": "Europa Clipper \u00b7 Ocean World",
+      "nasaRef": "NASA Europa Clipper, launched 14 October 2024",
+      "historicalBackground": "Europa, the smallest of Jupiter's Galilean moons, is covered by a smooth icy shell beneath which evidence strongly suggests a global liquid water ocean \u2014 potentially twice the volume of Earth's oceans \u2014 in contact with a rocky seafloor. Heat from tidal flexing by Jupiter's gravity keeps this ocean liquid. Europa Clipper will conduct 49 close flybys of Europa between 2031 and 2034, measuring ice thickness, characterising the subsurface ocean and searching for plumes of water vapour venting through the ice.",
+      "scientificObjective": "Determine whether Europa's subsurface ocean is habitable. Characterise the composition and thickness of the ice shell. Search for active water plumes. Map surface geology and identify potential future landing sites. Measure Europa's magnetic field interaction with Jupiter's magnetosphere.",
+      "destination": "Europa, moon of Jupiter",
+      "missionBriefing": "Design a spacecraft capable of surviving Jupiter's intense radiation environment during repeated Europa flybys. The spacecraft must carry scientific instruments including an ice-penetrating radar, mass spectrometer, thermal imager and magnetometer. After arrival at the Jovian system, perform a series of close flybys accumulating scientific data with each pass.",
+      "text": "A deep-space mission requiring a high-energy launch, a 5.5-year transit to Jupiter using gravity assists, and careful management of a radiation-hardened spacecraft through repeated Europa flybys. No orbital insertion at Europa \u2014 the flyby approach limits radiation dose while still enabling comprehensive science.",
+      "difficulty": 5,
+      "body": "earth",
+      "start": {
+        "type": "orbit",
+        "altitude": 200000
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Departure: Depart Earth toward Jupiter using a gravity-assist trajectory.",
+        "Phase 2 \u00b7 Interplanetary Cruise: 5.5-year transit using Mars and Earth gravity assists.",
+        "Phase 3 \u00b7 Jupiter Orbit Insertion: Capture into an elongated Jovian orbit.",
+        "Phase 4 \u00b7 Tour Phase: Use moon gravity assists to lower orbit and reduce inclination.",
+        "Phase 5 \u00b7 Europa Flybys: Conduct 49 close flybys over three years.",
+        "Phase 6 \u00b7 Data Return: Transmit accumulated scientific data to Earth."
+      ],
+      "requiredCapabilities": [
+        "Interplanetary transfer to Jupiter",
+        "Gravity assist trajectory planning",
+        "Jupiter orbital insertion",
+        "Radiation-hardened systems (simulated)",
+        "Scientific instrument suite",
+        "Long-duration data transmission"
+      ],
+      "objectives": [
+        {
+          "id": "clipper_escape",
+          "type": "reach_body",
+          "body": "sun",
+          "label": "Earth Departure to Jupiter Transfer",
+          "phase": 1,
+          "value": "sun",
+          "target": "sun"
+        },
+        {
+          "id": "clipper_reach_jupiter",
+          "type": "reach_body",
+          "body": "jupiter",
+          "label": "Jupiter SOI Arrival",
+          "phase": 2,
+          "after": "clipper_escape",
+          "value": "jupiter",
+          "target": "jupiter"
+        },
+        {
+          "id": "clipper_joi",
+          "type": "orbit",
+          "body": "jupiter",
+          "minPeriapsis": 10000000.0,
+          "maxApoapsis": 500000000.0,
+          "label": "Jupiter Capture Orbit",
+          "phase": 3,
+          "after": "clipper_reach_jupiter"
+        },
+        {
+          "id": "clipper_europa",
+          "type": "flyby",
+          "body": "europa",
+          "maxDistance": 200000.0,
+          "label": "Close Europa Flyby (< 200 km altitude)",
+          "phase": 4,
+          "after": "clipper_joi",
+          "target": "europa",
+          "value": "europa"
+        },
+        {
+          "id": "clipper_radar",
+          "type": "event",
+          "event": "deploy_payload",
+          "body": "jupiter",
+          "label": "REASON Ice-Penetrating Radar Survey",
+          "phase": 5,
+          "after": "clipper_europa"
+        }
+      ],
+      "suggestedVehicle": "europa_clipper_heavy",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 46000000,
+        "construction": 36000000,
+        "fuel": 800000,
+        "operations": 6000000,
+        "contingency": 3200000,
+        "basis": "Planning allocations based on Europa Clipper Flagship mission."
+      },
+      "rewards": {
+        "baseReward": 45000000,
+        "bonuses": [
+          {
+            "id": "subsurface_radar_pass",
+            "label": "Close Sub-25 km Europa Radar Sounding",
+            "amount": 12000000
+          }
+        ],
+        "scientificData": [
+          "REASON Ice-Penetrating Radar Subsurface Water Shell Profiles",
+          "MASPEX Neutral Gas Plume Mass Spectrometry",
+          "PIMS Induced Magnetic Field Ocean Salinity Characterization"
+        ]
+      }
+    },
+    {
+      "id": "lucy",
+      "title": "Lucy \u00b7 Trojan Asteroid Explorer",
+      "nasaRef": "NASA Lucy, launched 16 October 2021",
+      "historicalBackground": "Lucy takes its name from the fossilised human ancestor skeleton that transformed our understanding of human evolution. The spacecraft is on a 12-year journey to visit seven Trojan asteroids \u2014 the first mission to explore these primitive bodies, which are thought to be the leftover building blocks of the giant planets. The Trojans lead and trail Jupiter in its orbit, locked by gravitational resonance since the solar system formed 4.5 billion years ago.",
+      "scientificObjective": "Survey seven Jupiter Trojan asteroids across two distinct swarms (L4 and L5). Determine their surface composition, geology and colour diversity. Test whether Trojans represent a diverse reservoir of primordial solar system material. Characterise binary asteroid Patroclus\u2013Menoetius before the main Trojan tour.",
+      "destination": "Jupiter Trojan asteroids (L4 and L5 swarms)",
+      "missionBriefing": "Launch on a trajectory that uses multiple Earth gravity assists to reach both the leading (L4) and trailing (L5) Trojan swarms \u2014 an unprecedented double-swarm tour. Each flyby is brief (minutes to hours), so instrument operations must be pre-planned and timed precisely. Solar panels must generate adequate power at Jupiter distances where solar intensity is 25 times lower than at Earth.",
+      "text": "A multi-target flyby mission requiring a complex trajectory with Earth gravity assists and tightly timed observation windows at each asteroid. Unlike an orbiter, Lucy flies through each target zone only once \u2014 data collection windows are unforgiving and cannot be recovered. Solar panel sizing is critical at Jupiter distance.",
+      "difficulty": 4,
+      "body": "earth",
+      "start": {
+        "type": "orbit",
+        "altitude": 200000
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Departure: Launch into an elliptical heliocentric orbit.",
+        "Phase 2 \u00b7 Earth Gravity Assist 1: First Earth flyby to raise aphelion.",
+        "Phase 3 \u00b7 Inner Main Belt Flyby: Dinkinesh and Donaldjohanson flybys.",
+        "Phase 4 \u00b7 L4 Trojan Tour: Eurybates, Polymele, Leucus and Orus flybys.",
+        "Phase 5 \u00b7 Earth Gravity Assist 2: Second Earth flyby for L5 trajectory.",
+        "Phase 6 \u00b7 L5 Trojan Flyby: Patroclus\u2013Menoetius binary flyby."
+      ],
+      "requiredCapabilities": [
+        "Interplanetary transfer",
+        "Gravity assist trajectory",
+        "Multiple flyby observation windows",
+        "Solar power at Jupiter distance",
+        "Scientific instrument payload"
+      ],
+      "objectives": [
+        {
+          "id": "lucy_escape",
+          "type": "reach_body",
+          "body": "sun",
+          "label": "Trans-Asteroid Departure Burn",
+          "phase": 1,
+          "value": "sun",
+          "target": "sun"
+        },
+        {
+          "id": "lucy_dinkinesh",
+          "type": "flyby",
+          "body": "dinkinesh",
+          "maxDistance": 500000.0,
+          "label": "Flyby of Inner Belt Asteroid Dinkinesh",
+          "phase": 2,
+          "after": "lucy_escape",
+          "target": "dinkinesh",
+          "value": "dinkinesh"
+        },
+        {
+          "id": "lucy_donaldjohanson",
+          "type": "flyby",
+          "body": "donaldjohanson",
+          "maxDistance": 500000.0,
+          "label": "Flyby of Main Belt Asteroid Donaldjohanson",
+          "phase": 3,
+          "after": "lucy_dinkinesh",
+          "target": "donaldjohanson",
+          "value": "donaldjohanson"
+        },
+        {
+          "id": "lucy_eurybates",
+          "type": "flyby",
+          "body": "eurybates",
+          "maxDistance": 500000.0,
+          "label": "Flyby of Jupiter Trojan Eurybates",
+          "phase": 4,
+          "after": "lucy_donaldjohanson",
+          "target": "eurybates",
+          "value": "eurybates"
+        },
+        {
+          "id": "lucy_survey",
+          "type": "event",
+          "event": "deploy_payload",
+          "body": "sun",
+          "label": "Science Instrument Survey & Data Return",
+          "phase": 5,
+          "after": "lucy_eurybates"
+        }
+      ],
+      "suggestedVehicle": "lucy_trojan_probe",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 40000000,
+        "construction": 32000000,
+        "fuel": 600000,
+        "operations": 5000000,
+        "contingency": 2400000,
+        "basis": "Planning allocations based on Lucy Discovery Program multi-target tour."
+      },
+      "rewards": {
+        "baseReward": 32000000,
+        "bonuses": [
+          {
+            "id": "multiple_encounters",
+            "label": "Three Target Asteroid Flybys Achieved",
+            "amount": 8000000
+          }
+        ],
+        "scientificData": [
+          "Dinkinesh Main-Belt Contact Binary Asteroid Imagery",
+          "Donaldjohanson High-Velocity Collision Fragment Spectra",
+          "Eurybates C-type Trojan Primitive Volatiles Survey"
+        ]
+      }
+    },
+    {
+      "id": "juno",
+      "title": "Juno \u00b7 Jupiter Orbiter",
+      "nasaRef": "NASA Juno, launched 5 August 2011",
+      "historicalBackground": "Juno arrived at Jupiter on 5 July 2016, becoming only the second spacecraft to orbit Jupiter after Galileo. Its polar orbit takes it over the planet's poles every 53 days, diving inside Jupiter's intense radiation belts for brief science passes. Juno has revealed Jupiter's atmosphere extends to depths of 3,000 km, that its Great Red Spot has roots hundreds of kilometres deep, and that the planet has a fuzzy, diffuse core rather than a compact solid one.",
+      "scientificObjective": "Measure the composition, gravity field, magnetic field and atmospheric dynamics of Jupiter. Determine the planet's water and ammonia abundance. Characterise the structure of the magnetic field. Image the polar aurora and atmospheric features with the JunoCam instrument.",
+      "destination": "Jupiter, polar orbit",
+      "missionBriefing": "Design a spacecraft capable of reaching Jupiter, performing a precisely timed orbital insertion burn to enter a highly elliptical polar orbit, and surviving repeated passes through Jupiter's radiation belts. The science orbit is 53 days per revolution. Each close approach passes within 5,000 km of the cloud tops. Perijove passes require accurate thrust direction and timing.",
+      "text": "A deep-space mission to reach Jupiter and enter a highly elliptical polar orbit. The key challenge is the orbital insertion burn: too little and the spacecraft escapes; too much and it enters a dangerously deep orbit. Each science pass brings the spacecraft within the most intense radiation environment of any body the game models.",
+      "difficulty": 4,
+      "body": "earth",
+      "start": {
+        "type": "orbit",
+        "altitude": 200000
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Departure: Depart Earth orbit on a Jupiter transfer trajectory.",
+        "Phase 2 \u00b7 Earth Gravity Assist: Flyby of Earth after 2 years to gain additional speed.",
+        "Phase 3 \u00b7 Jupiter Approach: Fine trajectory correction burns.",
+        "Phase 4 \u00b7 Jupiter Orbit Insertion: Precision burn to enter capture orbit.",
+        "Phase 5 \u00b7 Science Orbit: Establish a 53-day polar orbit.",
+        "Phase 6 \u00b7 Perijove Passes: Conduct repeated science passes over the poles."
+      ],
+      "requiredCapabilities": [
+        "Interplanetary transfer to Jupiter",
+        "Earth gravity assist",
+        "Precision orbital insertion burn",
+        "Polar orbit management",
+        "Scientific instrument suite",
+        "Radiation hardening (simulated)"
+      ],
+      "objectives": [
+        {
+          "id": "juno_escape",
+          "type": "reach_body",
+          "body": "sun",
+          "label": "Jupiter Transfer Departure Burn",
+          "phase": 1,
+          "value": "sun",
+          "target": "sun"
+        },
+        {
+          "id": "juno_reach_jupiter",
+          "type": "reach_body",
+          "body": "jupiter",
+          "label": "Jupiter SOI Arrival",
+          "phase": 2,
+          "after": "juno_escape",
+          "value": "jupiter",
+          "target": "jupiter"
+        },
+        {
+          "id": "juno_joi",
+          "type": "orbit",
+          "body": "jupiter",
+          "minPeriapsis": 5000000.0,
+          "maxApoapsis": 500000000.0,
+          "label": "Jupiter Orbital Insertion (JOI)",
+          "phase": 3,
+          "after": "juno_reach_jupiter"
+        },
+        {
+          "id": "juno_perijove",
+          "type": "event",
+          "event": "perijove",
+          "body": "jupiter",
+          "count": 1,
+          "label": "Perijove Close Gravity & Radiation Pass",
+          "phase": 4,
+          "after": "juno_joi"
+        },
+        {
+          "id": "juno_survey",
+          "type": "event",
+          "event": "deploy_payload",
+          "body": "jupiter",
+          "label": "Atmospheric Water & Magnetosphere Survey",
+          "phase": 5,
+          "after": "juno_perijove"
+        }
+      ],
+      "suggestedVehicle": "juno_jupiter_orbiter",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 40000000,
+        "construction": 32000000,
+        "fuel": 600000,
+        "operations": 5000000,
+        "contingency": 2400000,
+        "basis": "Planning allocations based on Juno New Frontiers Jupiter orbiter."
+      },
+      "rewards": {
+        "baseReward": 36000000,
+        "bonuses": [
+          {
+            "id": "precision_joi",
+            "label": "Polar JOI Insertion Cleanliness",
+            "amount": 9000000
+          }
+        ],
+        "scientificData": [
+          "Deep Jovian Atmospheric Water & Ammonia Abundance Profiles",
+          "Polar 3D Magnetic Dynamo and Auroral Plasma Observations",
+          "JunoCam Polar Atmospheric Storm Cyclonic Dynamics"
+        ]
+      }
+    },
+    {
+      "id": "insight",
+      "title": "InSight \u00b7 Mars Interior Science",
+      "nasaRef": "NASA InSight, launched 5 May 2018",
+      "historicalBackground": "InSight (Interior Exploration using Seismic Investigations, Geodesy and Heat Transport) landed in Elysium Planitia on 26 November 2018. Its HP\u00b3 heat probe was designed to burrow 5 metres beneath the surface, but Martian soil proved unexpectedly resistant. Its SEIS seismometer detected more than 1,300 marsquakes before the mission ended in December 2022 when dust accumulation on the solar panels ended power generation. InSight was the first mission dedicated to studying the deep interior of Mars.",
+      "scientificObjective": "Measure the internal structure of Mars including crust thickness, mantle composition and core state. Detect and characterise marsquakes. Measure heat flow from the deep interior. Monitor Martian weather continuously from a fixed location. Determine if Mars has a liquid or solid inner core.",
+      "destination": "Elysium Planitia, Mars",
+      "missionBriefing": "Land a stationary scientific platform in Elysium Planitia \u2014 an equatorial plain chosen for its flatness, low wind speeds and optimal solar exposure. After landing, deploy the SEIS seismometer and HP\u00b3 heat probe. Conduct long-duration observations. Data transmission depends on orbital relay spacecraft (Mars Reconnaissance Orbiter). No mobility after landing.",
+      "text": "A precision-landing mission delivering a fixed scientific lander to the Martian surface. Unlike a rover mission there is no mobility \u2014 landing site accuracy is critical. The lander must survive atmospheric entry and powered descent in Mars's thin atmosphere. Scientific operations span several years, requiring sustained power generation from solar panels in the Martian environment.",
+      "difficulty": 4,
+      "body": "mars",
+      "start": {
+        "type": "state",
+        "altitude": 25000,
+        "vx": 300,
+        "vy": 0
+      },
+      "missionPhases": [
+        "Phase 1 \u00b7 Earth Departure: Launch toward Mars on a direct entry approach.",
+        "Phase 2 \u00b7 Interplanetary Cruise: Six-month transit to Mars.",
+        "Phase 3 \u00b7 Atmospheric Entry: Entry, descent and landing in thin Martian atmosphere.",
+        "Phase 4 \u00b7 Landing: Powered descent to Elysium Planitia.",
+        "Phase 5 \u00b7 Instrument Deployment: Deploy SEIS and HP\u00b3 from the lander deck.",
+        "Phase 6 \u00b7 Science Operations: Long-duration seismic and thermal monitoring."
+      ],
+      "requiredCapabilities": [
+        "Interplanetary transfer to Mars",
+        "Mars atmospheric entry",
+        "Precision powered descent",
+        "Fixed lander configuration",
+        "Seismic instrument payload",
+        "Sustained solar power generation"
+      ],
+      "objectives": [
+        {
+          "id": "insight_entry",
+          "type": "altitude",
+          "body": "mars",
+          "value": 12000,
+          "label": "Atmospheric Entry Descent to 12 km",
+          "phase": 1
+        },
+        {
+          "id": "insight_chute",
+          "type": "event",
+          "event": "deploy_parachute",
+          "body": "mars",
+          "label": "Deploy Terminal Parachute",
+          "phase": 2,
+          "after": "insight_entry"
+        },
+        {
+          "id": "insight_heatshield",
+          "type": "event",
+          "event": "jettison_heat_shield",
+          "body": "mars",
+          "label": "Jettison Heat Shield",
+          "phase": 3,
+          "after": "insight_chute"
+        },
+        {
+          "id": "insight_landing",
+          "type": "land_on",
+          "body": "mars",
+          "maxSpeed": 5.0,
+          "label": "Soft Landing on Elysium Planitia (< 5 m/s)",
+          "phase": 4,
+          "after": "insight_heatshield",
+          "target": "mars",
+          "value": "mars"
+        },
+        {
+          "id": "insight_seismic",
+          "type": "event",
+          "event": "deploy_payload",
+          "body": "mars",
+          "label": "Deploy SEIS Seismometer Package",
+          "phase": 5,
+          "after": "insight_landing"
+        },
+        {
+          "id": "insight_probe",
+          "type": "event",
+          "event": "collect_sample",
+          "body": "mars",
+          "label": "Deploy HP3 Heat-Flow Probe",
+          "phase": 6,
+          "after": "insight_seismic"
+        }
+      ],
+      "suggestedVehicle": "insight_lander_stack",
+      "status": "available",
+      "lockReason": "",
+      "capabilityGaps": [],
+      "budget": {
+        "total": 12500000,
+        "construction": 9500000,
+        "fuel": 300000,
+        "operations": 1700000,
+        "contingency": 1000000,
+        "basis": "Planning allocations based on InSight Discovery Program budget."
+      },
+      "rewards": {
+        "baseReward": 25000000,
+        "bonuses": [
+          {
+            "id": "elysium_touchdown",
+            "label": "Elysium Planitia Flat Landing",
+            "amount": 6000000
+          },
+          {
+            "id": "seismic_install",
+            "label": "Wind & Thermal Shield SEIS Placement",
+            "amount": 4000000
+          }
+        ],
+        "scientificData": [
+          "SEIS Very Broad Band Martian Crust & Mantle Seismograms",
+          "HP3 Subsurface Thermal Conductivity & Heat Flow Gradients",
+          "RISE Planetary Spin Axis Precession & Liquid Core Metrics"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "_readme": "MissionForge asset registry with Blender-generated 3D GLB assets",
+  "bodies": {
+    "earth": "assets/planets/earth.glb",
+    "moon": "assets/models/planets/lunar_surface.glb"
+  },
+  "models": {
+    "launch_complex": "assets/models/launch_site/launch_complex.glb",
+    "lunar_surface": "assets/models/planets/lunar_surface.glb",
+    "lander_rover": "assets/models/vehicles/lander_rover.glb",
+    "hangar_interior": "assets/models/hangar/hangar_interior.glb",
+    "rocket_parts": "assets/models/rocket_components/rocket_parts.glb"
+  },
+  "parts": {
+    "PAYLOAD-ROVER": "assets/parts/PAYLOAD-ROVER.png",
+    "PAYLOAD-SEISMIC": "assets/parts/PAYLOAD-SEISMIC.png",
+    "SAMPLE-RETURN-CAPSULE": "assets/parts/SAMPLE-RETURN-CAPSULE.png",
+    "SCIENCE-SUITE-DEEP": "assets/parts/SCIENCE-SUITE-DEEP.png",
+    "POWER-RTG-HEAVY": "assets/parts/POWER-RTG-HEAVY.png",
+    "POWER-SOLAR-OUTER": "assets/parts/POWER-SOLAR-OUTER.png",
+    "APOLLO-LM-DESCENT": "assets/parts/APOLLO-LM-DESCENT.png",
+    "APOLLO-LM-ASCENT": "assets/parts/APOLLO-LM-ASCENT.png"
+  }
+}
