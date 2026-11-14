@@ -1,6 +1,7 @@
 from __future__ import annotations
 import json
 import threading
+import time
 from pathlib import Path
 from backend.simulation import orbit, ephemeris, dynamics, flight_session
 from backend.vehicle import attachments
@@ -163,19 +164,26 @@ def asset_manifest():
 
 
 def list_blueprints():
-    data = _read(STATE / "blueprints.json", {})
-    return [{"id": key, "name": value.get("name", "Untitled vehicle"), "updatedAt": value.get("updatedAt")} for key, value in data.items()]
+    with _STATE_LOCK:
+        data = _read(STATE / "blueprints.json", {})
+        return [{"id": key, "name": value.get("name", "Untitled vehicle"), "updatedAt": value.get("updatedAt")} for key, value in data.items()]
 
 
 def get_blueprint(identifier: str):
-    return _read(STATE / "blueprints.json", {}).get(identifier)
+    with _STATE_LOCK:
+        return _read(STATE / "blueprints.json", {}).get(identifier)
 
 
 def save_blueprint(identifier: str, blueprint: dict):
     if not identifier or len(identifier) > 100: raise ValueError("Invalid blueprint ID.")
     with _STATE_LOCK:
         data = _read(STATE / "blueprints.json", {})
-        data[identifier] = {"id": identifier, "name": blueprint.get("name", "Untitled vehicle"), "blueprint": blueprint}
+        data[identifier] = {
+            "id": identifier,
+            "name": blueprint.get("name", "Untitled vehicle"),
+            "blueprint": blueprint,
+            "updatedAt": int(time.time() * 1000)
+        }
         _write("blueprints.json", data)
         return data[identifier]
 
@@ -189,17 +197,35 @@ def delete_blueprint(identifier: str):
         return existed
 
 
-def get_settings(): return _read(STATE / "settings.json", {})
+def get_settings():
+    with _STATE_LOCK:
+        return _read(STATE / "settings.json", {})
+
 def put_settings(settings: dict):
     with _STATE_LOCK:
         current = get_settings(); current.update(settings or {}); _write("settings.json", current); return current
 
-def get_progress(): return _read(STATE / "progress.json", {})
+def get_progress():
+    with _STATE_LOCK:
+        return _read(STATE / "progress.json", {})
+
 def put_progress(identifier: str, value: dict):
     with _STATE_LOCK:
         current = get_progress()
+        prev = current.get(identifier, {})
         entry = dict(value)
-        if "best" not in entry and "stats" in entry:
+        new_stats = entry.get("stats") or {}
+        prev_best = prev.get("best") or prev.get("stats") or {}
+        if prev_best:
+            best = dict(prev_best)
+            if "time" in new_stats:
+                best["time"] = min(prev_best.get("time", float("inf")), new_stats["time"])
+            if "cost" in new_stats:
+                best["cost"] = min(prev_best.get("cost", float("inf")), new_stats["cost"])
+            if "mass" in new_stats:
+                best["mass"] = min(prev_best.get("mass", float("inf")), new_stats["mass"])
+            entry["best"] = best
+        elif "stats" in entry:
             entry["best"] = entry["stats"]
         current[identifier] = entry
         _write("progress.json", current)

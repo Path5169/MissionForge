@@ -50,7 +50,6 @@ import { financialSnapshot, canBuildBlueprint } from '../../js/core/economy.js';
 import { paintPart, paintFairing, drawIcon, tankLinks } from '../shared/partArt.js';
 import { assets } from '../../js/rendering/assets.js';
 import { fmtMass, fmtSpeed, fmtMoney, fmtForce, fmtDist, fmtTime, slug } from '../shared/format.js';
-import { RocketAssemblyScene } from '../../js/vehicle/RocketAssemblyScene.js';
 
 const CATS = { command: ['Command', 'probe_core'], aero: ['Aero', 'AERO-CONE-SHORT'], fairing: ['Fairings', 'FAIR-MORE'], heatshield: ['Heat shields', 'BAS-HEATSHIELD'], tank: ['Tanks', 'tank_m'], separator: ['Separators', 'decoupler'], engine: ['Engines', 'engine_vacuum'], landing: ['Landing', 'landing_legs'], utility: ['Utility', 'BAS-RCS'], power: ['Power', 'OTH-SOLAR-3'], docking: ['Docking', 'OTH-DOCK-1'], wheel: ['Wheels', 'OTH-WHEEL-1'] };
 
@@ -83,7 +82,6 @@ export const workshop = {
     const top = h('div', { class: 'ws-top' }, h('button', { class: 'brand', onclick: () => bus.emit('nav', 'menu'), title: 'Main menu' }, 'MissionForge'),
       h('span', { class: 'top-divider', 'aria-hidden': 'true' }),
       this.name, h('div', { class: 'ws-actions' },
-        h('button', { class: 'btn', onclick: () => bus.emit('nav', 'facility') }, 'Facility 3D ⤶'),
         h('button', { class: 'btn', onclick: () => this.newVehicle() }, 'New'),
         h('button', { class: 'btn primary', onclick: () => this.save() }, 'Save'),
         h('button', { class: 'btn', onclick: () => this.openLoad() }, 'Load'),
@@ -111,37 +109,20 @@ export const workshop = {
     this.bin = h('div', { class: 'ws-bin', 'aria-hidden': 'true' }, ico('trash'), h('span', {}, 'Drop here to delete'));
     root.append(this.sheet, top, this.rail, this.fly, this.pill, this.bar, this.tools, this.modes, this.bin, this.info); this.renderModes();
     this.rail.querySelectorAll('.rail-btn').forEach(b => { b._ready = false; });
-    
-    // Initialize 3D Engineering Hangar Scene
-    try {
-      this.scene3d = new RocketAssemblyScene(this.canvas, {
-        onSelectPart: (part, def) => {
-          this.sel = part ? part.uid : null;
-          this.renderSel();
-          this.renderInfo();
-        },
-        onBlueprintChanged: bp => {
-          this.apply(bp);
-        }
-      });
-    } catch (err) {
-      console.warn('[Workshop] 3D assembly scene initialization warning:', err);
-    }
 
     this.canvas.addEventListener('pointerdown', e => this.canvasDown(e));
     this.canvas.addEventListener('pointermove', e => { if (this.drag || this.pressing) return; const r = this.canvas.getBoundingClientRect(), u = this.hit(e.clientX - r.left, e.clientY - r.top); if (u !== this.hover) { this.hover = u; this.canvas.style.cursor = u ? 'grab' : ''; this.invalidate(); } });
     this.canvas.addEventListener('pointerleave', () => { if (this.hover) { this.hover = null; this.invalidate(); } });
     this.canvas.addEventListener('wheel', e => this.wheel(e), { passive: false });
     this.canvas.addEventListener('dblclick', () => { this.view.auto = true; this.invalidate(); });
-    new ResizeObserver(() => { this.invalidate(); this.scene3d?.resize(); }).observe(this.sheet); window.addEventListener('keydown', e => this.key(e));
+    new ResizeObserver(() => this.invalidate()).observe(this.sheet); window.addEventListener('keydown', e => this.key(e));
   },
   show() {
     this.name.value = state.blueprint.name; this.hist = []; this.fut = []; this.sel = null; this.hover = null; this.drag = null; this.view.auto = true;
     this.infoMode = 'stats'; this.partPreview = null; this.toggleDrawer(false);
     this.L = layout(this.bp, this.cat_); this.railIcons(); const cats = [...this.rail.children].map(b => b.dataset.cat); if (!cats.includes(this.openCat)) this.openCat = cats.includes(this.bp.parts.length ? 'tank' : 'command') ? (this.bp.parts.length ? 'tank' : 'command') : cats[0]; this.renderCtx(); this.setCat(this.openCat, true); this.refresh(); this.snapView();
-    this.scene3d?.start();
   },
-  hide() { this.cancelDrag(); this.scene3d?.stop(); },
+  hide() { this.cancelDrag(); },
   bodyId() { return state.mode === 'mission' && state.missionId ? missionById(state.missionId).body : 'earth'; },
   railIcons() { for (const b of this.rail.children) if (!b._ready) { const [cv, id] = b._icon, d = this.cat_.component(id); if (d) { drawIcon(cv, d, { w: 40, h: 34, pad: 2, cap: 26 }); b._ready = true; } } },
 
@@ -150,7 +131,6 @@ export const workshop = {
     const old = this.L; state.blueprint = bp; this.L = layout(bp, this.cat_);
     if (shift && old && old.items.length && this.L.items.length) this.shiftView(reflowShift(old, this.L));
     if (sel !== undefined) this.sel = sel; if (this.sel && !find(bp, this.sel)) this.sel = null;
-    this.scene3d?.reloadRocket();
     if (stats) this.refresh(); else this.invalidate();
   },
   commit(bp, sel) { this.pushHist(this.bp, this.sel); this.apply(bp, { sel }); },
@@ -218,7 +198,7 @@ export const workshop = {
   else this.ctx.append(h('span', { class: 'workspace-mode' }, state.mode === 'sandbox' ? 'Sandbox' : 'Workshop · build & save'));
 
   this.launchBtn = null;
-  if (m || state.mode === 'sandbox') {
+  if (m || state.mode === 'sandbox' || state.mode === 'workshop') {
     this.launchBtn = h('button', { class: 'btn primary launch-btn', onclick: () => this.launch() }, 'Launch ▶');
     this.ctx.append(this.launchBtn);
     if (this.stats) this.launchBtn.disabled = !this.stats.ready;
@@ -309,7 +289,6 @@ launch() {
         const targets = await attachTargets(this.bp, this.cat_, d.def, { sym: d.sym });
         if (this.drag !== d) return;
         d.targets = targets;
-        this.scene3d?.beginPlacement(d.def, d.sym);
       } catch (e) {
         if (this.drag === d) { toast(e.message, 'bad', 5000); this.cancelDrag(); }
         return;
@@ -329,9 +308,6 @@ launch() {
     const r = this.canvas.getBoundingClientRect(), v = this.view, wx = (d.px - r.left - v.ox) / v.k, wy = (d.py - r.top - v.oy) / v.k;
     d.overCanvas = d.px >= r.left && d.px <= r.right && d.py >= r.top && d.py <= r.bottom && !d.over;
     if (ev.altKey !== undefined) d.alt = ev.altKey;
-    if (this.scene3d && d.overCanvas) {
-      this.scene3d.updatePlacement(d.px, d.py);
-    }
     const snap = (this.snap ? clamp(SNAP_PX + .1 * d.def.height * v.k, SNAP_PX, SNAP_MAX_PX) : FREE_SNAP_PX) / v.k, t = d.over || d.alt ? null : pickTarget(d.targets.filter(q => q.ok), wx, wy, snap);
     if (t?.ok && !canBuildBlueprint(t.bp, this.cat_, state.mode === 'mission' ? missionById(state.missionId) : null, state.mode, d.orig)) {
       t.ok = false;
@@ -456,7 +432,6 @@ launch() {
   },
   cancelDrag() {
     const d = this.drag; if (!d) return; this.drag = null; this.root.classList.remove('dragging', 'drag-rocket'); this.bin.classList.remove('hot');
-    this.scene3d?.cancelPlacement();
     this.view.auto = d.autoBefore;
     if (d.fromRocket) this.apply(d.orig, { sel: d.origSel }); else this.refresh();
   },

@@ -237,15 +237,15 @@ export const missions = {
             state.blueprint = loaded;
             state.mode = 'mission';
             state.missionId = m.id;
-            bus.emit('nav', 'facility');
-            toast(`Loaded vehicle "${preset.name}" into 3D Facility`);
+            bus.emit('nav', 'workshop');
+            toast(`Loaded recommended vehicle: "${preset.name}"`);
           }
-        }, `Deploy with recommended vehicle: ${preset.name} (3D)`)
+        }, `Launch with recommended vehicle: ${preset.name}`)
         : null,
       h('button', {
         class: preset ? 'btn' : 'btn primary',
-        onclick: () => { state.mode = 'mission'; state.missionId = m.id; bus.emit('nav', 'facility'); }
-      }, 'Deploy to 3D Aerospace Facility 🚀')
+        onclick: () => { state.mode = 'mission'; state.missionId = m.id; bus.emit('nav', 'workshop'); }
+      }, preset ? 'Open in workshop with custom vehicle' : 'Open in workshop with my vehicle')
     ));
     return d;
   },

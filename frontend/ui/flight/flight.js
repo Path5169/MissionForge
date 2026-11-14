@@ -26,7 +26,7 @@ const HTML = `
 <canvas id="fl-map" hidden></canvas>
 
 <div class="hud hud-left-col hud-tl">
-  <div class="box" id="fl-mission"></div>
+  <div id="fl-mission"></div>
   <div class="hud-left" id="fl-left">
     <div class="throttle-gauge">
       <span class="gauge-title">Throttle</span>
@@ -170,29 +170,21 @@ const HTML = `
       <span><kbd>W</kbd>/<kbd>S</kbd> Throttle</span>
       <span><kbd>A</kbd>/<kbd>D</kbd> Steer</span>
       <span><kbd>Space</kbd> Stage</span>
-      <span><kbd>M</kbd> Map</span>
     </div>
-    <div class="control-actions">
-      <div class="camera-toolbar" id="fl-cam-bar" role="group" aria-label="3D Cameras">
-        <button class="cam-btn active" data-cam="track" type="button" title="Ascent Tracking (1)">Track</button>
-        <button class="cam-btn" data-cam="pad_wide" type="button" title="Launch Complex Wide (2)">Pad Wide</button>
-        <button class="cam-btn" data-cam="pad_low" type="button" title="Low Angle Rocket (3)">Low Angle</button>
-        <button class="cam-btn" data-cam="engine_close" type="button" title="Engine Plume Close-Up (4)">Engines</button>
-        <button class="cam-btn" data-cam="distant" type="button" title="Perimeter Observation (5)">Perimeter</button>
-        <button class="cam-btn" data-cam="free" type="button" title="Free 3D Orbit (6)">Free 3D</button>
-      </div>
+    <div class="control-actions" id="fl-action-strip">
+      <!-- mission action buttons injected here by JS -->
       <button class="controls-toggle" id="fl-map-toggle"
         type="button" aria-pressed="false">
         Map
       </button>
       <button class="controls-toggle" id="fl-controls-toggle"
         type="button" aria-expanded="false" aria-controls="fl-controls">
-        All controls
+        Controls
       </button>
     </div>
   </div>
 
-  <button id="fl-rover-deploy" class="rover-deploy-btn" hidden type="button">🚜 Deploy Surface Rover (R)</button>
+  <button id="fl-rover-deploy" class="rover-deploy-btn" hidden type="button">🚜 Deploy Rover (R)</button>
 
   <div class="keys" id="fl-controls" hidden>
     <span><kbd>W</kbd>/<kbd>S</kbd> Adjust throttle</span>
@@ -315,6 +307,11 @@ export const flightScreen = {
       { passive: false }
     );
 
+    const roverBtn = this.el('fl-rover-deploy');
+    if (roverBtn) {
+      roverBtn.onclick = () => this._command('deployRover');
+    }
+
     this._keydown = e => this.key(e, true);
     this._keyup = e => this.key(e, false);
     this._resize = () => this.resize();
@@ -337,6 +334,7 @@ export const flightScreen = {
 
     if (!bodyData) {
       toast('Selected celestial body was not found.', 'bad');
+      bus.emit('nav', 'workshop');
       return;
     }
 
@@ -399,7 +397,7 @@ export const flightScreen = {
         'bad',
         6000
       );
-
+      bus.emit('nav', 'workshop');
       return;
     }
 
@@ -411,7 +409,7 @@ export const flightScreen = {
         'warn',
         6000
       );
-
+      bus.emit('nav', 'workshop');
       return;
     }
 
@@ -448,6 +446,7 @@ export const flightScreen = {
       );
 
       await this.stop();
+      bus.emit('nav', 'workshop');
       return;
     }
 
@@ -1027,7 +1026,30 @@ export const flightScreen = {
     }
 
     if (keybindings.matches(e.code, 'stage')) {
+      if (this.sim?.status === 'prelaunch') {
+        if (!this.launchCountdown) {
+          this.beginLaunchSequence();
+        }
+        return;
+      }
       this._command('activateNextStage');
+      return;
+    }
+    if (keybindings.matches(e.code, 'warpFaster')) {
+      const current = this.telemetryData?.warp ?? 1;
+      const index = WARP_LEVELS.indexOf(current);
+      this.warpIdx = Math.min(
+        WARP_LEVELS.length - 1,
+        Math.max(0, index) + 1
+      );
+      this._command('setWarp', WARP_LEVELS[this.warpIdx]);
+      return;
+    }
+    if (keybindings.matches(e.code, 'warpSlower')) {
+      const current = this.telemetryData?.warp ?? 1;
+      const index = WARP_LEVELS.indexOf(current);
+      this.warpIdx = Math.max(0, index - 1);
+      this._command('setWarp', WARP_LEVELS[this.warpIdx]);
       return;
     }
     if (keybindings.matches(e.code, 'throttleMax')) {
@@ -1226,87 +1248,11 @@ export const flightScreen = {
           )
         : null;
 
-      this.missionActionsEl = h(
-        'div',
-        { class: 'mission-actions', id: 'fl-mission-actions' },
-        h(
-          'button',
-          {
-            type: 'button',
-            class: 'action-btn',
-            title: 'Deploy parachute (C)',
-            onclick: () => this._command('deployParachute'),
-          },
-          'Parachute'
-        ),
-        h(
-          'button',
-          {
-            type: 'button',
-            class: 'action-btn',
-            title: 'Jettison heat shield (J)',
-            onclick: () => this._command('jettisonHeatShield'),
-          },
-          'Heat Shield'
-        ),
-        h(
-          'button',
-          {
-            type: 'button',
-            class: 'action-btn',
-            title: 'Collect sample (K)',
-            onclick: () => this._command('collectSample'),
-          },
-          'Sample'
-        ),
-        h(
-          'button',
-          {
-            type: 'button',
-            class: 'action-btn',
-            title: 'Deploy lander (L)',
-            onclick: () => this._command('deployLander'),
-          },
-          'Lander'
-        ),
-        h(
-          'button',
-          {
-            type: 'button',
-            class: 'action-btn',
-            title: 'Jettison fairing (F)',
-            onclick: () => this._command('jettisonFairing'),
-          },
-          'Fairing'
-        ),
-        h(
-          'button',
-          {
-            type: 'button',
-            class: 'action-btn',
-            title: 'Deploy payload (P)',
-            onclick: () => this._command('deployPayload'),
-          },
-          'Payload'
-        ),
-        h(
-          'button',
-          {
-            type: 'button',
-            class: 'action-btn',
-            title: 'Deploy rover (R)',
-            onclick: () => this._command('deployRover'),
-          },
-          'Rover'
-        )
-      );
-
       box.append(
         h('div', { class: 'mtitle' }, this.mission.title),
         ...(this.phaseHeaderEl ? [this.phaseHeaderEl] : []),
         ...this.objEls,
-        ...(this.objToggleBtn ? [this.objToggleBtn] : []),
-        this.missionActionsEl
+        ...(this.objToggleBtn ? [this.objToggleBtn] : [])
       );
     }
 

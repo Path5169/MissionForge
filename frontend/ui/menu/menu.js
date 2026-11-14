@@ -22,9 +22,18 @@ export const menu = {
       );
 
     const list = h('nav', { class: 'menu-list', 'aria-label': 'Main menu' },
-      item('Aerospace Facility (3D)', 'Explore the 3D NASA facility, assemble your rocket in 3D, and run operations', 'facility'),
-      item('NASA Missions', this.missionDesc, 'missions'),
-      item('Solar System (3D)', 'Planetary positions & live Kepler clock featuring 3D Earth', 'solar'),
+      item('Missions', this.missionDesc, 'missions'),
+      item('Sandbox', 'Build and launch your vehicle freely', null, () => {
+        state.mode = 'sandbox';
+        state.missionId = null;
+        bus.emit('nav', 'workshop');
+      }),
+      item('Workshop', 'Build, stage, save, and load vehicles', null, () => {
+        state.mode = 'workshop';
+        state.missionId = null;
+        bus.emit('nav', 'workshop');
+      }),
+      item('Solar system', 'Planet positions on a live Kepler clock', 'solar'),
       item('Settings', 'Graphics quality, motion, and audio', null, () => bus.emit('settings'))
     );
 

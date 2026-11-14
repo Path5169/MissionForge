@@ -183,13 +183,12 @@ def _toggle_group(session, group):
 def _deploy_payload(session, value):
     result = staging.release_payload(session)
     accepted, message = result if result else (True, "Payload deployed.")
-    if not any(e.get("type") == "deploy_payload" for e in session.get("events", [])):
-        session.setdefault("events", []).append({
-            "sequence": len(session["events"]),
-            "type": "deploy_payload",
-            "body": session.get("bodyId"),
-            "msg": "Payload deployed",
-        })
+    session.setdefault("events", []).append({
+        "sequence": len(session["events"]),
+        "type": "deploy_payload",
+        "body": session.get("bodyId"),
+        "msg": "Payload deployed",
+    })
     return {"accepted": accepted, "message": message}
 
 

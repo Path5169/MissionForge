@@ -97,9 +97,10 @@ export const assets = {
   /** Returns a Promise of a normalized Object3D for the component, or null when not registered / not present. */
   async part(def) {
     const rel = this.registry.parts?.[def.id];
-    if (!rel || !this.found.has(rel)) return null;
+    if (!rel || !this.found.has(rel) || !rel.endsWith('.glb')) return null;
     if (!cache.has(rel)) {
-      cache.set(rel, loader.loadAsync('/assets/' + rel).then(g => g.scene).catch(e => {
+      const path = rel.startsWith('/') ? rel : (rel.startsWith('assets/') ? '/' + rel : '/assets/' + rel);
+      cache.set(rel, loader.loadAsync(path).then(g => g.scene).catch(e => {
         console.warn('GLB failed:', rel, e);
         return null;
       }));

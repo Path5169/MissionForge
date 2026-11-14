@@ -51,9 +51,10 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/api/audio-assets": return self._send_json(service.audio_manifest())
         if path == "/api/blueprints": return self._send_json(service.list_blueprints())
         if path.startswith("/api/blueprints/"):
-            identifier = path.rsplit("/", 1)[-1]
+            identifier = unquote(path.rsplit("/", 1)[-1])
             value = service.get_blueprint(identifier)
-            return self._send_json({"blueprint": value["blueprint"]} if value else {"detail": "Blueprint not found."}, 200 if value else 404)
+            bp = value.get("blueprint", value) if value else None
+            return self._send_json({"blueprint": bp} if bp else {"detail": "Blueprint not found."}, 200 if bp else 404)
         if path == "/api/progress": return self._send_json(service.get_progress())
         if path == "/api/settings": return self._send_json(service.get_settings())
         if path.startswith("/api/flight/") and path.endswith("/snapshot"):
@@ -106,11 +107,11 @@ class Handler(SimpleHTTPRequestHandler):
         try:
             data = self._body()
             if path.startswith("/api/blueprints/"):
-                identifier = path.rsplit("/", 1)[-1]
+                identifier = unquote(path.rsplit("/", 1)[-1])
                 blueprint = data.get("blueprint", data)
                 return self._send_json(service.save_blueprint(identifier, blueprint))
             if path.startswith("/api/progress/"):
-                identifier = path.rsplit("/", 1)[-1]
+                identifier = unquote(path.rsplit("/", 1)[-1])
                 value = {"completed": bool(data.get("completed")), "stats": data.get("stats", {})}
                 return self._send_json(service.put_progress(identifier, value))
             if path == "/api/settings": return self._send_json(service.put_settings(data))
@@ -120,7 +121,7 @@ class Handler(SimpleHTTPRequestHandler):
     def do_DELETE(self):
         path = urlparse(self.path).path
         if path.startswith("/api/blueprints/"):
-            identifier = path.rsplit("/", 1)[-1]
+            identifier = unquote(path.rsplit("/", 1)[-1])
             service.delete_blueprint(identifier)
             return self._send_json({"ok": True})
         return self._send_json({"detail": "API route not found."}, 404)

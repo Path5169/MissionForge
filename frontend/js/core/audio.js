@@ -405,13 +405,6 @@ class AudioManager {
     audio.volume = targetVol;
     audio.playbackRate = 0.85 + 0.35 * t;
   }
-    if (!entry) return;
-    const { audio, category } = entry;
-    const t = Math.max(0, Math.min(1, Number(throttle) || 0));
-    const targetVol = this.getEffectiveVolume(category) * (0.2 + 0.8 * t);
-    audio.volume = targetVol;
-    audio.playbackRate = 0.85 + 0.35 * t;
-  }
 
   updateVolumes() {
     for (const [slotId, entry] of this.activeLoops.entries()) {

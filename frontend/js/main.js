@@ -12,16 +12,10 @@ import { openSettings } from '../ui/settings/settings.js';
 const views = { menu, workshop, payloadWorkshop, missions };
 let current = null;
 const root = n => document.getElementById('view-' + n);
-const VIEW_NAMES = ['menu', 'facility', 'workshop', 'payloadWorkshop', 'missions', 'flight', 'solar'];
+const VIEW_NAMES = ['menu', 'workshop', 'payloadWorkshop', 'missions', 'flight', 'solar'];
 
 async function loadView(name) {
   if (views[name]) return;
-  if (name === 'facility') {
-    const module = await import('./facility/FacilityView.js');
-    views.facility = module.facilityView;
-    views.facility.mount(root(name));
-    return;
-  }
   if (name === 'flight') {
     const module = await import('../ui/flight/flight.js');
     views.flight = module.flightScreen;
@@ -41,7 +35,7 @@ async function go(name, arg) {
   await loadView(name);
   if (current) {
     views[current].hide?.();
-    if (current === 'flight') views.flight.stop();
+    if (current === 'flight') await views.flight.stop();
   }
   for (const n of VIEW_NAMES) root(n).hidden = n !== name;
   current = name;

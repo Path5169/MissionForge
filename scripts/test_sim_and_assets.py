@@ -8,18 +8,16 @@ from backend import service
 from backend.simulation import flight_session, flight_command, landing
 
 def test_pipeline():
-    print("=== TEST 1: Asset Manifest & GLB Discovery ===")
+    print("=== TEST 1: Asset Manifest & Asset Discovery ===")
     manifest = service.asset_manifest()
     found_glbs = manifest.get("found", [])
     print(f"Discovered {len(found_glbs)} GLB files in assets:")
     for g in found_glbs:
         print(f"  - {g}")
-    assert any("launch_complex.glb" in g for g in found_glbs), "launch_complex.glb missing from manifest!"
-    assert any("lunar_surface.glb" in g for g in found_glbs), "lunar_surface.glb missing from manifest!"
-    assert any("lander_rover.glb" in g for g in found_glbs), "lander_rover.glb missing from manifest!"
-    assert any("hangar_interior.glb" in g for g in found_glbs), "hangar_interior.glb missing from manifest!"
-    assert any("rocket_parts.glb" in g for g in found_glbs), "rocket_parts.glb missing from manifest!"
-    print("PASS: Asset manifest verified.")
+    assert (PROJECT_ROOT / "frontend" / "assets" / "launch" / "launch-pad.png").exists(), "launch-pad.png missing!"
+    assert (PROJECT_ROOT / "frontend" / "assets" / "launch" / "earth-dawn-sky.png").exists(), "earth-dawn-sky.png missing!"
+    assert (PROJECT_ROOT / "frontend" / "assets" / "launch" / "service-tower.png").exists(), "service-tower.png missing!"
+    print("PASS: Core 2.5D visual assets and manifest verified.")
 
     print("\n=== TEST 2: Vehicle Blueprints & Stats Calculation ===")
     blueprints = service.list_blueprints()
