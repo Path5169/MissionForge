@@ -27,7 +27,8 @@ export function layout(bp, cat) {
   const place = (first, x, dir, side, yTop) => {
     const chain = chainOf(first); let y = yTop;
     for (const { c, d } of chain) {
-      const visualHeight = d.category === 'fairing' ? 0 : d.height;
+      const isFairing = d.category === 'fairing' || (d.id && d.id.toLowerCase().includes('fairing'));
+      const visualHeight = isFairing ? 0 : d.height;
       const it = { uid: c.uid, def: d, x, yTop: y, yBottom: y + visualHeight, count: side ? (dir ? 1 : 2) : 1, side, dir };
       items.push(it); byUid[c.uid] = it; bottom = Math.max(bottom, it.yBottom + (d.landing?.drop || 0)); width = Math.max(width, side ? 2 * (x + d.diameter / 2) : d.diameter); y = it.yBottom;
       for (const s of sideChildren(bp, c.uid)) {
@@ -64,7 +65,7 @@ export function instantiate(bp, cat, { includeLoose = false } = {}) {
   const attached = bp.parts.map(p => {
     const def = cat.component(p.c), it = L.byUid[p.uid] || { side: false, dir: p.dir || 0, count: 1, x: 0, yTop: 0, yBottom: def?.height || 1 };
     return { uid: p.uid, def, parent: p.parent, side: it.side, dir: it.dir || 0, count: it.count, x: it.x, y0: it.yTop, y1: it.yBottom, stage: p.stage, group: p.group,
-      fuel: def.tank ? def.tank.propellant * it.count : def.solid ? def.solid.propellant * it.count : 0, ignited: false, spent: false, alive: true };
+      fuel: def?.tank ? def.tank.propellant * it.count : def?.solid ? def.solid.propellant * it.count : 0, ignited: false, spent: false, alive: true };
   });
   if (!includeLoose) return attached;
   const loose = (bp.looseParts || []).flatMap(p => {

@@ -100,7 +100,7 @@ export function paintFairing(ctx, def, { x, top, bottom, S, width = 0, alpha = 1
   panel(-1); panel(1); ctx.strokeStyle = 'rgba(242,166,58,.95)'; ctx.lineWidth = Math.max(1.5, S / 22); ctx.beginPath(); ctx.moveTo(l - 2, top + h * .9); ctx.lineTo(r + 2, top + h * .9); ctx.stroke(); ctx.restore();
 }
 
-export function paintPart(ctx, def, { x, y, S, dir = 1, alpha = 1, onload, mergeTop = false, mergeBottom = false, taperTop = 0, taperBottom = 0 }) {
+export function paintPart(ctx, def, { x, y, S, dir = 1, alpha = 1, onload, mergeTop = false, mergeBottom = false, taperTop = 0, taperBottom = 0, deployed = false } = {}) {
   if (taperTop || taperBottom) { paintTapered(ctx, def, { x, y, S, dir, alpha, onload, mergeTop, mergeBottom, taperTop, taperBottom }); return; }
   const w = def.diameter * S, h = def.height * S, l = x - w / 2, r = x + w / 2, y1 = y + h, mid = y + h / 2;
   ctx.save(); ctx.globalAlpha = alpha; ctx.lineJoin = 'round'; ctx.lineWidth = Math.max(1, Math.min(1.7, S / 28)); ctx.strokeStyle = INK;
@@ -137,7 +137,18 @@ export function paintPart(ctx, def, { x, y, S, dir = 1, alpha = 1, onload, merge
     }
     case 'core': {
       box('graphite', l, y, w, h); band('steel', y + h * .1, h * .1); band('steel', y + h * .84, h * .08);
-      ctx.save(); ctx.shadowColor = '#52d6ea'; ctx.shadowBlur = Math.min(14, S * .25); ctx.fillStyle = '#52d6ea'; ctx.beginPath(); ctx.ellipse(x, y + h * .53, w * .2, h * .15, 0, 0, 7); ctx.fill(); ctx.restore();
+      // Realistic aerospace avionics bay: access hatch, star-tracker sapphire optical port, pinpoint telemetry LEDs
+      const hatchW = w * 0.42, hatchH = h * 0.50;
+      ctx.fillStyle = '#1e293b'; ctx.fillRect(x - hatchW / 2, y + h * 0.25, hatchW, hatchH);
+      ctx.strokeStyle = '#475569'; ctx.lineWidth = 1; ctx.strokeRect(x - hatchW / 2, y + h * 0.25, hatchW, hatchH);
+      // Star-tracker optical port (dark sapphire lens with gold bezel)
+      const lensR = Math.max(3, Math.min(10, S * 0.08));
+      ctx.fillStyle = '#0f172a'; ctx.beginPath(); ctx.arc(x - hatchW * 0.16, y + h * 0.50, lensR, 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#f59e0b'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = 'rgba(56,189,248,0.55)'; ctx.beginPath(); ctx.arc(x - hatchW * 0.16 - lensR * 0.25, y + h * 0.50 - lensR * 0.25, Math.max(1, lensR * 0.35), 0, Math.PI * 2); ctx.fill();
+      // Flight computer diagnostic status LEDs (pinpoint green and amber)
+      ctx.fillStyle = '#22c55e'; ctx.beginPath(); ctx.arc(x + hatchW * 0.22, y + h * 0.42, Math.max(1.2, S * 0.025), 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#f59e0b'; ctx.beginPath(); ctx.arc(x + hatchW * 0.22, y + h * 0.58, Math.max(1.2, S * 0.025), 0, Math.PI * 2); ctx.fill();
       break;
     }
     case 'ogive': {
@@ -149,14 +160,53 @@ export function paintPart(ctx, def, { x, y, S, dir = 1, alpha = 1, onload, merge
       break;
     }
     case 'satellite': {
-      const pw = w * .78, ph = h * .26;
-      for (const s of [-1, 1]) {
-        const a = s > 0 ? r + 3 : l - 3 - pw; ctx.fillStyle = BASE.panel; ctx.fillRect(a, mid - ph / 2, pw, ph); ctx.strokeRect(a, mid - ph / 2, pw, ph);
-        ctx.strokeStyle = 'rgba(150,185,255,.55)'; ctx.lineWidth = 1; ctx.beginPath(); for (let i = 1; i < 5; i++) { ctx.moveTo(a + pw * i / 5, mid - ph / 2); ctx.lineTo(a + pw * i / 5, mid + ph / 2); } ctx.moveTo(a, mid); ctx.lineTo(a + pw, mid); ctx.stroke();
-        ctx.strokeStyle = INK; ctx.lineWidth = Math.max(1, Math.min(1.7, S / 28));
+      const isDeployed = deployed === true;
+      if (isDeployed) {
+        // Fully deployed solar arrays in orbit
+        const pw = w * .78, ph = h * .28;
+        for (const s of [-1, 1]) {
+          const a = s > 0 ? r + 3 : l - 3 - pw;
+          ctx.fillStyle = BASE.panel; ctx.fillRect(a, mid - ph / 2, pw, ph); ctx.strokeRect(a, mid - ph / 2, pw, ph);
+          ctx.strokeStyle = 'rgba(150,185,255,.55)'; ctx.lineWidth = 1; ctx.beginPath();
+          for (let i = 1; i < 5; i++) { ctx.moveTo(a + pw * i / 5, mid - ph / 2); ctx.lineTo(a + pw * i / 5, mid + ph / 2); }
+          ctx.moveTo(a, mid); ctx.lineTo(a + pw, mid); ctx.stroke();
+          ctx.strokeStyle = INK; ctx.lineWidth = Math.max(1, Math.min(1.7, S / 28));
+        }
+      } else {
+        // Stowed configuration (in vehicle builder, launch pad, inside fairing during ascent)
+        // Folded solar array accordion packs tightly flush against bus flanks
+        const foldW = Math.max(3, Math.round(w * 0.08));
+        const foldH = h * 0.65;
+        const fy = mid - foldH / 2;
+        // Left folded panel pack
+        ctx.fillStyle = '#1e3a8a'; ctx.fillRect(l + w * 0.14 - foldW, fy, foldW, foldH);
+        ctx.strokeStyle = '#60a5fa'; ctx.lineWidth = 1; ctx.strokeRect(l + w * 0.14 - foldW, fy, foldW, foldH);
+        // Right folded panel pack
+        ctx.fillStyle = '#1e3a8a'; ctx.fillRect(r - w * 0.14, fy, foldW, foldH);
+        ctx.strokeStyle = '#60a5fa'; ctx.lineWidth = 1; ctx.strokeRect(r - w * 0.14, fy, foldW, foldH);
       }
-      box('gold', l + w * .06, y, w * .88, h); band('graphite', y + h * .08, h * .08, l + w * .06, w * .88);
-      ctx.fillStyle = barrel(ctx, x - w * .18, w * .36, BASE.steel); ctx.beginPath(); ctx.ellipse(x, y, w * .18, h * .09, 0, Math.PI, 0); ctx.fill(); ctx.stroke();
+      // Conical Payload Attach Fitting (PAF) / decoupler adapter truss at base
+      const pafH = Math.max(3, h * 0.14);
+      ctx.fillStyle = barrel(ctx, l + w * 0.12, w * 0.76, BASE.steel);
+      ctx.beginPath();
+      ctx.moveTo(l + w * 0.18, y1 - pafH);
+      ctx.lineTo(r - w * 0.18, y1 - pafH);
+      ctx.lineTo(r - w * 0.10, y1);
+      ctx.lineTo(l + w * 0.10, y1);
+      ctx.closePath();
+      ctx.fill(); ctx.stroke();
+      // Satellite bus with golden Multi-Layer Insulation (MLI)
+      box('gold', l + w * .14, y + h * 0.08, w * .72, h * 0.78);
+      band('graphite', y + h * .12, h * .08, l + w * .14, w * .72);
+      // High-gain communications dish antenna
+      ctx.fillStyle = barrel(ctx, x - w * .16, w * .32, BASE.steel);
+      ctx.beginPath();
+      ctx.ellipse(x, y + h * 0.08, w * .16, h * 0.07, 0, Math.PI, 0);
+      ctx.fill(); ctx.stroke();
+      // Earth observation sensor / camera optical aperture
+      ctx.fillStyle = '#0f172a';
+      ctx.beginPath(); ctx.arc(x, mid + h * 0.06, Math.max(3, w * 0.12), 0, Math.PI * 2); ctx.fill();
+      ctx.strokeStyle = '#38bdf8'; ctx.lineWidth = 1.2; ctx.stroke();
       break;
     }
     case 'taper': {

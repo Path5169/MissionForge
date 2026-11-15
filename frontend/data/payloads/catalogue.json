@@ -505,15 +505,16 @@
    "id": "INST-ROVER-M2020",
    "name": "M2020 Perseverance Science Rover",
    "category": "instruments",
-   "mount": "internal",
-   "w": 1.8,
-   "h": 1.2,
-   "d": 1.4,
+   "mount": "top",
+   "w": 1.5,
+   "h": 1.1,
+   "d": 1.3,
    "mass": 1025,
    "cost": 18500000,
    "powerW": 300,
    "dataRateKbps": 2048,
-   "desc": "Planetary rover with sample caching arm and science suite."
+   "desc": "Planetary exploration rover with rocker-bogie mobility, robotic sampling arm, mast cameras, and surface instrument suite.",
+   "shape": "rover"
   },
   {
    "id": "INST-SEIS-HP3",

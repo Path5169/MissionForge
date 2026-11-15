@@ -15,11 +15,18 @@
         "bonuses": [
           {
             "id": "under_budget",
-            "amount": 1500000
+            "amount": 1500000,
+            "label": "Under Budget Delivery"
           },
           {
             "id": "circular_orbit",
-            "amount": 1000000
+            "amount": 1000000,
+            "label": "Circular Orbit Precision (e < 0.04)"
+          },
+          {
+            "id": "payload_integrity",
+            "amount": 500000,
+            "label": "Payload Integrity & Safe Deployment"
           }
         ]
       }

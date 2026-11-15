@@ -67,6 +67,10 @@ def flight_values(session):
         "ablativeMass": session.get("ablativeMass", 0.0),
         "surfaceDistance": session.get("surfaceDistance", 0.0),
         "surfaceSpeed": session.get("surfaceSpeed", 0.0),
+        "fairingJettisoned": bool(session.get("fairingJettisoned", False)),
+        "payloadDeployed": bool(session.get("payloadDeployed", False)),
+        "heatShieldJettisoned": bool(session.get("heatShieldJettisoned", False)),
+        "controlledVessel": session.get("controlledVessel", "launcher"),
     }
 
 
@@ -101,6 +105,10 @@ def render_state(session):
         "ablativeMass": session.get("ablativeMass", 0.0),
         "surfaceDistance": session.get("surfaceDistance", 0.0),
         "surfaceSpeed": session.get("surfaceSpeed", 0.0),
+        "fairingJettisoned": bool(session.get("fairingJettisoned", False)),
+        "payloadDeployed": bool(session.get("payloadDeployed", False)),
+        "heatShieldJettisoned": bool(session.get("heatShieldJettisoned", False)),
+        "controlledVessel": session.get("controlledVessel", "launcher"),
     }
 
 

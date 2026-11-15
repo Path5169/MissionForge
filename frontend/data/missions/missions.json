@@ -3,13 +3,13 @@
   "missions": [
     {
       "id": "earth_observation_1",
-      "title": "TerraWatch-1 · Earth Observation Satellite",
+      "title": "TerraWatch-1 \u00b7 Earth Observation Satellite",
       "nasaRef": "Global Earth Observation & Environmental Monitoring Program",
       "historicalBackground": "Earth observation satellites revolutionized modern science by providing continuous real-time monitoring of weather patterns, deforestation, ocean currents, and global climate systems. TerraWatch-1 serves as the inaugural flight for the orbital space program, certifying multi-stage ascent, orbital circularization, and precision payload deployment.",
-      "scientificObjective": "Inject the TerraWatch-1 Earth observation satellite into Low Earth Orbit (160–350 km altitude), achieve orbital circularization, and deploy the satellite payload to establish an environmental monitoring constellation.",
+      "scientificObjective": "Inject the TerraWatch-1 satellite or planetary rover payload into Low Earth Orbit (160\u2013350 km altitude), achieve orbital circularization, and deploy the payload to certify orbital spaceflight capabilities.",
       "destination": "Low Earth Orbit (250 km, Earth)",
       "missionBriefing": "Launch the TerraWatch-1 rocket from the launch pad, pitch over into an orbital ascent trajectory, separate the first stage booster, ignite the vacuum upper stage, achieve a circular parking orbit above 160 km, and deploy the TerraWatch-1 Earth observation satellite.",
-      "text": "Mission 01 (Compulsory Program Milestone): Launch to Low Earth Orbit, achieve stable circular orbit, and deploy the TerraWatch-1 Earth observation satellite payload.",
+      "text": "Mission 01 (Compulsory Program Milestone): Launch to Low Earth Orbit, achieve stable circular orbit, and deploy the TerraWatch-1 Earth observation satellite or rover payload.",
       "difficulty": 1,
       "compulsory": true,
       "body": "earth",
@@ -17,15 +17,15 @@
         "type": "pad"
       },
       "missionPhases": [
-        "Phase 1 · Atmospheric Ascent: Lift off from launch pad and clear dense lower atmosphere.",
-        "Phase 2 · Booster Separation & Second Stage: Jettison first stage and ignite vacuum sustainer.",
-        "Phase 3 · Orbital Insertion: Circularize orbit with periapsis above 160 km and apoapsis under 350 km.",
-        "Phase 4 · Satellite Deployment: Separate and deploy the TerraWatch-1 Earth observation payload."
+        "Phase 1 \u00b7 Atmospheric Ascent: Lift off from launch pad and clear dense lower atmosphere.",
+        "Phase 2 \u00b7 Booster Separation & Second Stage: Jettison first stage and ignite vacuum sustainer.",
+        "Phase 3 \u00b7 Orbital Insertion: Circularize orbit with periapsis above 160 km and apoapsis under 350 km.",
+        "Phase 4 \u00b7 Payload Deployment: Separate and deploy the TerraWatch-1 Earth observation payload or rover package."
       ],
       "requiredCapabilities": [
         "Multi-stage rocket with staging separation",
         "Earth orbit with periapsis above 150 km",
-        "Satellite payload deployment"
+        "Payload deployment (Satellite or Rover payload)"
       ],
       "objectives": [
         {
@@ -49,7 +49,7 @@
           "body": "earth",
           "minPeriapsis": 160000,
           "maxApoapsis": 350000,
-          "label": "Low Earth Orbit Insertion (160–350 km)",
+          "label": "Low Earth Orbit Insertion (160\u2013350 km)",
           "phase": 3,
           "after": "eos_staging"
         },
@@ -86,15 +86,42 @@
           {
             "id": "circular_orbit",
             "amount": 1000000,
-            "label": "Circular Orbit Precision"
+            "label": "Circular Orbit Precision (e < 0.04)"
+          },
+          {
+            "id": "payload_integrity",
+            "amount": 500000,
+            "label": "Payload Integrity & Safe Deployment"
           }
         ],
         "scientificData": [
           "High-resolution multispectral land surface mapping",
           "Atmospheric aerosol and greenhouse gas concentration profiles",
-          "Global cloud cover and weather front tracking data"
+          "Global cloud cover and weather front tracking data",
+          "Orbital telemetry & microgravity payload deployment baseline"
+        ],
+        "certifications": [
+          "Orbital Spaceflight Qualification (Class-1 LEO)",
+          "Planetary Exploration Program Authorization"
+        ],
+        "unlockedParts": [
+          "PAYLOAD-ROVER (M2020 Planetary Science Rover)"
         ]
-      }
+      },
+      "passCriteria": [
+        "Stage 1 Ignition & Liftoff: Clear launch complex safely with nominal vehicle telemetry.",
+        "Booster Staging: Clean first-stage burnout and second-stage separation and vacuum ignition.",
+        "Orbital Insertion: Establish stable Low Earth Orbit with periapsis >= 160 km and apoapsis <= 350 km.",
+        "Payload Deployment: Successfully release the orbital satellite or planetary rover payload above the atmosphere.",
+        "Vehicle Survivability: Rocket and payload remain intact without aerodynamic breakup or surface impact."
+      ],
+      "failCriteria": [
+        "Surface Impact / Collision: Vehicle or payload crashes into Earth surface or water.",
+        "Suborbital Propellant Exhaustion: Propellant depleted before reaching orbital velocity (~7,800 m/s).",
+        "Premature Payload Deployment: Jettisoning payload inside dense atmosphere (altitude < 140 km).",
+        "Orbital Trajectory Deviation: Apoapsis overshoots Low Earth Orbit ceiling (> 350 km) or periapsis re-enters atmosphere.",
+        "Loss of Attitude Control: Uncontrolled tumble or excessive aerodynamic pressure causing vehicle destruction."
+      ]
     },
     {
       "id": "apollo_11",

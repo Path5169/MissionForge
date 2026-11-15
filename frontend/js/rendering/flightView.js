@@ -3,7 +3,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
-import { buildVehicle, buildPayloadMesh } from './rocketMesh.js';
+import { buildVehicle, buildPayloadMesh, buildFairingShroud, buildFairingHalf, buildSatelliteVehicle, isFairingPart, isPayloadPart } from './rocketMesh.js';
 import { assets } from './assets.js';
 
 const SUN_ANGLE = 0.9;
@@ -337,35 +337,35 @@ varying float vLife;
 void main() {
   vec2 c = gl_PointCoord - 0.5;
   float r = length(c) * 2.0;
-  if (r > 1.0) discard;
+  // Soft diffuse radial bell curve instead of hard pixelated discard circle
+  float alpha = smoothstep(1.0, 0.0, r) * pow(vLife, 1.5) * 0.22;
+  if (alpha <= 0.003) discard;
 
   float t = 1.0 - vLife;
-  vec3 hot = mix(
-    vec3(0.75, 0.88, 1.0),
-    vec3(1.0, 0.62, 0.18),
-    smoothstep(0.0, 0.35, t)
+  vec3 smoke = mix(
+    vec3(0.95, 0.76, 0.45), // Warm glow vapor near nozzle
+    vec3(0.55, 0.58, 0.62), // Cooling grayish condensation trail
+    smoothstep(0.15, 0.85, t)
   );
 
-  vec3 cool = mix(
-    hot,
-    vec3(0.45, 0.2, 0.08),
-    smoothstep(0.35, 1.0, t)
-  );
-
-  float a = pow(1.0 - r, 1.8) * (0.45 + 0.55 * vLife);
-  gl_FragColor = vec4(cool * (1.5 - 0.25 * t), a);
+  gl_FragColor = vec4(smoke, alpha);
 }`;
 
 const FLAME_VERT = `
 uniform float uTime;
 uniform float uPower;
+uniform float uPressure;
 varying vec2 vUv;
 
 void main() {
   vUv = uv;
   vec3 p = position;
-  float edge = sin(uv.y * 18.0 + uTime * 18.0) * 0.045;
-  p.x += edge * (1.0 - uv.y) * uPower;
+  float t = 1.0 - uv.y; // 0 at nozzle, 1 at plume tip
+  // Supersonic bell expansion & aerodynamic turbulence
+  float expansion = mix(0.35, 1.0 + (1.0 - clamp(uPressure, 0.0, 1.0)) * 0.65, pow(t, 0.7));
+  float ripple = sin(uv.y * 22.0 - uTime * 28.0) * 0.035 * t * uPower;
+  p.x *= expansion;
+  p.x += ripple;
   gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
 }`;
 
@@ -374,31 +374,53 @@ precision highp float;
 uniform float uTime;
 uniform float uPower;
 uniform float uCore;
+uniform float uPressure;
 varying vec2 vUv;
 
-float noise(vec2 p) {
-  return 0.5 + 0.5 * sin(p.x * 13.7 + sin(p.y * 7.1 + uTime * 7.0) * 2.0);
-}
-
 void main() {
-  float t = 1.0 - vUv.y;
-  float n = noise(vec2(vUv.x * 2.0, t * 3.0));
-  float width = mix(.10, .48, t) + (n - .5) * .13 * t;
-  if (uCore > .5) width *= .48;
-  float edge = abs(vUv.x - .5) * 2.0;
-  float plume = 1.0 - smoothstep(width * .56, width, edge);
-  float tip = 1.0 - smoothstep(.72, 1.0, t);
-  float root = smoothstep(0.0, .06, t);
-  float a = plume * tip * root * (.8 + .2 * uPower);
-  if (a < .012) discard;
+  float t = 1.0 - vUv.y; // 0 at nozzle throat, 1 at tail
+  float xDist = abs(vUv.x - 0.5) * 2.0; // 0 at center, 1 at sides
 
-  vec3 orange = vec3(1.0, .18, .015);
-  vec3 gold = vec3(1.0, .66, .08);
-  vec3 white = vec3(1.0, .98, .78);
-  vec3 col = mix(white, gold, smoothstep(.02, .42, t));
-  col = mix(col, orange, smoothstep(.42, 1.0, t));
-  if (uCore > .5) col = mix(white, vec3(1.0, .72, .24), smoothstep(.05, .8, t));
-  gl_FragColor = vec4(col * (1.15 + 1.15 * uPower), a * (uCore > .5 ? .98 : .72));
+  // Mach diamond shock disks (standing shock cones along exhaust column)
+  float shockFreq = 26.0;
+  float diamonds = sin(t * shockFreq - uTime * 6.0);
+  float shockGlow = smoothstep(0.4, 0.98, diamonds) * smoothstep(0.7, 0.08, t) * (1.0 - xDist);
+
+  // Smooth Gaussian bell profile across the plume
+  float plumeRadius = mix(0.35, 0.95, pow(t, 0.6));
+  if (uCore > 0.5) plumeRadius *= 0.55;
+  float radialFalloff = exp(-pow(xDist / max(0.01, plumeRadius), 2.2) * 2.8);
+
+  // Longitudinal intensity falloff: intense white at throat, soft fade at tip
+  float throatGlow = smoothstep(0.0, 0.04, t) * (1.0 - smoothstep(0.75, 1.0, t));
+  float a = radialFalloff * throatGlow * (0.85 + 0.25 * uPower);
+
+  // Temperature / Radiation color ramp
+  // Throat / Core: incandescent brilliant white-blue
+  // Intermediate: golden amber
+  // Outer expansion: luminous rocket orange
+  // Wake / Fringe: deep ruby
+  vec3 colThroat = vec3(1.0, 0.98, 0.94);
+  vec3 colGold   = vec3(1.0, 0.74, 0.20);
+  vec3 colOrange = vec3(1.0, 0.38, 0.05);
+  vec3 colRuby   = vec3(0.92, 0.12, 0.02);
+
+  vec3 col = mix(colThroat, colGold, smoothstep(0.05, 0.35, t));
+  col = mix(col, colOrange, smoothstep(0.35, 0.70, t));
+  col = mix(col, colRuby, smoothstep(0.70, 1.0, t));
+
+  // Add shock diamond illumination
+  col += vec3(0.9, 0.95, 1.0) * shockGlow * 1.6;
+
+  if (uCore > 0.5) {
+    // Inner hot supersonic core
+    col = mix(vec3(1.0, 1.0, 1.0), colGold, smoothstep(0.1, 0.85, t));
+    col *= 1.45 + 0.5 * uPower;
+  } else {
+    col *= 1.15 + 0.35 * uPower;
+  }
+
+  gl_FragColor = vec4(col, a * (uCore > 0.5 ? 0.95 : 0.65));
 }`;
 
 const srgb = c => new THREE.Color().setRGB(
@@ -703,6 +725,7 @@ export class FlightView {
   }
 
   async setVehicle(parts, payload = null) {
+    this.payloadData = payload;
     const token = this._building = {};
     const v = await buildVehicle(parts, payload);
 
@@ -725,6 +748,8 @@ export class FlightView {
     this.holder.add(v.root);
    
     this._partBottoms = new Map(parts.filter(p => !p.detached).map(p => [p.uid, (Number(p.y1) || 0) + (Number(p.def?.landing?.drop) || 0)]));
+    this._fairingUids = new Set(parts.filter(p => isFairingPart(p.def)).map(p => p.uid));
+    this._payloadUids = new Set(parts.filter(p => isPayloadPart(p.def)).map(p => p.uid));
     this._measureVehicle();
     this._buildFlames(parts);
   }
@@ -745,14 +770,14 @@ export class FlightView {
       const material = core => new THREE.ShaderMaterial({
         vertexShader: FLAME_VERT,
         fragmentShader: FLAME_FRAG,
-        uniforms: { uTime: { value: 0 }, uPower: { value: 0 }, uCore: { value: core } },
+        uniforms: { uTime: { value: 0 }, uPower: { value: 0 }, uCore: { value: core }, uPressure: { value: 1.0 } },
         transparent: true,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
         side: THREE.DoubleSide
       });
-      const outer = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 1, 12), material(0));
-      const inner = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 1, 12), material(1));
+      const outer = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 16, 48), material(0));
+      const inner = new THREE.Mesh(new THREE.PlaneGeometry(1, 1, 16, 48), material(1));
       outer.renderOrder = 6;
       inner.renderOrder = 7;
       group.add(outer, inner);
@@ -767,21 +792,33 @@ export class FlightView {
     for (const [uid, flame] of this.flames) {
       const runtime = (sim.engines || []).find(e => e.uid === uid);
       const part = (sim.parts || []).find(p => p.uid === uid) || flame.part;
-      const spec = runtime?.spec || runtime?.def?.engine || flame.part.def.engine;
-      const output = spec?.type === 'solid' ? (runtime?.firing ? 1 : 0) : Math.max(0, Number(runtime?.throttle ?? sim.throttle ?? 0));
-      const active = part?.alive !== false && runtime?.alive !== false && output > .015 && runtime?.firing !== false && !sim.crashed;
+      const spec = runtime?.spec || runtime?.def?.engine || flame.part.def?.engine;
+      const isSolid = spec?.type === 'solid';
+      const isFiring = isSolid ? Boolean(runtime?.firing) : (Boolean(runtime?.ignited && runtime?.firing) || (sim.status === 'flying' && runtime?.firing !== false));
+      const output = isSolid ? (isFiring ? 1.0 : 0.0) : Math.max(0, Number(runtime?.throttle ?? sim.throttle ?? 0));
+      const active = sim.status !== 'prelaunch'
+        && isFiring
+        && part?.alive !== false
+        && runtime?.alive !== false
+        && !sim.crashed
+        && output > 0.015;
+
       flame.group.visible = active;
       if (!active) continue;
-      const pulse = .92 + .12 * Math.sin((sim.t || 0) * 38 + uid.length);
-      const pressure = Math.max(.72, Math.min(1.18, Number(sim.pressureRatio) || 1));
-      const diameter = Math.max(.28, Number(flame.part.def.diameter) || 1);
-      const length = diameter * (.55 + output * 1.35) * pulse * (1.08 - .14 * pressure);
-      const width = diameter * (.5 + output * .16);
-      flame.group.position.y = -flame.part.y1 + .02 - length * .5;
+
+      const pulse = 0.94 + 0.08 * Math.sin((sim.t || 0) * 45.0 + uid.length);
+      const pr = Math.max(0.01, Math.min(1.2, Number(sim.pressureRatio) || 1.0));
+      const expansion = 1.0 + (1.0 - Math.min(1.0, pr)) * 0.85;
+      const diameter = Math.max(0.28, Number(flame.part.def?.diameter) || 1.0);
+      const length = diameter * (0.8 + output * 1.8) * pulse * (1.1 - 0.15 * pr);
+      const width = diameter * (0.55 + output * 0.22) * expansion;
+
+      flame.group.position.y = -flame.part.y1 + 0.02 - length * 0.5;
       flame.group.scale.set(width, length, 1);
       for (const mesh of [flame.outer, flame.inner]) {
         mesh.material.uniforms.uTime.value = sim.t || 0;
         mesh.material.uniforms.uPower.value = output;
+        mesh.material.uniforms.uPressure.value = pr;
       }
     }
   }
@@ -815,7 +852,7 @@ export class FlightView {
       dx * sp + dy * cp
     ];
 
-    const L = Math.max(4, sim.botY - sim.topY);
+    const L = (sim.controlledVessel === 'satellite') ? 2.6 : Math.max(4, sim.botY - sim.topY);
 
     this.zoom = opts.zoom ?? this.zoom;
 
@@ -908,37 +945,108 @@ export class FlightView {
     this.sun.intensity = 0.25 + 3.1 * dayCam;
     this.hemi.intensity = 0.12 + 0.55 * skyBright + 0.08 * dayCam;
 
+    const controlledVessel = sim.controlledVessel || 'launcher';
+    if (controlledVessel === 'satellite' && this._activeControlled !== 'satellite') {
+      this._activeControlled = 'satellite';
+      if (!this._satDeployStart) {
+        this._satDeployStart = performance.now();
+      }
+      if (this.vehicle && !this.launcherVehicle) {
+        this.launcherVehicle = this.vehicle;
+      }
+      if (!this.satelliteVehicle) {
+        this.satelliteVehicle = buildSatelliteVehicle(this.payloadData || {}, 0.0);
+      }
+      if (this.launcherVehicle) this.holder.remove(this.launcherVehicle.root);
+      this.vehicle = this.satelliteVehicle;
+      this.holder.add(this.satelliteVehicle.root);
+    } else if (controlledVessel === 'launcher' && this._activeControlled === 'satellite') {
+      this._activeControlled = 'launcher';
+      if (this.satelliteVehicle) this.holder.remove(this.satelliteVehicle.root);
+      if (this.launcherVehicle) {
+        this.vehicle = this.launcherVehicle;
+        this.holder.add(this.launcherVehicle.root);
+      }
+    }
+
+    if (sim.payloadDeployed && !this._satDeployStart && !this._satDeployDone) {
+      this._satDeployStart = performance.now();
+    }
+
     if (this.vehicle) {
       const h = this.holder;
 
       h.rotation.z = -(sim.th - phi);
       h.scale.set(1, 1, 1);
 
-      let lowest = 0;
-      for (const p of (sim.parts || [])) {
-        if (p.alive === false) continue;
-        lowest = Math.max(lowest, this._partBottoms?.get(p.uid) ?? 0);
-      }
-      this.vehicle.model.position.y = lowest || sim.com || 0;
-      if (lowest && Math.abs(lowest - (sim.com || 0)) > 0.05 && !this._warnedCom) {
-        this._warnedCom = true;
-        console.warn('Rocket geometry mismatch: frontend bottom', lowest, 'vs backend centerOfMass', sim.com,
-          '. Keep frontend/js/vehicle/vehicle.js layout() and backend/vehicle/geometry.py in sync.');
-      }
-
-      for (const p of (sim.parts || [])) {
-        const m = this.vehicle.meshes.get(p.uid);
-        if (m) {
-          if (p.def?.category === 'fairing' && sim.fairingJettisoned) {
-            m.visible = false;
-          } else {
-            m.visible = p.alive !== false;
+      if (this._activeControlled === 'satellite') {
+        this.vehicle.model.position.set(0, 0, 0);
+        // Animate smooth multi-stage slow-motion unfolding of solar arrays & antenna for active satellite
+        const elapsed = this._satDeployStart ? (performance.now() - this._satDeployStart) / 1000 : 999;
+        const duration = 6.8; // Cinematic slow-motion deployment (~7 seconds)
+        const t = Math.min(1.0, elapsed / duration);
+        // Majestic cubic S-curve ease-in-out
+        const prog = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        const satMesh = this.satelliteVehicle?.payloadMesh;
+        const thr = Number(sim.throttle) || 0;
+        const rot = Number(sim.rotInput) || 0;
+        if (satMesh?.userData?.updateState) {
+          satMesh.userData.updateState(prog, thr, rot, sim.t || 0);
+        } else if (satMesh?.userData?.updateProgress) {
+          satMesh.userData.updateProgress(prog);
+        }
+        if (t >= 1.0) {
+          this._satDeployStart = null;
+          this._satDeployDone = true;
+        }
+      } else {
+        let lowest = 0;
+        for (const p of (sim.parts || [])) {
+          if (p.alive === false) continue;
+          lowest = Math.max(lowest, this._partBottoms?.get(p.uid) ?? 0);
+        }
+        if (lowest <= 0) {
+          for (const m of this.vehicle.meshes.values()) {
+            if (!m.visible) continue;
+            const h = m.geometry?.parameters?.height || m.userData?.spanH || 0;
+            const b = -(m.position.y - h / 2);
+            if (b > lowest) lowest = b;
           }
         }
+        this.vehicle.model.position.y = lowest || sim.botY || sim.com || 0;
       }
-      const payloadMesh = this.vehicle?.meshes?.get('payload');
-      if (payloadMesh) {
-        payloadMesh.visible = !sim.payloadDeployed;
+
+      const hasFairing = (sim.parts || []).some(
+        p => (this._fairingUids?.has(p.uid) || isFairingPart(p.def)) && p.alive !== false
+      );
+      const fairingClosed = hasFairing && !sim.fairingJettisoned;
+
+      const syncVehicleVisibility = (veh) => {
+        if (!veh?.meshes) return;
+        for (const p of (sim.parts || [])) {
+          const m = veh.meshes.get(p.uid);
+          if (m) {
+            const isFairing = this._fairingUids?.has(p.uid) || m.userData.isFairing || isFairingPart(p.def);
+            const isPayload = this._payloadUids?.has(p.uid) || m.userData.isPayload || isPayloadPart(p.def);
+
+            if (isFairing) {
+              m.visible = !sim.fairingJettisoned && p.alive !== false;
+            } else if (isPayload) {
+              m.visible = !sim.payloadDeployed && !fairingClosed && p.alive !== false;
+            } else {
+              m.visible = p.alive !== false;
+            }
+          }
+        }
+        const payloadMesh = veh.meshes.get('payload');
+        if (payloadMesh) {
+          payloadMesh.visible = !sim.payloadDeployed && !fairingClosed;
+        }
+      };
+
+      syncVehicleVisibility(this.vehicle);
+      if (this.launcherVehicle && this.launcherVehicle !== this.vehicle) {
+        syncVehicleVisibility(this.launcherVehicle);
       }
       this._syncFlames(sim);
     }
@@ -1002,10 +1110,26 @@ export class FlightView {
 
         const record = rec;
 
-        if (o.type === 'payload' || o.payload) {
-          const pMesh = buildPayloadMesh(o.payload || {});
+        const isPayloadObj = o.type === 'payload' || o.payload || (Array.isArray(o.parts) && o.parts.some(isPayloadPart));
+        const isFairingObj = o.type === 'fairing' || o.label?.toLowerCase().includes('fairing') || (Array.isArray(o.parts) && o.parts.some(isFairingPart));
+
+        if (isPayloadObj) {
+          const payloadMeta = o.payload || this.payloadData || (o.parts ? o.parts.find(isPayloadPart)?.def : null) || {};
+          rec._spawnTime = performance.now();
+          rec.payloadMeta = payloadMeta;
+          const pMesh = buildPayloadMesh(payloadMeta, true, 0.0);
+          rec.pMesh = pMesh;
           record.model = { root: pMesh, model: pMesh };
           record.group.add(pMesh);
+        } else if (isFairingObj) {
+          const side = o.side || (o.id?.includes('stbd') || o.id?.includes('right') ? 'right' : 'left');
+          const fairingPart = (o.parts || []).find(isFairingPart) || { def: { height: 1.8, diameter: 1.2 } };
+          const fMesh = buildFairingHalf(side, fairingPart, 2.0, 1.3);
+          record.model = { root: fMesh, model: fMesh };
+          record.group.add(fMesh);
+        } else if (o.id === 'launcher-core' && this.launcherVehicle) {
+          record.model = this.launcherVehicle;
+          record.group.add(this.launcherVehicle.root);
         } else {
           buildVehicle(Array.isArray(o.parts) ? o.parts : [])
             .then(v => {
@@ -1023,6 +1147,15 @@ export class FlightView {
         }
       }
 
+      // Smooth cinematic slow-motion solar array unfolding for deployed satellites
+      if (rec.pMesh?.userData?.updateProgress && rec._spawnTime) {
+        const elapsed = (performance.now() - rec._spawnTime) / 1000;
+        const duration = 6.8; // Cinematic slow-motion deployment (~7 seconds)
+        const t = Math.min(1.0, elapsed / duration);
+        const progress = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        rec.pMesh.userData.updateProgress(progress);
+      }
+
       rec.group.visible = !o.dead;
 
       const rel = toL(
@@ -1035,7 +1168,30 @@ export class FlightView {
       rec.group.scale.set(1, 1, 1);
 
       if (rec.model?.model) {
-        rec.model.model.position.y = o.com || 0;
+        if (o.id === 'launcher-core') {
+          let lowest = 0;
+          for (const p of (sim.parts || [])) {
+            if (p.alive === false) continue;
+            lowest = Math.max(lowest, this._partBottoms?.get(p.uid) ?? 0);
+          }
+          if (lowest <= 0 && this.launcherVehicle?.meshes) {
+            for (const m of this.launcherVehicle.meshes.values()) {
+              if (!m.visible) continue;
+              const h = m.geometry?.parameters?.height || m.userData?.spanH || 0;
+              const b = -(m.position.y - h / 2);
+              if (b > lowest) lowest = b;
+            }
+          }
+          rec.model.model.position.y = lowest || o.com || 0;
+        } else if (o.type === 'stage' || Array.isArray(o.parts)) {
+          // Center detached stages at their true physical center so they decouple cleanly without jumping or clipping
+          const yCenter = o.yCenter ?? (o.parts && o.parts.length
+            ? (Math.min(...o.parts.map(p => Number(p.y0) || 0)) + Math.max(...o.parts.map(p => Number(p.y1) || 0))) / 2
+            : (o.com || 0));
+          rec.model.model.position.y = yCenter;
+        } else {
+          rec.model.model.position.y = o.com || 0;
+        }
       }
     }
 
@@ -1176,12 +1332,13 @@ export class FlightView {
 
     const engines = Array.isArray(sim.engines) ? sim.engines : [];
 
-    if (!rails && dt > 0 && dt < 0.2 && !sim.crashed) {
+    if (!rails && dt > 0 && dt < 0.2 && !sim.crashed && sim.status !== 'prelaunch') {
       for (const engine of engines) {
         if (
           !engine ||
           engine.alive === false ||
-          engine.firing !== true
+          engine.firing !== true ||
+          engine.ignited === false
         ) {
           continue;
         }

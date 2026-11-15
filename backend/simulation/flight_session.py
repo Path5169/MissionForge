@@ -18,7 +18,7 @@ MAX_REAL_DT = 2.0
 MAX_PHYSICS_WARP = 4      
 RAILS_CLEARANCE = 1000.0 
 MAX_RAIL_SLICES = 400
-COUNTDOWN_SECONDS = 6.0
+COUNTDOWN_SECONDS = 10.0
 SETTLE_TIME = 3.0
 REST_SPEED = 1.0   
 IDLE_LIMIT = 1800.0
@@ -347,7 +347,18 @@ def advance_session(session):
         height = math.hypot(session["x"], session["y"]) - radius
         _, session["pressureRatio"] = dynamics.atmosphere(body, height)
         part_behaviors.step_part_behaviors(session, definitions, height, math.hypot(session["vx"], session["vy"]))
-        thrust = engines.step(session, h, session["pressureRatio"], stage)
+        if session.get("controlledVessel") == "satellite":
+            thr = session.get("throttle", 0.0)
+            fuel = session.get("fuel", 0.0)
+            if thr > 0 and fuel > 0:
+                thrust = thr * 140.0
+                session["thrustNow"] = thrust
+                session["fuel"] = max(0.0, fuel - thr * 0.02 * h)
+            else:
+                thrust = 0.0
+                session["thrustNow"] = 0.0
+        else:
+            thrust = engines.step(session, h, session["pressureRatio"], stage)
         result = dynamics.rk4_step(
             body,
             {"x": session["x"], "y": session["y"], "vx": session["vx"], "vy": session["vy"]},
@@ -373,6 +384,11 @@ def _countdown(session, now):
         return None
     remaining = max(0.0, session["countdownDuration"] - (now - session["countdownStart"]))
     if remaining > 0.0:
+        # Ignite stage 1 engine at T - 1.8s for realistic turbopump spin-up before pad hold-down release
+        if remaining <= 1.8 and session.get("status") == "prelaunch":
+            session["holdDown"] = True
+            session["throttle"] = max(session.get("throttle", 0.0), staging.liftoff_throttle(session))
+            staging.fire_first_stage(session)
         return {"remaining": remaining, "remainingSeconds": remaining}
     begin_liftoff(session)
     return None

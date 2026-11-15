@@ -499,6 +499,9 @@ class ObjectiveRun:
         self.rendezvous_targets = sorted({spec["target"] for spec in specs if spec["type"] == "rendezvous"})
         self.visited = set()
         self.outcome = "active"
+        self.failure_reason = None
+        self.failure_details = None
+        self.failed_objective = None
 
     def _ready(self, index):
         return all(self.met[dep] for dep in self.after[index])
@@ -629,7 +632,73 @@ class ObjectiveRun:
                 self.outcome = "complete"
             elif obs["status"] == "crashed":
                 self.outcome = "failure"
+                self._diagnose_failure(session, obs)
+            else:
+                premature = self._check_premature_deployment(session, obs)
+                if premature:
+                    self.outcome = "failure"
+                    self.failure_reason = "Premature Payload Deployment"
+                    self.failure_details = premature
+                    self._mark_failed_objective()
+                elif self._check_suborbital_exhaustion(session, obs):
+                    self.outcome = "failure"
+                    self.failure_reason = "Suborbital Propellant Depletion"
+                    self.failure_details = "All rocket stages depleted while on a suborbital descent trajectory without reaching required orbital velocity (~7,800 m/s)."
+                    self._mark_failed_objective()
         return self.report()
+
+    def _mark_failed_objective(self):
+        for idx, spec in enumerate(self.specs):
+            if not self.met[idx]:
+                self.failed_objective = spec.get("label", spec.get("id"))
+                break
+
+    def _diagnose_failure(self, session, obs):
+        self._mark_failed_objective()
+        time = float(obs.get("time", 0.0) or 0.0)
+        speed = float(obs.get("speed", 0.0) or 0.0)
+        max_alt = float(obs.get("maxAltitude", 0.0) or 0.0)
+        fuel = float(obs.get("fuel", 0.0) or 0.0)
+        
+        if time < 5.0 and max_alt < 50.0:
+            self.failure_reason = "Launch Pad Collapse / Insufficient Thrust"
+            self.failure_details = "Vehicle failed to generate adequate thrust-to-weight ratio (TWR > 1.0) and toppled or exploded on the launch pad."
+            return
+
+        if fuel <= 0.01 and max_alt < 150000.0:
+            self.failure_reason = "Suborbital Propellant Depletion"
+            self.failure_details = f"Propellant exhausted at peak altitude {max_alt/1000:.1f} km before achieving orbital velocity (7,800 m/s). Vehicle re-entered atmosphere and crashed at {speed:.0f} m/s."
+            return
+
+        if speed > 20.0:
+            self.failure_reason = "High-Velocity Surface Impact"
+            self.failure_details = f"Vehicle impacted terrain at {speed:.0f} m/s. Impact energy exceeded structural tolerance."
+            return
+
+        self.failure_reason = "Hard Landing / Structural Failure"
+        self.failure_details = f"Touchdown velocity ({speed:.1f} m/s) exceeded safe landing limits (max 8 m/s)."
+
+    def _check_premature_deployment(self, session, obs):
+        events = session.get("events", [])
+        for ev in events:
+            ev_type = ev.get("type", "")
+            if ev_type in ("deploy_payload", "payload_deployed", "deploy_rover"):
+                for idx, spec in enumerate(self.specs):
+                    if spec.get("type") == "orbit" and not self.met[idx]:
+                        alt = obs.get("altitude", 0.0)
+                        return f"Payload deployed prematurely inside atmosphere at altitude {alt/1000:.1f} km before orbital circularization was achieved."
+        return None
+
+    def _check_suborbital_exhaustion(self, session, obs):
+        time = float(obs.get("time", 0.0) or 0.0)
+        fuel = float(obs.get("fuel", 0.0) or 0.0)
+        alt = float(obs.get("altitude", 0.0) or 0.0)
+        speed = float(obs.get("speed", 0.0) or 0.0)
+        vy = float(session.get("vy", 0.0))
+        has_orbit = any(spec.get("type") == "orbit" for spec in self.specs)
+        if has_orbit and time > 30.0 and fuel <= 0.001 and alt < 120000.0 and vy < -5.0 and speed < 6500.0:
+            return True
+        return False
 
     def report(self):
         active_phase = None
@@ -664,6 +733,12 @@ class ObjectiveRun:
             "activePhase": active_phase,
             "totalPhases": total_phases,
             "missionStatus": self.outcome,
+            "outcome": self.outcome,
+            "failureReason": self.failure_reason,
+            "failureDetails": self.failure_details,
+            "failedObjective": self.failed_objective,
+            "passCriteria": self.mission_data.get("passCriteria", []),
+            "failCriteria": self.mission_data.get("failCriteria", []),
         }
 
 

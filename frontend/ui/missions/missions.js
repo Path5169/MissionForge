@@ -81,6 +81,28 @@ function capabilityGaps(m) {
   );
 }
 
+function passCriteriaList(criteria) {
+  if (!criteria?.length) return null;
+  return h('ul', { class: 'ms-pass-list' },
+    ...criteria.map(c => h('li', { class: 'ms-pass-item' }, h('span', { class: 'ms-check-icon' }, '✓'), c))
+  );
+}
+
+function failCriteriaList(criteria) {
+  if (!criteria?.length) return null;
+  return h('ul', { class: 'ms-fail-list' },
+    ...criteria.map(c => h('li', { class: 'ms-fail-item' }, h('span', { class: 'ms-fail-icon' }, '✕'), c))
+  );
+}
+
+function programUnlocks(rewards) {
+  if (!rewards?.certifications?.length && !rewards?.unlockedParts?.length) return null;
+  return h('div', { class: 'ms-unlocks-list' },
+    ...(rewards.certifications || []).map(c => h('div', { class: 'ms-unlock-pill' }, '🏅 ' + c)),
+    ...(rewards.unlockedParts || []).map(p => h('div', { class: 'ms-unlock-pill ms-rover-pill' }, '🚀 ' + p))
+  );
+}
+
 function missionPhases(m) {
   if (!m.missionPhases?.length) return null;
   return h('ol', { class: 'ms-phases' },
@@ -206,6 +228,16 @@ export const missions = {
       ));
     }
 
+    if (m.passCriteria?.length) {
+      d.append(h('div', { class: 'sec', style: 'color:#5fdb8f' }, 'Mission Pass Criteria'));
+      d.append(passCriteriaList(m.passCriteria));
+    }
+
+    if (m.failCriteria?.length) {
+      d.append(h('div', { class: 'sec', style: 'color:#ff7a6b' }, 'Mission Failure Criteria'));
+      d.append(failCriteriaList(m.failCriteria));
+    }
+
     if (m.objectives?.length) {
       d.append(h('div', { class: 'sec' }, 'Objectives'));
       d.append(...m.objectives.map(o => h('div', { class: 'obj' }, h('i', {}, '○'), o.label)));
@@ -224,6 +256,10 @@ export const missions = {
         d.append(h('div', { class: 'sec' }, 'Scientific data awarded'));
         d.append(scienceData(m.rewards));
       }
+      if (m.rewards.certifications?.length || m.rewards.unlockedParts?.length) {
+        d.append(h('div', { class: 'sec', style: 'color:#ffe2ac' }, 'Program Qualifications & Rewards'));
+        d.append(programUnlocks(m.rewards));
+      }
     }
 
     const preset = state.presets.find(x => x.id === m.suggestedVehicle);
@@ -237,8 +273,12 @@ export const missions = {
             state.blueprint = loaded;
             state.mode = 'mission';
             state.missionId = m.id;
-            bus.emit('nav', 'workshop');
-            toast(`Loaded recommended vehicle: "${preset.name}"`);
+            bus.emit('nav', 'flight', {
+              bodyId: m.body || 'earth',
+              start: m.start || { type: 'pad' },
+              blueprint: structuredClone(loaded),
+              missionId: m.id,
+            });
           }
         }, `Launch with recommended vehicle: ${preset.name}`)
         : null,

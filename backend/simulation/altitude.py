@@ -69,15 +69,18 @@ def turn_toward(current, target, max_step):
 def step_attitude(session, dt):
    
     previous = session["rotation"]
+    is_sat = session.get("controlledVessel") == "satellite"
+    rate = 1.1 if is_sat else ROTATE_RATE
+    sas_rate = 1.2 if is_sat else SAS_TURN_RATE
     if dt > 0 and session["status"] in STEERABLE_STATUSES:
         steer = session.get("rotInput", 0.0)
         if steer:
-            session["rotation"] = previous + steer * ROTATE_RATE * dt
+            session["rotation"] = previous + steer * rate * dt
         else:
             target = sas_target(session.get("sas"), session["x"], session["y"],
                                 session["vx"], session["vy"])
             if target is not None:
-                session["rotation"] = turn_toward(previous, target, SAS_TURN_RATE * dt)
+                session["rotation"] = turn_toward(previous, target, sas_rate * dt)
     omega = (session["rotation"] - previous) / dt if dt > 0 else 0.0
     session["angularVelocity"] = omega
     return omega

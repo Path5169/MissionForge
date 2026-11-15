@@ -9,7 +9,7 @@
       "parts": [
         {
           "uid": "p0",
-          "c": "payload_eos_sat",
+          "c": "fairing_nosecone",
           "parent": null,
           "mount": "below",
           "stage": 0,
@@ -17,56 +17,152 @@
         },
         {
           "uid": "p1",
-          "c": "BAS-DECOUPLER",
+          "c": "payload_eos_sat",
           "parent": "p0",
-          "mount": "below",
-          "stage": 3,
-          "group": 0
-        },
-        {
-          "uid": "p2",
-          "c": "OTH-CONTROL",
-          "parent": "p1",
           "mount": "below",
           "stage": 0,
           "group": 0
         },
         {
+          "uid": "p2",
+          "c": "BAS-DECOUPLER",
+          "parent": "p1",
+          "mount": "below",
+          "stage": 3,
+          "group": 0
+        },
+        {
           "uid": "p3",
-          "c": "BAS-TANK-2",
+          "c": "OTH-CONTROL",
           "parent": "p2",
           "mount": "below",
           "stage": 0,
           "group": 0
         },
         {
-          "uid": "p4",
-          "c": "ENG-MID-PREM",
+          "uid": "p4a",
+          "c": "BAS-TANK-3",
           "parent": "p3",
           "mount": "below",
-          "stage": 2,
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4b",
+          "c": "BAS-TANK-3",
+          "parent": "p4a",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4c",
+          "c": "BAS-TANK-3",
+          "parent": "p4b",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p4d",
+          "c": "BAS-TANK-3",
+          "parent": "p4c",
+          "mount": "below",
+          "stage": 0,
           "group": 0
         },
         {
           "uid": "p5",
-          "c": "BAS-DECOUPLER",
-          "parent": "p4",
+          "c": "ENG-MID-PREM",
+          "parent": "p4d",
           "mount": "below",
           "stage": 2,
           "group": 0
         },
         {
           "uid": "p6",
-          "c": "BAS-TANK-3",
+          "c": "BAS-DECOUPLER",
           "parent": "p5",
+          "mount": "below",
+          "stage": 2,
+          "group": 0
+        },
+        {
+          "uid": "p7a",
+          "c": "BAS-TANK-3",
+          "parent": "p6",
           "mount": "below",
           "stage": 0,
           "group": 0
         },
         {
-          "uid": "p7",
-          "c": "BAS-ENG-1",
-          "parent": "p6",
+          "uid": "p7b",
+          "c": "BAS-TANK-3",
+          "parent": "p7a",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7c",
+          "c": "BAS-TANK-3",
+          "parent": "p7b",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7d",
+          "c": "BAS-TANK-3",
+          "parent": "p7c",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7e",
+          "c": "BAS-TANK-3",
+          "parent": "p7d",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7f",
+          "c": "BAS-TANK-3",
+          "parent": "p7e",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7g",
+          "c": "BAS-TANK-3",
+          "parent": "p7f",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7h",
+          "c": "BAS-TANK-3",
+          "parent": "p7g",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p7i",
+          "c": "BAS-TANK-3",
+          "parent": "p7h",
+          "mount": "below",
+          "stage": 0,
+          "group": 0
+        },
+        {
+          "uid": "p8",
+          "c": "ENG-BOOST-PREM",
+          "parent": "p7i",
           "mount": "below",
           "stage": 1,
           "group": 0

@@ -207,6 +207,10 @@ export class FlightSessionClient {
     return this.command('deploy_seismometer');
   }
 
+  switchVessel(target = 'toggle') {
+    return this.command('switch_vessel', { target });
+  }
+
   activatePart(uid) {
     return this.command('activate_part', { uid });
   }

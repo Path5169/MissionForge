@@ -10,7 +10,7 @@ from backend.vehicle import part_behaviors, part_state
 COMMANDS = {
     "begin_launch_sequence", "abort_launch_sequence", "set_throttle", "set_rotation", "set_sas",
     "set_time_warp", "pause", "resume", "activate_part", "ignite_stage_engines", "toggle_group",
-    "deploy_payload", "activate_next_stage",
+    "deploy_payload", "activate_next_stage", "switch_vessel",
     "deploy_parachute", "jettison_heat_shield", "jettison_fairing", "collect_sample",
     "deploy_lander", "separate_lander", "deploy_rover", "deploy_seismometer",
 }
@@ -73,6 +73,9 @@ def parse_command(data):
         if isinstance(value, bool) or not isinstance(value, int) or not 0 <= value <= 4:
             raise CommandError("Engine group is invalid.")
         return FlightCommand(name, value)
+    if name == "switch_vessel":
+        target = data.get("target") or data.get("targetId") or "toggle"
+        return FlightCommand(name, str(target))
     return FlightCommand(name)
 
 
@@ -180,16 +183,120 @@ def _toggle_group(session, group):
     return engines.toggle_group(session, group)
 
 
+def _switch_vessel(session, target="toggle"):
+    controlled = session.get("controlledVessel", "launcher")
+    detached = session.setdefault("detachedObjects", [])
+
+    if target == "toggle":
+        target = "launcher" if controlled in ("satellite", "rover", "payload") else "satellite"
+
+    if target in ("satellite", "rover", "payload"):
+        if controlled in ("satellite", "rover", "payload"):
+            return {"accepted": True, "message": "Already controlling active payload.", "controlledVessel": controlled}
+        sat_idx = next((i for i, o in enumerate(detached) if o.get("type") == "payload" or "payload" in str(o.get("id")).lower() or "sat" in str(o.get("label", "")).lower() or "rover" in str(o.get("label", "")).lower() or "rover" in str(o.get("id", "")).lower()), None)
+        if sat_idx is None:
+            return {"accepted": False, "message": "No deployed payload in flight to control."}
+        sat_obj = detached.pop(sat_idx)
+
+        # Save launcher as a detached object so it keeps orbiting
+        launcher_obj = {
+            "id": "launcher-core",
+            "type": "stage",
+            "label": "Spent Launcher Booster",
+            "x": session["x"],
+            "y": session["y"],
+            "vx": session["vx"],
+            "vy": session["vy"],
+            "th": session["rotation"],
+            "omega": session.get("angularVelocity", 0.0),
+            "com": session.get("centerOfMass", 0.0),
+            "mass": session["mass"],
+            "dead": False,
+        }
+        detached.append(launcher_obj)
+
+        session["activeSatellite"] = sat_obj
+        session["controlledVessel"] = "satellite"
+        session["x"] = sat_obj["x"]
+        session["y"] = sat_obj["y"]
+        session["vx"] = sat_obj["vx"]
+        session["vy"] = sat_obj["vy"]
+        session["rotation"] = sat_obj.get("th", 0.0)
+        session["angularVelocity"] = 0.0
+        session["rotInput"] = 0.0
+        session["throttle"] = 0.0
+        session["throttleActual"] = 0.0
+        session["thrustNow"] = 0.0
+        session["mass"] = sat_obj.get("mass", 280.0)
+        session["fuel"] = 45.0
+        session["fuelCap"] = 45.0
+        session.setdefault("events", []).append({
+            "sequence": len(session["events"]),
+            "type": "switch_vessel",
+            "msg": f"Active control transferred to {sat_obj.get('name', 'Satellite')}",
+        })
+        return {"accepted": True, "message": f"Controlling {sat_obj.get('name', 'Satellite')}", "controlledVessel": "satellite"}
+
+    elif target == "launcher":
+        if controlled == "launcher":
+            return {"accepted": True, "message": "Already controlling launcher.", "controlledVessel": "launcher"}
+        lnch_idx = next((i for i, o in enumerate(detached) if o.get("id") == "launcher-core" or o.get("type") == "stage"), None)
+        if lnch_idx is None:
+            return {"accepted": False, "message": "No launcher core found."}
+        launcher_obj = detached.pop(lnch_idx)
+
+        # Save satellite back into detached objects
+        sat_data = session.get("activeSatellite") or {}
+        sat_back = {
+            "id": sat_data.get("id") or "payload-satellite",
+            "type": "payload",
+            "name": sat_data.get("name") or "TerraWatch-1 Satellite",
+            "payload": sat_data.get("payload"),
+            "x": session["x"],
+            "y": session["y"],
+            "vx": session["vx"],
+            "vy": session["vy"],
+            "th": session["rotation"],
+            "omega": session.get("angularVelocity", 0.0),
+            "com": 0.0,
+            "mass": session["mass"],
+            "dead": False,
+        }
+        detached.append(sat_back)
+
+        session["controlledVessel"] = "launcher"
+        session["x"] = launcher_obj["x"]
+        session["y"] = launcher_obj["y"]
+        session["vx"] = launcher_obj["vx"]
+        session["vy"] = launcher_obj["vy"]
+        session["rotation"] = launcher_obj.get("th", 0.0)
+        session["angularVelocity"] = launcher_obj.get("omega", 0.0)
+        session["rotInput"] = 0.0
+        session["throttle"] = 0.0
+        session["mass"] = launcher_obj.get("mass", 1200.0)
+        session.setdefault("events", []).append({
+            "sequence": len(session["events"]),
+            "type": "switch_vessel",
+            "msg": "Active control transferred back to Launcher",
+        })
+        return {"accepted": True, "message": "Controlling Launcher", "controlledVessel": "launcher"}
+
+    return {"accepted": False, "message": "Unknown target vessel."}
+
+
 def _deploy_payload(session, value):
     result = staging.release_payload(session)
     accepted, message = result if result else (True, "Payload deployed.")
+    if accepted:
+        # Automatically transfer control and camera focus to the newly deployed satellite!
+        _switch_vessel(session, "satellite")
     session.setdefault("events", []).append({
         "sequence": len(session["events"]),
         "type": "deploy_payload",
         "body": session.get("bodyId"),
-        "msg": "Payload deployed",
+        "msg": "Payload deployed into orbit",
     })
-    return {"accepted": accepted, "message": message}
+    return {"accepted": accepted, "message": "Payload deployed! Control transferred to satellite.", "controlledVessel": "satellite"}
 
 
 def _deploy_parachute(session, value):
@@ -254,7 +361,7 @@ def _jettison_fairing(session, value=None):
         defn = definitions.get(uid) or {}
         cat = defn.get("category") or ""
         part_id = defn.get("id") or defn.get("partId") or ""
-        if cat == "fairing" or "fairing" in str(part_id).lower() or "fair" in str(part_id).lower():
+        if cat == "fairing" or "fairing" in str(part_id).lower() or "fair" in str(part_id).lower() or defn.get("shape") == "ogive":
             fairing_uids.append(uid)
     if fairing_uids:
         session.setdefault("deadUids", set())
@@ -330,6 +437,7 @@ _HANDLERS = {
     "toggle_group": _toggle_group,
     "deploy_payload": _deploy_payload,
     "activate_next_stage": _activate_next_stage,
+    "switch_vessel": lambda s, v: _switch_vessel(s, v),
     "deploy_parachute": _deploy_parachute,
     "jettison_heat_shield": _jettison_heat_shield,
     "jettison_fairing": _jettison_fairing,

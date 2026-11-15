@@ -6,6 +6,7 @@ import { computeStats } from '../../js/vehicle/stats.js';
 import { FlightSessionClient } from '../../js/simulation/flight.js';
 import { WARP_LEVELS } from '../../js/core/constants.js';
 import { FlightView } from '../../js/rendering/flightView.js';
+import { isFairingPart, isPayloadPart } from '../../js/rendering/rocketMesh.js';
 import { MapView, drawAdi } from '../../js/rendering/mapView.js';
 import { audio } from '../../js/core/audio.js';
 import { keybindings } from '../../js/core/keybindings.js';
@@ -155,9 +156,10 @@ const HTML = `
   </div>
 </div>
 
+<div class="countdown-overlay" id="fl-countdown" hidden></div>
+
 <div class="hud hud-bottom">
   <div class="prompt" id="fl-prompt" hidden></div>
-  <div class="countdown" id="fl-countdown" hidden></div>
 </div>
 
 <div class="hud hud-adi">
@@ -172,7 +174,7 @@ const HTML = `
       <span><kbd>Space</kbd> Stage</span>
     </div>
     <div class="control-actions" id="fl-action-strip">
-      <!-- mission action buttons injected here by JS -->
+      <span id="fl-actions-container" class="action-buttons-wrap"></span>
       <button class="controls-toggle" id="fl-map-toggle"
         type="button" aria-pressed="false">
         Map
@@ -569,6 +571,11 @@ export const flightScreen = {
       stageDone: controls.stageDone ?? 0,
       stagesFired: controls.stagesFired ?? 0,
 
+      fairingJettisoned: Boolean(rs.fairingJettisoned ?? telemetry.fairingJettisoned ?? this.sim?.fairingJettisoned ?? false),
+      payloadDeployed: Boolean(rs.payloadDeployed ?? telemetry.payloadDeployed ?? this.sim?.payloadDeployed ?? false),
+      heatShieldJettisoned: Boolean(rs.heatShieldJettisoned ?? telemetry.heatShieldJettisoned ?? this.sim?.heatShieldJettisoned ?? false),
+      controlledVessel: rs.controlledVessel ?? telemetry.controlledVessel ?? this.sim?.controlledVessel ?? 'launcher',
+
       crashed: rs.crashed ?? snapshot.status === 'crashed',
       crashMsg: rs.crashMessage || '',
 
@@ -631,6 +638,7 @@ export const flightScreen = {
     }
 
     this._schedulePrediction();
+    this._updateActionButtons();
   },
 
   _switchBody(bodyId) {
@@ -831,6 +839,128 @@ export const flightScreen = {
 
     this.el('fl-countdown').hidden = true;
     this.root.classList.remove('countdown-active');
+  },
+
+  deployPayload() {
+    const hasFairing = (this.visualParts || []).some(p => isFairingPart(p.def));
+    if (hasFairing && !this.sim?.fairingJettisoned) {
+      toast('Jettison fairing first (Press F) to expose the payload!', 'warn');
+      return;
+    }
+    if (this.sim?.payloadDeployed) {
+      toast('Payload is already deployed in orbit. Press [ to control it.', 'dim');
+      return;
+    }
+    this._command('deployPayload').then(res => {
+      if (res && res.accepted !== false) {
+        if (this.sim) {
+          this.sim.payloadDeployed = true;
+          this.sim.controlledVessel = res.controlledVessel || 'satellite';
+        }
+        if (this.simTarget) {
+          this.simTarget.payloadDeployed = true;
+          this.simTarget.controlledVessel = res.controlledVessel || 'satellite';
+        }
+        audio.play('stage_separation');
+        toast('Payload deployed into orbit! Control switched to satellite.', 'good');
+        this._updateActionButtons();
+      }
+    });
+  },
+
+  switchVessel(target = 'toggle') {
+    this._command('switchVessel', target).then(res => {
+      if (res && res.accepted !== false) {
+        const vessel = res.controlledVessel || 'satellite';
+        if (this.sim) this.sim.controlledVessel = vessel;
+        if (this.simTarget) this.simTarget.controlledVessel = vessel;
+        toast(res.message || `Active control switched to ${vessel}`, 'good');
+        audio.play('ui_confirm');
+        this._updateActionButtons();
+      }
+    });
+  },
+
+  jettisonFairing() {
+    const hasFairing = (this.visualParts || []).some(p => isFairingPart(p.def));
+    if (!hasFairing) {
+      toast('No fairing attached to this vehicle.', 'dim');
+      return;
+    }
+    if (this.sim?.fairingJettisoned) {
+      toast('Fairing already jettisoned.', 'dim');
+      return;
+    }
+    this._command('jettisonFairing').then(res => {
+      if (res && res.accepted !== false) {
+        if (this.sim) this.sim.fairingJettisoned = true;
+        if (this.simTarget) this.simTarget.fairingJettisoned = true;
+        audio.play('stage_separation');
+        this.view?.addTrauma(0.5);
+        toast('Payload fairing jettisoned.', 'good');
+        this._updateActionButtons();
+      }
+    });
+  },
+
+  _updateActionButtons() {
+    const wrap = this.el('fl-actions-container');
+    if (!wrap) return;
+
+    const parts = this.visualParts || [];
+    const hasFairing = parts.some(p => isFairingPart(p.def));
+    const hasPayload = parts.some(p => isPayloadPart(p.def)) || Boolean(this.cfg?.blueprint?.payload);
+
+    if (!hasFairing && !hasPayload) {
+      wrap.innerHTML = '';
+      return;
+    }
+
+    const fairingDone = Boolean(this.sim?.fairingJettisoned);
+    const payloadDone = Boolean(this.sim?.payloadDeployed);
+    const controlledVessel = this.sim?.controlledVessel || 'launcher';
+
+    const stateKey = `${hasFairing}:${fairingDone}:${hasPayload}:${payloadDone}:${controlledVessel}`;
+    if (this._lastActionKey === stateKey) return;
+    this._lastActionKey = stateKey;
+
+    wrap.innerHTML = '';
+
+    if (hasFairing && !fairingDone) {
+      const fBtn = document.createElement('button');
+      fBtn.type = 'button';
+      fBtn.className = 'action-btn is-fairing';
+      fBtn.innerHTML = '<kbd>F</kbd> <span>Jettison Fairing</span>';
+      fBtn.onclick = () => this.jettisonFairing();
+      wrap.appendChild(fBtn);
+    }
+
+    if (hasPayload && !payloadDone) {
+      const pBtn = document.createElement('button');
+      pBtn.type = 'button';
+      pBtn.className = 'action-btn is-payload';
+      if (hasFairing && !fairingDone) {
+        pBtn.innerHTML = '<kbd>P</kbd> <span>Payload</span>';
+      } else {
+        pBtn.innerHTML = '<kbd>P</kbd> <span>Deploy Payload</span>';
+      }
+      pBtn.onclick = () => this.deployPayload();
+      wrap.appendChild(pBtn);
+    }
+
+    // Interactive vessel switcher pill
+    if (payloadDone || controlledVessel === 'satellite') {
+      const vBtn = document.createElement('button');
+      vBtn.type = 'button';
+      vBtn.className = 'action-btn is-switch';
+      if (controlledVessel === 'satellite') {
+        vBtn.innerHTML = '<kbd>[</kbd> <span>🛰️ Satellite Active (Switch to Rocket)</span>';
+      } else {
+        vBtn.innerHTML = '<kbd>[</kbd> <span>🚀 Rocket Active (Switch to Satellite)</span>';
+      }
+      vBtn.onclick = () => this.switchVessel('toggle');
+      wrap.appendChild(vBtn);
+    }
   },
 
   async stop() {
@@ -1079,7 +1209,7 @@ export const flightScreen = {
       return;
     }
     if (keybindings.matches(e.code, 'deployPayload')) {
-      this._command('deployPayload');
+      this.deployPayload();
       return;
     }
     if (keybindings.matches(e.code, 'deployRover')) {
@@ -1091,7 +1221,7 @@ export const flightScreen = {
       return;
     }
     if (keybindings.matches(e.code, 'jettisonFairing')) {
-      this._command('jettisonFairing');
+      this.jettisonFairing();
       return;
     }
     if (keybindings.matches(e.code, 'collectSample')) {
@@ -1142,11 +1272,11 @@ export const flightScreen = {
         break;
 
       case 'KeyP':
-        this._command('deployPayload');
+        this.deployPayload();
         break;
 
       case 'KeyF':
-        this._command('jettisonFairing');
+        this.jettisonFairing();
         break;
 
       case 'KeyR':
@@ -1171,6 +1301,14 @@ export const flightScreen = {
 
       case 'KeyM':
         this.setMapOpen(!this.mapOpen);
+        break;
+
+      case 'BracketLeft':
+      case 'BracketRight':
+      case 'KeyV':
+        if (this.sim?.payloadDeployed || this.sim?.controlledVessel === 'satellite') {
+          this.switchVessel('toggle');
+        }
         break;
 
       case 'Period': {
@@ -1368,8 +1506,15 @@ export const flightScreen = {
     if (this.phaseHeaderEl) {
       if (activePhase) {
         const phaseNames = this.mission.missionPhases || [];
-        const phaseName = phaseNames[activePhase - 1] || `Phase ${activePhase} of ${totalPhases}`;
-        this.phaseHeaderEl.textContent = phaseName;
+        const rawPhase = phaseNames[activePhase - 1] || `Phase ${activePhase} of ${totalPhases}`;
+        const sepIdx = rawPhase.indexOf(':');
+        if (sepIdx > -1) {
+          const pTitle = rawPhase.slice(0, sepIdx).trim();
+          const pDesc = rawPhase.slice(sepIdx + 1).trim();
+          this.phaseHeaderEl.innerHTML = `<span class="phase-badge-tag"><span class="phase-indicator-dot"></span>${pTitle}</span><span class="phase-badge-desc">${pDesc}</span>`;
+        } else {
+          this.phaseHeaderEl.innerHTML = `<span class="phase-badge-tag"><span class="phase-indicator-dot"></span>PHASE ${activePhase} OF ${totalPhases}</span><span class="phase-badge-desc">${rawPhase}</span>`;
+        }
         this.phaseHeaderEl.hidden = false;
       } else {
         this.phaseHeaderEl.hidden = true;
@@ -1616,41 +1761,130 @@ export const flightScreen = {
     if (completed) {
       audio.play('mission_success');
       const rewards = this.mission?.rewards;
-      const totalReward = rewards
-        ? (rewards.baseReward || 0) + (rewards.bonuses || []).reduce((s, b) => s + (b.amount || 0), 0)
-        : 0;
+      const cost = this.launchStats.cost || 0;
+      const budgetMax = this.mission?.budget?.construction || this.mission?.budget?.total || 0;
+      const orb = snapshot.orbit || {};
+      const ecc = orb.eccentricity ?? 0.02;
+
+      const bonusesEarned = [];
+      let totalReward = rewards?.baseReward || 0;
+
+      // Under budget delivery bonus
+      const underBudgetBonus = rewards?.bonuses?.find(b => b.id === 'under_budget');
+      if (underBudgetBonus && (cost <= budgetMax || !budgetMax)) {
+        bonusesEarned.push(underBudgetBonus);
+        totalReward += underBudgetBonus.amount;
+      }
+
+      // Circular orbit precision bonus
+      const circularBonus = rewards?.bonuses?.find(b => b.id === 'circular_orbit');
+      if (circularBonus && ecc < 0.04) {
+        bonusesEarned.push(circularBonus);
+        totalReward += circularBonus.amount;
+      }
+
+      // Payload integrity bonus
+      const integrityBonus = rewards?.bonuses?.find(b => b.id === 'payload_integrity');
+      if (integrityBonus) {
+        bonusesEarned.push(integrityBonus);
+        totalReward += integrityBonus.amount;
+      }
+
       const statsList = [
         h('div', { class: 'ms-budget-row' }, h('span', {}, 'Mission Elapsed Time'), h('b', {}, fmtTime(missionTime))),
         h('div', { class: 'ms-budget-row' }, h('span', {}, 'Launch Wet Mass'), h('b', {}, fmtMass(this.launchStats.wetMass || 0))),
-        h('div', { class: 'ms-budget-row' }, h('span', {}, 'Mission Cost'), h('b', {}, fmtMoney(this.launchStats.cost || 0))),
+        h('div', { class: 'ms-budget-row' }, h('span', {}, 'Vehicle Build Cost'), h('b', {}, fmtMoney(cost))),
+        h('div', { class: 'ms-budget-row' }, h('span', {}, 'Base Contract Reward'), h('b', { class: 'ms-reward-val' }, fmtMoney(rewards?.baseReward || 0))),
       ];
-      if (totalReward > 0) {
-        statsList.push(h('div', { class: 'ms-budget-row ms-reward-total' }, h('span', {}, 'Total Rewards Awarded'), h('b', { class: 'ms-reward-val' }, fmtMoney(totalReward))));
+
+      for (const b of bonusesEarned) {
+        statsList.push(
+          h('div', { class: 'ms-budget-row ms-bonus-row' },
+            h('span', {}, '★ ' + b.label),
+            h('b', { class: 'ms-reward-val' }, '+' + fmtMoney(b.amount))
+          )
+        );
       }
+
+      statsList.push(
+        h('div', { class: 'ms-budget-row ms-reward-total' },
+          h('span', {}, 'Total Financial Rewards Credited'),
+          h('b', { class: 'ms-reward-val', style: 'font-size:15px;color:#5fdb8f' }, fmtMoney(totalReward))
+        )
+      );
+
       const debriefNodes = [
-        h('div', { class: 'fl-debrief-lead' }, `${this.mission?.title || 'Flight'}: All mission objectives successfully accomplished!`),
-        h('div', { class: 'ms-budget' }, ...statsList),
+        h('div', { class: 'fl-debrief-badge fl-badge-success' }, '★ MISSION ACCOMPLISHED ★'),
+        h('div', { class: 'fl-debrief-lead' }, `${this.mission?.title || 'Flight'}: All mission pass criteria verified and certified!`),
+        h('div', { class: 'ms-budget ms-rewards' }, ...statsList),
       ];
+
       if (rewards?.scientificData?.length) {
         debriefNodes.push(
-          h('div', { class: 'sec', style: 'margin-top:10px;font-weight:650;color:#7ee6f5;font-size:12px;text-transform:uppercase' }, 'Scientific Data Awarded'),
+          h('div', { class: 'sec', style: 'margin-top:12px;font-weight:650;color:#7ee6f5;font-size:11px;letter-spacing:0.04em;text-transform:uppercase' }, 'Scientific Research Data Cataloged'),
           h('ul', { class: 'ms-science-list', style: 'margin:4px 0 0 0;padding:0;list-style:none' },
             ...rewards.scientificData.map(d => h('li', { style: 'font-size:12px;color:#9fcab4;padding:3px 0' }, '\u2b21 ' + d))
           )
         );
       }
+
+      if (rewards?.certifications?.length || rewards?.unlockedParts?.length) {
+        debriefNodes.push(
+          h('div', { class: 'sec', style: 'margin-top:12px;font-weight:650;color:#ffe2ac;font-size:11px;letter-spacing:0.04em;text-transform:uppercase' }, 'Program Qualifications & Technology Unlocks'),
+          h('div', { class: 'fl-unlocks-box' },
+            ...(rewards.certifications || []).map(c => h('div', { class: 'fl-unlock-pill' }, '🏅 ' + c)),
+            ...(rewards.unlockedParts || []).map(p => h('div', { class: 'fl-unlock-pill fl-rover-unlock' }, '🚀 ' + p))
+          )
+        );
+      }
+
       dialogBody = h('div', { class: 'fl-debrief' }, ...debriefNodes);
     } else {
       audio.play('mission_failure');
-      const crashMsg = snapshot.renderState?.crashMessage ||
-        (snapshot.status === 'crashed' ? 'Vehicle crashed into terrain.' : 'Vehicle was lost during flight.');
-      dialogBody = h('div', { class: 'fl-debrief fl-loss' },
-        h('div', { class: 'fl-debrief-lead' }, crashMsg),
+      const failReason = snapshot.failureReason ||
+        (snapshot.status === 'crashed' ? 'Surface Impact / Catastrophic Loss' : 'Flight Objective Failure');
+      const failDetails = snapshot.failureDetails ||
+        snapshot.renderState?.crashMessage ||
+        (snapshot.status === 'crashed' ? 'Vehicle impacted terrain at high speed during flight.' : 'Vehicle was lost or unable to satisfy required mission criteria.');
+
+      const failedObj = snapshot.failedObjective ||
+        (this.mission?.objectives?.find((_, idx) => !snapshot.objectives?.[idx]?.met)?.label);
+
+      // Diagnostic remediation tip
+      let remediation = '';
+      if (failReason.includes('Propellant') || failReason.includes('Suborbital')) {
+        remediation = 'Stage 2 lacked sufficient delta-V to reach orbit. Pitch over smoothly into a gravity turn (30° at 15 km, 60° at 45 km, 90° horizontal at 80 km) to build 7.8 km/s orbital velocity rather than flying straight up.';
+      } else if (failReason.includes('Premature') || failReason.includes('Separation')) {
+        remediation = 'Payload was released before achieving orbit. Wait until orbital insertion is confirmed (periapsis >= 160 km) above the atmosphere before deploying payload.';
+      } else if (failReason.includes('Impact') || failReason.includes('Collapse')) {
+        remediation = 'Ensure first-stage engine has a thrust-to-weight ratio (TWR > 1.2) for liftoff and keep the rocket pointed along the prograde velocity vector to minimize aerodynamic drag.';
+      } else {
+        remediation = 'Review the mission pass criteria and verify stage propellant capacity and staging sequence in the workshop.';
+      }
+
+      const debriefNodes = [
+        h('div', { class: 'fl-debrief-badge fl-badge-fail' }, '✕ MISSION FAILED'),
+        h('div', { class: 'fl-debrief-lead' }, `${this.mission?.title || 'Flight'}: Flight Terminated`),
+        h('div', { class: 'fl-fail-box' },
+          h('div', { class: 'fl-fail-title' }, failReason),
+          h('div', { class: 'fl-fail-desc' }, failDetails)
+        ),
+        h('div', { class: 'sec', style: 'margin-top:10px;font-weight:650;color:#ff9e94;font-size:11px;letter-spacing:0.04em;text-transform:uppercase' }, 'Loss Analysis & Flight Telemetry'),
         h('div', { class: 'ms-budget' },
           h('div', { class: 'ms-budget-row' }, h('span', {}, 'Time of Loss'), h('b', {}, fmtTime(missionTime))),
+          h('div', { class: 'ms-budget-row' }, h('span', {}, 'Active Objective at Loss'), h('b', { style: 'color:#ffe2ac' }, failedObj || 'Nominal Ascent')),
+          h('div', { class: 'ms-budget-row' }, h('span', {}, 'Altitude at Loss'), h('b', {}, fmtDist(snapshot.telemetry?.altitude || 0))),
+          h('div', { class: 'ms-budget-row' }, h('span', {}, 'Velocity at Loss'), h('b', {}, `${Math.round(snapshot.telemetry?.speed || 0).toLocaleString()} m/s`)),
+          h('div', { class: 'ms-budget-row' }, h('span', {}, 'Propellant Remaining'), h('b', {}, `${Math.round(snapshot.telemetry?.fuel || 0).toLocaleString()} kg`)),
           h('div', { class: 'ms-budget-row' }, h('span', {}, 'Flight Status'), h('b', { style: 'color:#ff4d4d' }, (snapshot.status || 'lost').toUpperCase()))
+        ),
+        h('div', { class: 'fl-remedy-box' },
+          h('b', { style: 'color:#7ee6f5;display:block;margin-bottom:3px' }, '💡 Flight Controller Advice:'),
+          remediation
         )
-      );
+      ];
+
+      dialogBody = h('div', { class: 'fl-debrief fl-loss' }, ...debriefNodes);
     }
 
     const choice = await ask(
@@ -2076,23 +2310,87 @@ export const flightScreen = {
     this.root.classList.toggle('prelaunch', ready);
 
     if (this.launchCountdown) {
-      const remaining =
-        this.launchCountdown.remaining ??
-        this.launchCountdown.remainingSeconds ??
-        0;
-
-      const count = Math.ceil(remaining);
-
-      const label = count > 1 ? `T − ${count}` : count === 1 ? 'ENGINE START' : 'LIFTOFF';
-      if (countdown.textContent !== label) {
-        countdown.textContent = label;
-        countdown.className = 'countdown ' + (count > 1 ? 't-minus' : count === 1 ? 'engine-start' : 'liftoff');
-        if (count === 1) this.view?.addTrauma(0.35);
-        if (count === 0) this.view?.addTrauma(0.75);
+      if (!this._countdownActive) {
+        this._countdownActive = true;
+        this._countdownBaseRemaining = Number(this.launchCountdown.remaining ?? this.launchCountdown.remainingSeconds) || 10.0;
+        this._countdownBaseTime = performance.now();
+        this._ignitionTraumaDone = false;
+        this._liftoffTraumaDone = false;
       }
+
+      // Smooth frame-accurate remaining time with sub-second interpolation
+      const elapsedSinceSnap = (performance.now() - this._countdownBaseTime) / 1000;
+      const snapRemaining = Number(this.launchCountdown.remaining ?? this.launchCountdown.remainingSeconds) || 0;
+      if (Math.abs(snapRemaining - (this._countdownBaseRemaining - elapsedSinceSnap)) > 0.4) {
+        this._countdownBaseRemaining = snapRemaining;
+        this._countdownBaseTime = performance.now();
+      }
+
+      const currentRemaining = Math.max(0.0, this._countdownBaseRemaining - (performance.now() - this._countdownBaseTime) / 1000);
+
       countdown.hidden = false;
       this.root.classList.add('countdown-active');
+
+      if (currentRemaining > 5.0) {
+        // Whole-second countdown from T - 10s down to T - 5s
+        const sec = Math.ceil(currentRemaining);
+        const secStr = (sec < 10 ? '0' : '') + sec;
+        countdown.className = 'countdown-overlay t-minus';
+        countdown.innerHTML = `
+          <div class="countdown-clock">
+            <span class="countdown-prefix">T −</span>
+            <span class="countdown-digits">${secStr}</span>
+          </div>
+          <div class="countdown-callout">TERMINAL COUNTDOWN INITIATED</div>
+        `;
+      } else if (currentRemaining > 1.8) {
+        // Fast millisecond countdown from T - 5s down to T - 1.8s
+        const sec = Math.floor(currentRemaining);
+        const secStr = (sec < 10 ? '0' : '') + sec;
+        const ms = Math.floor((currentRemaining % 1) * 100);
+        const msStr = (ms < 10 ? '0' : '') + ms;
+        countdown.className = 'countdown-overlay t-minus-fast';
+        countdown.innerHTML = `
+          <div class="countdown-clock">
+            <span class="countdown-prefix">T −</span>
+            <span class="countdown-digits">${secStr}.${msStr}</span>
+          </div>
+          <div class="countdown-callout">AUTONOMOUS SEQUENCER · FLIGHT COMPUTERS ARMED</div>
+        `;
+      } else if (currentRemaining > 0.05) {
+        // Main engine ignition at T - 1.8s down to T - 0s
+        const sec = Math.floor(currentRemaining);
+        const secStr = (sec < 10 ? '0' : '') + sec;
+        const ms = Math.floor((currentRemaining % 1) * 100);
+        const msStr = (ms < 10 ? '0' : '') + ms;
+        countdown.className = 'countdown-overlay engine-start';
+        countdown.innerHTML = `
+          <div class="countdown-clock">
+            <span class="countdown-prefix">T −</span>
+            <span class="countdown-digits">${secStr}.${msStr}</span>
+          </div>
+          <div class="countdown-callout ignition">STAGE 1 MAIN ENGINE IGNITION</div>
+        `;
+        if (!this._ignitionTraumaDone) {
+          this.view?.addTrauma(0.42);
+          this._ignitionTraumaDone = true;
+        }
+      } else {
+        // Liftoff! Hold-down released
+        countdown.className = 'countdown-overlay liftoff';
+        countdown.innerHTML = `
+          <div class="countdown-clock">
+            <span class="countdown-digits">LIFTOFF</span>
+          </div>
+          <div class="countdown-callout liftoff">HOLD-DOWN RELEASED · VEHICLE IN FLIGHT</div>
+        `;
+        if (!this._liftoffTraumaDone) {
+          this.view?.addTrauma(0.85);
+          this._liftoffTraumaDone = true;
+        }
+      }
     } else {
+      this._countdownActive = false;
       countdown.hidden = true;
       this.root.classList.remove('countdown-active');
 

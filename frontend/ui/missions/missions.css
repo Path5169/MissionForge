@@ -55,8 +55,27 @@
 .ms-detail .obj:last-of-type { border-bottom: 0; }
 .ms-detail .obj i { flex: 0 0 auto; width: 17px; height: 17px; border: 1.5px solid var(--faint); border-radius: 50%; font-size: 0; }
 .ms-detail .lock { position: relative; max-width: 54ch; padding: 14px 18px; color: #ffe2ac; background: linear-gradient(90deg, rgba(255, 176, 46, .11), rgba(255, 176, 46, .02)); border-left: 3px solid var(--caution); border-radius: 0 var(--radius) var(--radius) 0; line-height: 1.5; }
-.ms-actions { display: grid; grid-template-columns: minmax(0, 54ch); gap: 10px; margin-top: 34px; }
-.ms-actions .btn { min-height: 48px; padding: 0 22px; font-size: 14px; }
+.ms-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 30px;
+  max-width: 560px;
+  width: 100%;
+}
+.ms-actions .btn {
+  min-height: 48px;
+  height: auto;
+  padding: 12px 22px;
+  font-size: 13.5px;
+  line-height: 1.4;
+  white-space: normal;
+  word-break: break-word;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .btn.ms-back { position: absolute; z-index: 2; left: 6vw; bottom: 26px; background: transparent; border-color: transparent; box-shadow: none; color: var(--dim); }
 .btn.ms-back:hover:not(:disabled) { color: var(--frost); background: rgba(232, 237, 245, .06); border-color: transparent; box-shadow: none; transform: translateX(-3px); }
 
@@ -190,4 +209,38 @@
   background: rgba(82, 214, 234, .1) !important;
   border: 1px solid rgba(82, 214, 234, .35) !important;
   box-shadow: 0 0 16px rgba(82, 214, 234, .12) !important;
+}
+
+
+/* ── Pass & Fail Criteria and Program Unlocks ── */
+.ms-pass-list, .ms-fail-list { max-width: 54ch; padding: 0; margin: 4px 0 10px; list-style: none; }
+.ms-pass-item {
+  display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; margin-bottom: 6px;
+  background: rgba(95, 219, 143, .06); border: 1px solid rgba(95, 219, 143, .22);
+  border-radius: var(--radius); color: #c6edd5; font-size: 13px; line-height: 1.5;
+}
+.ms-check-icon {
+  display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px;
+  background: rgba(95, 219, 143, .22); color: var(--go); border-radius: 50%; font-size: 11px; font-weight: 800; flex-shrink: 0; margin-top: 1px;
+}
+.ms-fail-item {
+  display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; margin-bottom: 6px;
+  background: rgba(255, 92, 77, .06); border: 1px solid rgba(255, 92, 77, .25);
+  border-radius: var(--radius); color: #ffcdc7; font-size: 13px; line-height: 1.5;
+}
+.ms-fail-icon {
+  display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px;
+  background: rgba(255, 92, 77, .22); color: #ff5c4d; border-radius: 50%; font-size: 11px; font-weight: 800; flex-shrink: 0; margin-top: 1px;
+}
+
+.ms-unlocks-list {
+  display: flex; flex-wrap: wrap; gap: 8px; max-width: 54ch; margin-top: 6px;
+}
+.ms-unlock-pill {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px;
+  background: rgba(255, 226, 172, .08); border: 1px solid rgba(255, 226, 172, .28);
+  border-radius: 99px; color: #ffe2ac; font-size: 12px; font-weight: 600;
+}
+.ms-rover-pill {
+  background: rgba(82, 214, 234, .09); border-color: rgba(82, 214, 234, .32); color: #7ee6f5;
 }

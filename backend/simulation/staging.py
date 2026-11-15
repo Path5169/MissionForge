@@ -100,8 +100,20 @@ def release_payload(session):
             or "rover" in str(part_id).lower()
             or "seismic" in str(part_id).lower()
             or "demosat" in str(part_id).lower()
+            or "sat" in str(part_id).lower()
         ):
             payload_uids.append(uid)
+
+    # Also include any parts mounted to payload parts (e.g. rover wheels, cameras, instruments)
+    bp_parts = (session.get("blueprint") or {}).get("parts") or []
+    expanded = True
+    while expanded:
+        expanded = False
+        for p in bp_parts:
+            p_uid = p.get("uid")
+            if p_uid and p_uid not in payload_uids and p.get("parent") in payload_uids:
+                payload_uids.append(p_uid)
+                expanded = True
 
     has_custom = bool(
         payload and (payload.get("parts") or payload.get("name") or payload.get("mass"))
@@ -112,36 +124,67 @@ def release_payload(session):
         return True, "Payload already deployed."
 
     session["payloadDeployed"] = True
+    session.setdefault("deadUids", set())
+    session.setdefault("detachedObjects", [])
 
+    angle = float(session.get("rotation", 0.0))
+    fwd_x = math.sin(angle)
+    fwd_y = math.cos(angle)
+
+    # Compute physical location of payload relative to rocket COM
+    items = session.get("layout") or {}
+    p_uids = [u for u in payload_uids if u in items]
+    com = float(session.get("centerOfMass", 0.0))
+    if p_uids:
+        p_y0 = min(items[u]["y0"] for u in p_uids)
+        p_y1 = max(items[u]["y1"] for u in p_uids)
+        p_center = (p_y0 + p_y1) / 2.0
+        # In vehicle stack, top is smaller Y, so distance forward from COM:
+        sep_dist = max(1.0, com - p_center)
+    else:
+        sep_dist = 2.4
+
+    kick = 1.8       # Forward spring ejection push (m/s)
+
+    summary = payload.get("summary") or {}
+    p_mass = max(20.0, float(summary.get("mass") or payload.get("mass") or 280.0))
+    count = int(session.get("separationCount", 0))
+    session["separationCount"] = count + 1
+
+    # Kill payload parts on launcher vehicle
     if payload_uids:
-        session.setdefault("deadUids", set())
-        session.setdefault("detachedObjects", [])
-        separation.detach_parts(session, payload_uids, definitions, speed=1.5)
+        session["deadUids"].update(payload_uids)
+        for part in session.get("parts", []):
+            if part.get("uid") in payload_uids:
+                part["alive"] = False
+        geometry.refresh(session)
 
-    if has_custom:
-        summary = payload.get("summary") or {}
-        p_mass = max(10.0, float(summary.get("mass") or payload.get("mass") or 50.0))
-        count = int(session.get("separationCount", 0))
-        session["separationCount"] = count + 1
-        angle = float(session.get("rotation", 0.0))
-        kick = 1.5
-        p_body = {
-            "id": f"payload-{count}",
-            "type": "payload",
-            "name": payload.get("name") or "Deployed Satellite",
-            "uids": [],
-            "payload": payload,
-            "x": session["x"],
-            "y": session["y"],
-            "vx": session["vx"] + math.sin(angle) * kick,
-            "vy": session["vy"] + math.cos(angle) * kick,
-            "th": angle,
-            "com": 0.0,
-            "mass": p_mass,
-            "dead": False,
-        }
-        session.setdefault("detachedObjects", []).append(p_body)
-        session["mass"] = max(1.0, float(session.get("mass", 0.0)) - p_mass)
+    # Rocket booster experiences backwards recoil
+    rocket_mass = max(10.0, float(session.get("mass", 800.0)))
+    recoil = kick * (p_mass / rocket_mass)
+    session["vx"] -= fwd_x * recoil
+    session["vy"] -= fwd_y * recoil
+    session["mass"] = max(1.0, rocket_mass - p_mass)
+
+    sat_name = payload.get("name") or "TerraWatch-1 Satellite"
+    p_body = {
+        "id": f"payload-{count}",
+        "type": "payload",
+        "name": sat_name,
+        "label": sat_name,
+        "uids": list(payload_uids),
+        "payload": payload,
+        "x": session["x"] + fwd_x * sep_dist,
+        "y": session["y"] + fwd_y * sep_dist,
+        "vx": session["vx"] + fwd_x * kick,
+        "vy": session["vy"] + fwd_y * kick,
+        "th": angle,
+        "omega": 0.0,
+        "com": 0.0,
+        "mass": p_mass,
+        "dead": False,
+    }
+    session["detachedObjects"].append(p_body)
 
     session.setdefault("events", []).append({
         "sequence": len(session["events"]),

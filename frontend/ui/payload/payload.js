@@ -26,6 +26,7 @@ const mk = (c, extra = {}) => ({ c, ...extra });
 const PRESETS = [
   { name: 'CubeSat 12U Demo', blurb: '12U technology demonstrator', fairing: 'FAIR-01', parts: [mk('ADP-12'), mk('BUS-12U'), mk('FC-1'), mk('TX-S'), mk('BAT-1'), mk('IMU-1'), mk('ANT-1'), mk('SA-0', { dir: 0 })] },
   { name: 'Earth Observer', blurb: 'Microsat with camera and star tracker', fairing: 'FAIR-06', parts: [mk('ADP-37'), mk('BUS-S'), mk('FC-1'), mk('TX-S'), mk('BAT-2'), mk('IMU-1'), mk('RW-1'), mk('ANT-1'), mk('SA-1', { dir: 0 }), mk('CAM-1', { dir: -1, row: 1 }), mk('ST-1', { dir: 1, row: 0 })] },
+  { name: 'Mars Exploration Rover', blurb: 'Planetary surface rover with science mast & sampling arm', fairing: 'FAIR-MORE', parts: [mk('ADP-66'), mk('BUS-L'), mk('FC-2'), mk('BAT-2'), mk('BAT-2'), mk('TX-X'), mk('IMU-1'), mk('INST-ROVER-M2020'), mk('SA-2', { dir: 0 }), mk('CAM-2', { dir: 1, row: 0 }), mk('RTG-1', { dir: -1, row: 1 })] },
   { name: 'Deep-space Probe', blurb: 'Large science probe with 2 m dish', fairing: 'FAIR-MORE', parts: [mk('ADP-66'), mk('BUS-L'), mk('FC-2'), mk('REC-1'), mk('TX-X'), mk('BAT-2'), mk('BAT-2'), mk('IMU-1'), mk('RW-1'), mk('ANT-4'), mk('SA-2', { dir: 0 }), mk('CAM-2', { dir: 1, row: 0 }), mk('ST-1', { dir: 1, row: 2 }), mk('SPC-1', { dir: -1, row: 0 }), mk('RCS-1', { dir: -1, row: 2 })] },
 ];
 
@@ -243,6 +244,68 @@ function paintPart(ctx, def, o) {
         }
       } break;
     }
+    case 'rover': {
+      const cw = w * 0.72, ch = hh * 0.42;
+      const cy = y - hh * 0.32;
+      box('gold', x - cw / 2, cy - ch, cw, ch);
+      ctx.fillStyle = barrel(ctx, x - cw / 2, cw, 'steel');
+      ctx.fillRect(x - cw * 0.48, cy - ch - 2, cw * 0.96, Math.max(2, hh * 0.05));
+      const mastX = x + (dir > 0 ? cw * 0.22 : -cw * 0.22);
+      const mastH = hh * 0.45;
+      const mastTop = cy - ch - mastH;
+      ctx.strokeStyle = BASE.graphite;
+      ctx.lineWidth = Math.max(1.5, S * 0.02);
+      ctx.beginPath();
+      ctx.moveTo(mastX, cy - ch);
+      ctx.lineTo(mastX, mastTop);
+      ctx.stroke();
+      box('graphite', mastX - w * 0.09, mastTop - hh * 0.08, w * 0.18, hh * 0.08);
+      ell(mastX - w * 0.04, mastTop - hh * 0.04, w * 0.025, w * 0.025, '#52d6ea');
+      ell(mastX + w * 0.04, mastTop - hh * 0.04, w * 0.025, w * 0.025, '#52d6ea');
+      const armX = x + (dir > 0 ? -cw * 0.32 : cw * 0.32);
+      ctx.strokeStyle = BASE.steel;
+      ctx.lineWidth = Math.max(1.8, S * 0.022);
+      ctx.beginPath();
+      ctx.moveTo(armX, cy - ch * 0.5);
+      if (stowed) {
+        ctx.lineTo(armX + (dir > 0 ? -w * 0.15 : w * 0.15), cy - ch * 0.15);
+        ctx.lineTo(armX + (dir > 0 ? -w * 0.18 : w * 0.18), cy - ch * 0.85);
+      } else {
+        ctx.lineTo(armX + (dir > 0 ? -w * 0.28 : w * 0.28), cy - ch * 0.3);
+        ctx.lineTo(armX + (dir > 0 ? -w * 0.42 : w * 0.42), cy + hh * 0.1);
+      }
+      ctx.stroke();
+      ell(armX + (dir > 0 ? (stowed ? -w * 0.18 : -w * 0.42) : (stowed ? w * 0.18 : w * 0.42)), stowed ? cy - ch * 0.85 : cy + hh * 0.1, Math.max(2, w * 0.04), Math.max(2, w * 0.04), BASE.amber);
+      const rtgX = x + (dir > 0 ? -cw * 0.38 : cw * 0.38);
+      const rtgW = w * 0.18, rtgH = ch * 0.7;
+      box('graphite', rtgX - rtgW / 2, cy - ch + 2, rtgW, rtgH);
+      for (let fi = 1; fi <= 3; fi++) {
+        ctx.fillStyle = BASE.copper;
+        ctx.fillRect(rtgX - rtgW * 0.6, cy - ch + 2 + fi * (rtgH / 4), rtgW * 1.2, 1.5);
+      }
+      const wheelR = Math.max(3, w * 0.07);
+      const groundY = y - wheelR;
+      ctx.strokeStyle = BASE.steel;
+      ctx.lineWidth = Math.max(1.5, S * 0.018);
+      const bogieCenterY = cy - ch * 0.2;
+      ctx.beginPath();
+      ctx.moveTo(x - cw * 0.35, bogieCenterY);
+      ctx.lineTo(x - w * 0.4, groundY);
+      ctx.moveTo(x, bogieCenterY);
+      ctx.lineTo(x, groundY);
+      ctx.moveTo(x + cw * 0.35, bogieCenterY);
+      ctx.lineTo(x + w * 0.4, groundY);
+      ctx.stroke();
+      const wheelXs = [x - w * 0.4, x, x + w * 0.4];
+      for (const wx of wheelXs) {
+        ell(wx, groundY, wheelR, wheelR, '#2a3545');
+        ctx.strokeStyle = BASE.steel;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ell(wx, groundY, wheelR * 0.45, wheelR * 0.45, BASE.gold);
+      }
+      break;
+    }
     default: box('paint', l, t, w, hh);
   }
   ctx.restore();
@@ -250,6 +313,7 @@ function paintPart(ctx, def, o) {
 function extentOf(def) {
   if (def.shape === 'wing' || def.shape === 'boom') return { w: def.deployedW, h: def.h };
   if (def.shape === 'dish') return { w: def.deployedW, h: def.h * .5 + def.deployedW * .36 };
+  if (def.shape === 'rover') return { w: def.w * 1.25, h: def.h * 1.15 };
   return null;
 }
 function drawIcon(canvas, def, { w = 50, h = 56, pad = 4 } = {}) {
