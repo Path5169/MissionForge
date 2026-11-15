@@ -1,1 +1,15 @@
-{}
+{
+  "earth_observation_1": {
+    "completed": true,
+    "stats": {
+      "time": 449.11694955825806,
+      "mass": 31879,
+      "cost": 2241510
+    },
+    "best": {
+      "time": 448.7618088722229,
+      "mass": 31879,
+      "cost": 2241510
+    }
+  }
+}

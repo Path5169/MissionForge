@@ -1,4 +1,4 @@
-import { state, loadAll } from './core/store.js';
+import { state, loadAll, loadPreset } from './core/store.js';
 import { api } from './core/api.js';
 import { bus, h, toast } from './core/bus.js';
 import { assets } from './rendering/assets.js';
@@ -77,6 +77,27 @@ async function boot() {
   bus.on('settings', openSettings);
   window.addEventListener('error', e => toast('Error: ' + e.message, 'bad', 6000));
   window.addEventListener('unhandledrejection', e => toast('Error: ' + (e.reason?.message || e.reason), 'bad', 6000));
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.has('autoplay') || params.has('auto') || params.has('demo')) {
+    const m = state.missions.find(x => x.id === 'earth_observation_1') || state.missions[0];
+    const presetId = m.suggestedVehicle || 'eos_terrawatch_launcher';
+    const loaded = await loadPreset(presetId);
+    if (loaded) {
+      state.blueprint = loaded;
+      state.mode = 'mission';
+      state.missionId = m.id;
+      await go('flight', {
+        bodyId: m.body || 'earth',
+        start: m.start || { type: 'pad' },
+        blueprint: structuredClone(loaded),
+        missionId: m.id,
+        autoLaunch: true,
+      });
+      return;
+    }
+  }
+
   await go('menu');
 }
 

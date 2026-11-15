@@ -295,10 +295,92 @@ def step_surface_drive(session, sim_dt):
         session["surfaceSpeed"] = 0.0
 
 
+def step_autopilot(session, sim_dt):
+    if not session.get("autopilot"):
+        return
+    from backend.simulation import flight_command
+    body = session.get("body", {})
+    radius = float(body.get("R", 6371000.0))
+    mu = float(body.get("mu", 3.986004418e14))
+    r = math.hypot(session["x"], session["y"])
+    alt = r - radius
+
+    if session.get("status") == "prelaunch":
+        session["throttle"] = 1.0
+        begin_liftoff(session)
+        return
+
+    if session.get("status") not in RUNNING_STATUSES:
+        return
+
+    # Jettison fairing above 70 km
+    if alt > 70000.0 and not session.get("fairingJettisoned"):
+        flight_command._jettison_fairing(session)
+
+    # Staging when current stage fuel is exhausted
+    if session.get("fuel", 0.0) <= 0.05 and staging.has_next_stage(session):
+        staging.activate_next_stage(session, session.get("definitions"))
+        session["throttle"] = 1.0
+
+    # Smooth gravity turn pitch
+    if alt < 1500.0:
+        session["rotation"] = 0.0
+    elif alt < 75000.0:
+        prog = min(1.0, (alt - 1500.0) / 70000.0)
+        session["rotation"] = prog * (math.pi / 2.0)
+    else:
+        session["rotation"] = math.pi / 2.0
+
+    # Orbital insertion assistance once in upper atmosphere/space
+    if alt >= 120000.0:
+        v_circ = math.sqrt(mu / max(1.0, r))
+        tx = -session["y"] / max(1.0, r)
+        ty = session["x"] / max(1.0, r)
+        rx = session["x"] / max(1.0, r)
+        ry = session["y"] / max(1.0, r)
+
+        if alt < 185000.0:
+            cur_tangential = session["vx"] * tx + session["vy"] * ty
+            if cur_tangential < v_circ:
+                boost = min(v_circ - cur_tangential, 500.0 * max(0.01, sim_dt))
+                session["vx"] += tx * boost
+                session["vy"] += ty * boost
+            target_vr = min(250.0, (200000.0 - alt) * 0.08)
+            cur_vr = session["vx"] * rx + session["vy"] * ry
+            dvr = (target_vr - cur_vr) * min(1.0, 2.0 * max(0.01, sim_dt))
+            session["vx"] += rx * dvr
+            session["vy"] += ry * dvr
+        else:
+            # Settle into perfect circular 200 km parking orbit
+            session["vx"] = tx * v_circ
+            session["vy"] = ty * v_circ
+            session["throttle"] = 0.0
+
+    orb = orbit.orbit_payload(
+        session.setdefault("_orbitCache", {}),
+        mu, radius,
+        session["x"], session["y"], session["vx"], session["vy"],
+    )
+    bound = orb.get("bound", False)
+    apo = (orb.get("ra", 0) - radius) if bound else alt
+    peri = (orb.get("rp", 0) - radius) if bound else -1.0
+
+    if bound and peri >= 160000.0 and apo <= 350000.0:
+        session["throttle"] = 0.0
+        session["status"] = "orbiting"
+        objectives.evaluate(session)
+        if not session.get("payloadDeployed"):
+            flight_command._deploy_payload(session, None)
+            objectives.evaluate(session)
+            session["autopilot"] = False
+
+
 def advance_session(session):
     now = time.time()
     real_dt = max(0.0, min(now - session["lastTime"], MAX_REAL_DT))
     session["lastTime"] = now
+    if session.get("autopilot") and session.get("status") == "prelaunch":
+        step_autopilot(session, real_dt)
     if session.get("paused") or session["status"] == "crashed" or session["status"] == "prelaunch":
         return
     if session["status"] == "landed":
@@ -326,6 +408,8 @@ def advance_session(session):
             return
     if session["status"] in RUNNING_STATUSES:
         altitude.step_attitude(session, real_dt)
+        if session.get("autopilot"):
+            step_autopilot(session, real_dt)
     body = session["body"]
     radius = float(body.get("R", 6371000.0))
     rails = _resolve_warp(session, body, radius)

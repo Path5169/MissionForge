@@ -60,7 +60,7 @@ def ground_contact(session, body, radius, thrust):
         and speed <= 1.0
         and session["fuel"] > 0
         and (thrust > 0 or session["throttle"] > 0)
-        and session.get("missionTime", 0.0) < 1.0
+        and session.get("missionTime", 0.0) < 3.5
     )
     if spooling:
         settle_on_surface(session, radius)

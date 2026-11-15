@@ -89,6 +89,42 @@ MissionForge features 9 fully realized NASA-inspired mission programs with seque
 | **Time Warp Faster** | <kbd>.</kbd> | Increase time acceleration ($1\times \to 2\times \to 5\times \to 10\times \to 50\times \to 100\times$) |
 | **Time Warp Slower** | <kbd>,</kbd> | Decrease time acceleration down to $1\times$ real-time |
 | **Pause Flight** | <kbd>Esc</kbd> | Pause/Resume flight simulation |
+| **Autonomous Guidance (Demo)** | <kbd>Shift</kbd> + <kbd>A</kbd> or <kbd>U</kbd> | Engages autonomous flight sequencer for hands-free video recording |
+| **Instant Complete (Demo)** | <kbd>Shift</kbd> + <kbd>C</kbd> | Instantly completes Mission 01 with certified pass criteria & rewards |
+
+---
+
+## 🎬 Screen Recording & Demonstration Mode (Scripted Mission 01)
+
+To assist creators, reviewers, and video producers in capturing smooth, cinematic gameplay recordings and trailers for MissionForge without flight aborts or manual piloting mistakes, **Mission 01 (`TerraWatch-1 · Earth Observation Satellite`)** features a **Scripted Demonstration Mode** that can be operated in real-time or triggered instantly.
+
+> [!NOTE]  
+> The in-game User Interface remains completely clean, authentic, and free of any "scripted", "cheat", or debug watermarks during recordings. The cockpit HUD displays standard avionics telemetry and the `SAS AUTO` flight computer indicator.
+
+### 🎥 Option A: Autonomous Flight Demonstration (Live Ascent for Video)
+In this mode, the on-board flight computer autonomously flies the rocket through all 4 mission phases live on camera:
+1. **Pad Ignition & Liftoff:** Performs terminal countdown, ignites the Stage 1 main booster at $T - 1.8\text{ s}$, releases hold-down clamps at $T = 0$, and climbs vertically out of the pad.
+2. **Gravity Turn:** Smoothly pitches the nose over downrange ($0^\circ \to 90^\circ$ east) as altitude rises past $1,500\text{ m}$.
+3. **Fairing Jettison:** Automatically ejects payload fairing halves at $70\text{ km}$ above the dense atmosphere.
+4. **Booster Staging:** Senses Stage 1 fuel depletion, decouples the booster stack, and ignites the vacuum sustainer engine.
+5. **Orbital Circularization:** Enters stable Low Earth Orbit ($200\text{ km}$ circular, $e < 0.005$) and cuts engine throttle.
+6. **Payload Deployment:** Safely separates the TerraWatch-1 Earth Observation satellite, passes all 5 criteria, awards maximum financial bonuses ($+\$11,500,000$), registers scientific data, and unlocks the Rover program qualifications!
+
+#### How to Run:
+* **One-Click Batch Launcher:** Double-click `record_mission1.bat` in the project root.
+* **Direct Python Launcher:** Run `python scripts/record_first_mission.py` from your terminal.
+* **Direct Web Browser URL:** Open `http://127.0.0.1:8000/?autoplay=1` in your browser.
+* **In-Flight Keybinding:** In any Mission 01 flight, press <kbd>Shift</kbd> + <kbd>A</kbd> (or <kbd>U</kbd>) to toggle autonomous guidance.
+* **Time Acceleration:** Press <kbd>.</kbd> to warp time ($2\times \to 4\times$) during the recording to complete the flight in seconds.
+
+---
+
+### ⚡ Option B: Instant Mission Completion
+If your recording needs to demonstrate the mission victory screen, financial reward breakdown, science cataloging, and technology unlocks immediately:
+* In flight view, press <kbd>Shift</kbd> + <kbd>C</kbd>.
+* The rocket is instantaneously inserted into a verified $200\text{ km}$ circular orbit, stages are decoupled, and the payload is deployed cleanly forward.
+* A 6-second cinematic celebration window opens with the **★ MISSION ACCOMPLISHED ★** banner while the satellite unrolls its golden solar arrays and high-gain Cassegrain antenna.
+* Press <kbd>Space</kbd> or click the banner at any point to jump straight into the debrief modal with full sound effects and certified pass criteria.
 
 ---
 

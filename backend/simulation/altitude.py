@@ -6,7 +6,7 @@ import math
 ROTATE_RATE = 0.6          
 SAS_TURN_RATE = 0.8        # rad/s maximum SAS turn rate
 SAS_MIN_SPEED = 2.0        # m/s; below this prograde/retrograde have no direction
-SAS_MODES = frozenset({None, "stability", "prograde", "retrograde", "radial"})
+SAS_MODES = frozenset({None, "stability", "prograde", "retrograde", "radial", "auto"})
 STEERABLE_STATUSES = frozenset({"launched", "flying", "orbiting"})
 
 _TWO_PI = 2.0 * math.pi

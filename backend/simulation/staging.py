@@ -139,12 +139,12 @@ def release_payload(session):
         p_y0 = min(items[u]["y0"] for u in p_uids)
         p_y1 = max(items[u]["y1"] for u in p_uids)
         p_center = (p_y0 + p_y1) / 2.0
-        # In vehicle stack, top is smaller Y, so distance forward from COM:
-        sep_dist = max(1.0, com - p_center)
+        # Position satellite cleanly ahead of launcher adapter ring
+        sep_dist = max(6.5, abs(com - p_center) + 3.0)
     else:
-        sep_dist = 2.4
+        sep_dist = 6.5
 
-    kick = 1.8       # Forward spring ejection push (m/s)
+    kick = 3.2       # Forward spring ejection push (m/s)
 
     summary = payload.get("summary") or {}
     p_mass = max(20.0, float(summary.get("mass") or payload.get("mass") or 280.0))
@@ -161,7 +161,7 @@ def release_payload(session):
 
     # Rocket booster experiences backwards recoil
     rocket_mass = max(10.0, float(session.get("mass", 800.0)))
-    recoil = kick * (p_mass / rocket_mass)
+    recoil = max(1.2, kick * (p_mass / rocket_mass))
     session["vx"] -= fwd_x * recoil
     session["vy"] -= fwd_y * recoil
     session["mass"] = max(1.0, rocket_mass - p_mass)

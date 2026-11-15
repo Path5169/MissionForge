@@ -2,6 +2,7 @@ import { state, mission as missionById, loadPreset } from '../../js/core/store.j
 import { h, bus, toast } from '../../js/core/bus.js';
 import { fmtDist, fmtMoney, fmtMoneyShort, fmtTime, fmtMass } from '../shared/format.js';
 import { missionBudget } from '../../js/core/economy.js';
+import { newBlueprint } from '../../js/vehicle/vehicle.js';
 
 const pips = n => h('span', { class: 'dots' }, h('span', { class: 'on' }, '●'.repeat(n)), '○'.repeat(5 - n));
 
@@ -284,7 +285,15 @@ export const missions = {
         : null,
       h('button', {
         class: preset ? 'btn' : 'btn primary',
-        onclick: () => { state.mode = 'mission'; state.missionId = m.id; bus.emit('nav', 'workshop'); }
+        onclick: () => {
+          state.mode = 'mission';
+          state.missionId = m.id;
+          if (!state.blueprint || state.presets.some(p => p.id === state.blueprint.id)) {
+            state.blueprint = newBlueprint();
+            state.blueprint.name = `${m.title} Custom Launcher`;
+          }
+          bus.emit('nav', 'workshop');
+        }
       }, preset ? 'Open in workshop with custom vehicle' : 'Open in workshop with my vehicle')
     ));
     return d;

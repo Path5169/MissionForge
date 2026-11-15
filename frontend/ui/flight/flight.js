@@ -508,6 +508,15 @@ export const flightScreen = {
     audio.playLoop('ambience_launch', { volume: 0.5 });
 
     requestAnimationFrame(t => this.frame(t));
+
+    if (cfg?.autoLaunch) {
+      setTimeout(() => {
+        if (this.sim?.status === 'prelaunch' && !this.launchCountdown) {
+          this.beginLaunchSequence();
+        }
+        this._command('toggleAutopilot', true);
+      }, 700);
+    }
   },
 
   _syncSnapshot(snapshot) {
@@ -841,6 +850,26 @@ export const flightScreen = {
     this.root.classList.remove('countdown-active');
   },
 
+  async toggleAutopilot() {
+    if (!this.client || this.ended) return;
+    if (this.sim?.status === 'prelaunch' && !this.launchCountdown) {
+      await this.beginLaunchSequence();
+    }
+    const res = await this._command('toggleAutopilot');
+    if (res?.accepted) {
+      await this._pollSnapshot();
+    }
+  },
+
+  async instantComplete() {
+    if (!this.client || this.ended) return;
+    const res = await this._command('instantComplete');
+    if (res?.accepted) {
+      await this._pollSnapshot();
+      await this.checkEnd();
+    }
+  },
+
   deployPayload() {
     const hasFairing = (this.visualParts || []).some(p => isFairingPart(p.def));
     if (hasFairing && !this.sim?.fairingJettisoned) {
@@ -963,9 +992,45 @@ export const flightScreen = {
     }
   },
 
+  _showCelebrationBanner() {
+    this._hideCelebrationBanner();
+    const banner = document.createElement('div');
+    banner.className = 'mission-celebration-banner';
+    const missionTitle = this.mission?.title || 'TerraWatch-1';
+    banner.innerHTML = `
+      <div class="mcb-title">★ MISSION ACCOMPLISHED ★</div>
+      <div class="mcb-sub">${missionTitle} deployed into Earth orbit · Systems nominal</div>
+      <div class="mcb-countdown"><kbd>Space</kbd> or click to debrief (auto in <span class="mcb-num">6</span>s)</div>
+    `;
+    banner.onclick = () => {
+      this._skipCelebration = true;
+      this.checkEnd();
+    };
+    this.root.appendChild(banner);
+    this._celebrationEl = banner;
+  },
+
+  _updateCelebrationBanner(remainingSec) {
+    if (!this._celebrationEl) return;
+    const numEl = this._celebrationEl.querySelector('.mcb-num');
+    if (numEl) numEl.textContent = String(remainingSec);
+  },
+
+  _hideCelebrationBanner() {
+    if (this._celebrationEl) {
+      this._celebrationEl.remove();
+      this._celebrationEl = null;
+    }
+  },
+
   async stop() {
     this.running = false;
     this.gen = (this.gen || 0) + 1;
+
+    this._hideCelebrationBanner();
+    this._celebrationStart = null;
+    this._celebrationSaved = false;
+    this._skipCelebration = false;
 
     audio.stopLoop('ambience_launch');
     audio.stopLoop('engine_loop');
@@ -1153,6 +1218,25 @@ export const flightScreen = {
       }
 
       this.cancelLaunchSequence();
+    }
+
+    if (this._celebrationStart && !this._skipCelebration && (e.code === 'Space' || e.code === 'Enter')) {
+      e.preventDefault();
+      this._skipCelebration = true;
+      this.checkEnd();
+      return;
+    }
+
+    if ((e.shiftKey && e.code === 'KeyA') || (e.altKey && e.code === 'KeyA') || e.code === 'KeyU') {
+      e.preventDefault();
+      this.toggleAutopilot();
+      return;
+    }
+
+    if ((e.shiftKey && e.code === 'KeyC') || (e.altKey && e.code === 'KeyC')) {
+      e.preventDefault();
+      this.instantComplete();
+      return;
     }
 
     if (keybindings.matches(e.code, 'stage')) {
@@ -1726,13 +1810,50 @@ export const flightScreen = {
 
     if (!crashed && !completed) return;
 
+    if (completed) {
+      if (!this._celebrationStart) {
+        this._celebrationStart = performance.now();
+        this._celebrationSaved = false;
+        audio.play('mission_success');
+        this._showCelebrationBanner();
+      }
+
+      if (!this._celebrationSaved && this.mission) {
+        this._celebrationSaved = true;
+        api.setProgress(
+          this.mission.id,
+          true,
+          {
+            time: snapshot.missionTime ?? 0,
+            mass: this.launchStats.wetMass,
+            cost: this.launchStats.cost,
+          }
+        ).then(async () => {
+          state.progress = await api.progress();
+        }).catch(err => {
+          console.warn('Could not save progress:', err);
+        });
+      }
+
+      const celebrationDuration = 6500;
+      const elapsed = performance.now() - this._celebrationStart;
+
+      if (elapsed < celebrationDuration && !this._skipCelebration) {
+        const remainingSec = Math.max(1, Math.ceil((celebrationDuration - elapsed) / 1000));
+        this._updateCelebrationBanner(remainingSec);
+        return;
+      }
+
+      this._hideCelebrationBanner();
+    }
+
     this._checkingEnd = true;
     this.ended = true;
 
     const generation = this.gen;
     const missionTime = snapshot.missionTime ?? 0;
 
-    if (completed && this.mission) {
+    if (completed && this.mission && !this._celebrationSaved) {
       try {
         await api.setProgress(
           this.mission.id,
@@ -1912,6 +2033,8 @@ export const flightScreen = {
     if (choice === 'continue' && completed) {
       this.mission = null;
       this.ended = false;
+      this._celebrationStart = null;
+      this._skipCelebration = false;
       this.buildMissionBox();
       return;
     }
@@ -2084,7 +2207,7 @@ export const flightScreen = {
 
       ...(telemetry.sas
         ? [{
-            text: 'SAS ' + telemetry.sas,
+            text: telemetry.sas === 'auto' ? 'SAS AUTO' : 'SAS ' + telemetry.sas,
             className: 'on',
           }]
         : []),

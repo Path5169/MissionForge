@@ -550,11 +550,13 @@ export class MapView {
       ctx.restore();
     }
 
+    ctx.save();
     ctx.fillStyle = css('--dim');
+    ctx.textAlign = 'center';
 
     ctx.fillText(
       `${body.name || body.id}  ·  scroll out to see the solar system  ·  M to close`,
-      16 * d,
+      cx,
       24 * d
     );
 
@@ -564,9 +566,10 @@ export class MapView {
 
     ctx.fillText(
       `e ${eccentricity}   period ${fmtTime(orbit.period)}   inclination 0° (planar model)`,
-      16 * d,
+      cx,
       42 * d
     );
+    ctx.restore();
   }
 
   _drawPath(points, project, color, width, dashed) {

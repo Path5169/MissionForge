@@ -960,6 +960,10 @@ export class FlightView {
       if (this.launcherVehicle) this.holder.remove(this.launcherVehicle.root);
       this.vehicle = this.satelliteVehicle;
       this.holder.add(this.satelliteVehicle.root);
+      if (!this._satZoomed) {
+        this._satZoomed = true;
+        this.zoom = 0.28;
+      }
     } else if (controlledVessel === 'launcher' && this._activeControlled === 'satellite') {
       this._activeControlled = 'launcher';
       if (this.satelliteVehicle) this.holder.remove(this.satelliteVehicle.root);
@@ -1169,20 +1173,10 @@ export class FlightView {
 
       if (rec.model?.model) {
         if (o.id === 'launcher-core') {
-          let lowest = 0;
-          for (const p of (sim.parts || [])) {
-            if (p.alive === false) continue;
-            lowest = Math.max(lowest, this._partBottoms?.get(p.uid) ?? 0);
-          }
-          if (lowest <= 0 && this.launcherVehicle?.meshes) {
-            for (const m of this.launcherVehicle.meshes.values()) {
-              if (!m.visible) continue;
-              const h = m.geometry?.parameters?.height || m.userData?.spanH || 0;
-              const b = -(m.position.y - h / 2);
-              if (b > lowest) lowest = b;
-            }
-          }
-          rec.model.model.position.y = lowest || o.com || 0;
+          // Align separation plane at top of launcher booster so it decouples cleanly behind the deployed satellite
+          const aliveParts = (sim.parts || []).filter(p => p.alive !== false && !this._payloadUids?.has(p.uid));
+          const topY = aliveParts.length ? Math.min(...aliveParts.map(p => Number(p.y0) || 0)) : (o.com || 0);
+          rec.model.model.position.y = topY;
         } else if (o.type === 'stage' || Array.isArray(o.parts)) {
           // Center detached stages at their true physical center so they decouple cleanly without jumping or clipping
           const yCenter = o.yCenter ?? (o.parts && o.parts.length

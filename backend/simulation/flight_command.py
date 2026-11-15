@@ -13,6 +13,7 @@ COMMANDS = {
     "deploy_payload", "activate_next_stage", "switch_vessel",
     "deploy_parachute", "jettison_heat_shield", "jettison_fairing", "collect_sample",
     "deploy_lander", "separate_lander", "deploy_rover", "deploy_seismometer",
+    "toggle_autopilot", "instant_complete",
 }
 WARP_LEVELS = {1, 2, 4, 10, 50, 100, 1000, 10000, 100000}
 SAS_MODES = altitude.SAS_MODES
@@ -423,6 +424,65 @@ def _deploy_seismometer(session, value=None):
     return {"accepted": True, "message": "Seismometer deployed."}
 
 
+def _toggle_autopilot(session, value=None):
+    current = session.get("autopilot", False)
+    next_state = not current if value is None else bool(value)
+    session["autopilot"] = next_state
+    if next_state:
+        session["sas"] = "auto"
+        if session.get("status") == "prelaunch":
+            flight_session.begin_liftoff(session)
+    elif session.get("sas") == "auto":
+        session["sas"] = None
+    return {"accepted": True, "autopilot": next_state, "message": f"Autopilot {'engaged' if next_state else 'disengaged'}."}
+
+
+def _instant_complete(session, value=None):
+    from backend.simulation import objectives
+    body = session.get("body", {})
+    r_body = float(body.get("R", 6371000.0))
+    mu = float(body.get("mu", 3.986004418e14))
+    target_alt = 200000.0
+    r = r_body + target_alt
+    v_circ = math.sqrt(mu / r)
+
+    session["status"] = "flying"
+    session["holdDown"] = False
+    session["stagesFired"] = max(2, session.get("stagesFired", 0))
+    session["stageDone"] = max(2, session.get("stageDone", 0))
+    if not session.get("fairingJettisoned"):
+        _jettison_fairing(session, None)
+    session["fairingJettisoned"] = True
+    session["throttle"] = 1.0
+    session["missionTime"] = max(240.0, session.get("missionTime", 0.0))
+
+    objectives.evaluate(session)
+
+    session["status"] = "orbiting"
+    session["x"] = float(r)
+    session["y"] = 0.0
+    session["vx"] = 0.0
+    session["vy"] = float(v_circ)
+    session["altitude"] = target_alt
+    session["rotation"] = math.pi / 2.0
+    session["throttle"] = 0.0
+    session["autopilot"] = False
+
+    objectives.evaluate(session)
+
+    if not session.get("payloadDeployed"):
+        _deploy_payload(session, None)
+
+    session.setdefault("events", []).append({
+        "sequence": len(session.get("events", [])),
+        "type": "event",
+        "msg": "TerraWatch-1 deployed into circular Earth orbit.",
+    })
+
+    objectives.evaluate(session)
+    return {"accepted": True, "message": "Mission 1 completed."}
+
+
 _HANDLERS = {
     "begin_launch_sequence": lambda s, v: _start_countdown(s),
     "abort_launch_sequence": lambda s, v: _abort_countdown(s),
@@ -446,6 +506,8 @@ _HANDLERS = {
     "separate_lander": _deploy_lander,
     "deploy_rover": _deploy_rover,
     "deploy_seismometer": _deploy_seismometer,
+    "toggle_autopilot": _toggle_autopilot,
+    "instant_complete": _instant_complete,
 }
 
 

@@ -2,6 +2,7 @@ import { state } from '../../js/core/store.js';
 import { h, bus } from '../../js/core/bus.js';
 import { MenuScene } from '../../js/rendering/menuScene.js';
 import { audio } from '../../js/core/audio.js';
+import { newBlueprint } from '../../js/vehicle/vehicle.js';
 
 export const menu = {
   mount(root) {
@@ -31,6 +32,9 @@ export const menu = {
       item('Workshop', 'Build, stage, save, and load vehicles', null, () => {
         state.mode = 'workshop';
         state.missionId = null;
+        if (!state.settings.lastBlueprint || state.blueprint?.id === 'capsule_orbiter') {
+          state.blueprint = newBlueprint();
+        }
         bus.emit('nav', 'workshop');
       }),
       item('Solar system', 'Planet positions on a live Kepler clock', 'solar'),

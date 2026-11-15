@@ -207,6 +207,14 @@ export class FlightSessionClient {
     return this.command('deploy_seismometer');
   }
 
+  toggleAutopilot(value) {
+    return this.command('toggle_autopilot', { value });
+  }
+
+  instantComplete() {
+    return this.command('instant_complete');
+  }
+
   switchVessel(target = 'toggle') {
     return this.command('switch_vessel', { target });
   }

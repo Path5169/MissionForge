@@ -38,9 +38,6 @@ export async function loadAll()
   try { await api.health(); state.online = true; state.progress = await api.progress(); Object.assign(state.settings, await api.settings()); } catch { state.online = false; }
   const last = state.settings.lastBlueprint;
   if (last) { try { const r = await api.getBlueprint(last); state.blueprint = await migrate(r.blueprint); } catch { } }
-  if (!state.blueprint) {
-    try { state.blueprint = (await loadPreset('capsule_orbiter')) || (await loadPreset('orbiter_one')); } catch { }
-  }
   if (!state.blueprint) state.blueprint = newBlueprint();
 }
 export const loadPreset = async id => { const p = state.presets.find(x => x.id === id); return p ? migrate(structuredClone(p)) : null; };

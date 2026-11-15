@@ -198,7 +198,7 @@ export const workshop = {
   else this.ctx.append(h('span', { class: 'workspace-mode' }, state.mode === 'sandbox' ? 'Sandbox' : 'Workshop · build & save'));
 
   this.launchBtn = null;
-  if (m || state.mode === 'sandbox' || state.mode === 'workshop') {
+  if (m || state.mode === 'sandbox') {
     this.launchBtn = h('button', { class: 'btn primary launch-btn', onclick: () => this.launch() }, 'Launch ▶');
     this.ctx.append(this.launchBtn);
     if (this.stats) this.launchBtn.disabled = !this.stats.ready;
